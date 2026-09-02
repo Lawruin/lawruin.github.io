@@ -30,7 +30,7 @@
     #scroll-track {
       position: relative;
       width: 100%;
-      height: 200vh;
+      height: 100vh;
       pointer-events: none;
     }
 
@@ -138,7 +138,7 @@
       height: 480px;
       transform-style: preserve-3d;
       will-change: transform;
-      transition: transform 0.05s linear;
+      transition: transform 0.04s linear;
     }
 
     .watch-layer {
@@ -161,7 +161,7 @@
       height: 100%;
       object-fit: contain;
       filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.4));
-      transition: filter 0.15s ease;
+      transition: filter 0.1s ease;
     }
 
     .layer-pin {
@@ -174,7 +174,7 @@
       gap: 10px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.3s ease, transform 0.3s ease;
+      transition: opacity 0.2s ease, transform 0.2s ease;
       white-space: nowrap;
     }
 
@@ -218,7 +218,7 @@
       z-index: 50;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
     }
 
     .story-section.active {
@@ -331,7 +331,7 @@
       height: 5px;
       background: #c5a059;
       border-radius: 2px;
-      animation: wheelMove 1.5s infinite ease-in-out;
+      animation: wheelMove 1s infinite ease-in-out;
     }
 
     @keyframes wheelMove {
@@ -356,7 +356,7 @@
       height: 100%;
       width: 0%;
       background: linear-gradient(90deg, #99732b, #e5c178);
-      transition: width 0.08s linear;
+      transition: width 0.05s linear;
     }
 
     .explode-degree-text {
@@ -385,7 +385,7 @@
       cursor: pointer;
       border-radius: 3px;
       backdrop-filter: blur(12px);
-      transition: all 0.2s ease;
+      transition: all 0.15s ease;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -398,15 +398,9 @@
     }
 
     @media (max-width: 900px) {
-      header {
-        padding: 16px 20px;
-      }
-      .nav-links {
-        display: none;
-      }
-      .brand-logo {
-        font-size: 15px;
-      }
+      header { padding: 16px 20px; }
+      .nav-links { display: none; }
+      .brand-logo { font-size: 15px; }
 
       .watch-container {
         width: 250px;
@@ -424,14 +418,8 @@
         bottom: 80px;
         transform: translateY(0);
       }
-      .story-section.active {
-        transform: translateY(0);
-      }
-      .story-title {
-        font-size: 18px;
-        line-height: 1.15;
-        margin-bottom: 6px;
-      }
+      .story-section.active { transform: translateY(0); }
+      .story-title { font-size: 18px; line-height: 1.15; margin-bottom: 6px; }
       .story-desc {
         font-size: 11px;
         line-height: 1.45;
@@ -439,13 +427,8 @@
         margin-bottom: 6px;
         background: rgba(6, 8, 12, 0.82);
       }
-      .story-specs {
-        display: none;
-      }
-
-      .layer-pin {
-        display: none;
-      }
+      .story-specs { display: none; }
+      .layer-pin { display: none; }
 
       .bottom-hud {
         padding: 0 16px 14px 16px;
@@ -453,23 +436,11 @@
         align-items: center;
         justify-content: space-between;
       }
-      .scroll-hint {
-        display: none;
-      }
-      .progress-bar-container {
-        width: 100px;
-      }
-      .explode-degree-text {
-        font-size: 9px;
-        text-align: left;
-      }
-      .hud-actions {
-        gap: 6px;
-      }
-      .hud-btn {
-        padding: 6px 10px;
-        font-size: 8.5px;
-      }
+      .scroll-hint { display: none; }
+      .progress-bar-container { width: 100px; }
+      .explode-degree-text { font-size: 9px; text-align: left; }
+      .hud-actions { gap: 6px; }
+      .hud-btn { padding: 6px 10px; font-size: 8.5px; }
     }
   </style>
 </head>
@@ -738,9 +709,9 @@
     let mouseX = 0, mouseY = 0;
     let targetMouseX = 0, targetMouseY = 0;
 
-    // Hızlandırılmış Tekerlek Algılama
+    // 5 KAT HIZLI TEKERLEK (Tek tıkla tam açılma)
     window.addEventListener('wheel', (e) => {
-      targetProg += e.deltaY * 0.0028;
+      targetProg += e.deltaY * 0.014;
       targetProg = Math.max(0, Math.min(1, targetProg));
     }, { passive: true });
 
@@ -751,7 +722,7 @@
       }
     }, { passive: true });
 
-    // Hızlandırılmış Mobil Swipe Algılama
+    // 5 KAT HIZLI MOBİL KAYDIRMA (Küçük bir parmak hareketi yeterli)
     let touchStartY = 0;
     window.addEventListener('touchstart', (e) => {
       touchStartY = e.touches[0].clientY;
@@ -761,7 +732,7 @@
       const touchY = e.touches[0].clientY;
       const deltaY = touchStartY - touchY;
       touchStartY = touchY;
-      targetProg += deltaY * 0.0065;
+      targetProg += deltaY * 0.032;
       targetProg = Math.max(0, Math.min(1, targetProg));
     }, { passive: true });
 
@@ -776,7 +747,7 @@
       const startP = scrollProg;
       const endP = scrollProg > 0.5 ? 0.0 : 1.0;
       const startTime = performance.now();
-      const dur = 2000;
+      const dur = 700;
 
       function step(now) {
         const elapsed = (now - startTime) / dur;
@@ -834,8 +805,8 @@
     function render() {
       requestAnimationFrame(render);
 
-      // Daha atak ve çevik geçiş (0.14)
-      scrollProg += (targetProg - scrollProg) * 0.14;
+      // Anında yanıt veren çevik sönümleme (0.28)
+      scrollProg += (targetProg - scrollProg) * 0.28;
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
 

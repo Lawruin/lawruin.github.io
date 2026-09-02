@@ -1,1303 +1,1112 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>NOIR Coffee House</title>
-    <meta name="description" content="NOIR Coffee House - Kahve, tatlı ve iyi sohbetin adresi.">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
-
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            font-family: "DM Sans", sans-serif;
-            background: #f4f0e9;
-            color: #211d18;
-            line-height: 1.6;
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        img {
-            width: 100%;
-            display: block;
-        }
-
-        :root {
-            --cream: #f4f0e9;
-            --dark: #211d18;
-            --brown: #6c4935;
-            --light-brown: #b89476;
-            --white: #ffffff;
-            --border: rgba(33, 29, 24, 0.12);
-        }
-
-        /* NAVBAR */
-
-        .navbar {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            z-index: 1000;
-            padding: 20px 5%;
-            transition: 0.3s ease;
-        }
-
-        .navbar.scrolled {
-            background: rgba(244, 240, 233, 0.95);
-            backdrop-filter: blur(15px);
-            padding: 14px 5%;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.05);
-        }
-
-        .nav-inner {
-            max-width: 1400px;
-            margin: auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-family: "Playfair Display", serif;
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: 2px;
-        }
-
-        .nav-links {
-            display: flex;
-            align-items: center;
-            gap: 34px;
-            list-style: none;
-        }
-
-        .nav-links a {
-            font-size: 14px;
-            font-weight: 500;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: "";
-            position: absolute;
-            bottom: -6px;
-            left: 0;
-            width: 0;
-            height: 1px;
-            background: var(--dark);
-            transition: 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        .nav-button {
-            background: var(--dark);
-            color: white;
-            padding: 11px 20px;
-            border-radius: 40px;
-            transition: 0.3s ease;
-        }
-
-        .nav-button:hover {
-            transform: translateY(-2px);
-            background: var(--brown);
-        }
-
-        .menu-toggle {
-            display: none;
-            font-size: 28px;
-            cursor: pointer;
-        }
-
-        /* HERO */
-
-        .hero {
-            min-height: 100vh;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            align-items: center;
-            padding: 120px 5% 70px;
-            gap: 60px;
-            max-width: 1500px;
-            margin: auto;
-        }
-
-        .hero-content {
-            max-width: 650px;
-        }
-
-        .eyebrow {
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            font-size: 12px;
-            font-weight: 600;
-            margin-bottom: 20px;
-            color: var(--brown);
-        }
-
-        .hero h1 {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(58px, 7vw, 105px);
-            line-height: 0.98;
-            font-weight: 600;
-            letter-spacing: -3px;
-            margin-bottom: 28px;
-        }
-
-        .hero h1 span {
-            font-style: italic;
-            color: var(--brown);
-        }
-
-        .hero-description {
-            max-width: 480px;
-            color: #655e56;
-            font-size: 17px;
-            margin-bottom: 35px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-        }
-
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 15px 25px;
-            border-radius: 50px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-
-        .btn-dark {
-            background: var(--dark);
-            color: white;
-        }
-
-        .btn-dark:hover {
-            background: var(--brown);
-            transform: translateY(-3px);
-        }
-
-        .btn-outline {
-            border: 1px solid var(--border);
-        }
-
-        .btn-outline:hover {
-            background: white;
-            transform: translateY(-3px);
-        }
-
-        .hero-image {
-            position: relative;
-            height: 680px;
-            border-radius: 180px 180px 20px 20px;
-            overflow: hidden;
-        }
-
-        .hero-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .hero-card {
-            position: absolute;
-            bottom: 25px;
-            left: 25px;
-            right: 25px;
-            padding: 20px;
-            background: rgba(255,255,255,0.87);
-            backdrop-filter: blur(15px);
-            border-radius: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .hero-card small {
-            display: block;
-            color: #766d65;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-        }
-
-        .hero-card strong {
-            font-family: "Playfair Display", serif;
-            font-size: 20px;
-        }
-
-        /* MARQUEE */
-
-        .marquee {
-            border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
-            padding: 20px 0;
-            overflow: hidden;
-        }
-
-        .marquee-track {
-            display: flex;
-            width: max-content;
-            animation: marquee 25s linear infinite;
-        }
-
-        .marquee span {
-            font-family: "Playfair Display", serif;
-            font-size: 23px;
-            margin-right: 55px;
-            white-space: nowrap;
-        }
-
-        .dot {
-            color: var(--brown);
-        }
-
-        @keyframes marquee {
-            from {
-                transform: translateX(0);
-            }
-            to {
-                transform: translateX(-50%);
-            }
-        }
-
-        /* COMMON SECTION */
-
-        section {
-            padding: 120px 5%;
-        }
-
-        .section-inner {
-            max-width: 1300px;
-            margin: auto;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: end;
-            margin-bottom: 55px;
-            gap: 30px;
-        }
-
-        .section-title {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(42px, 5vw, 70px);
-            line-height: 1;
-            font-weight: 600;
-        }
-
-        .section-description {
-            max-width: 400px;
-            color: #766d65;
-        }
-
-        /* ABOUT */
-
-        .about {
-            background: #211d18;
-            color: white;
-        }
-
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: center;
-        }
-
-        .about-image {
-            height: 600px;
-            overflow: hidden;
-            border-radius: 20px;
-        }
-
-        .about-image img {
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .about-content .eyebrow {
-            color: #c7a88e;
-        }
-
-        .about-content h2 {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(42px, 5vw, 70px);
-            line-height: 1.05;
-            margin-bottom: 25px;
-        }
-
-        .about-content p {
-            color: #c9c0b7;
-            max-width: 530px;
-            margin-bottom: 18px;
-        }
-
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            margin-top: 45px;
-            padding-top: 25px;
-            border-top: 1px solid rgba(255,255,255,0.15);
-        }
-
-        .stat strong {
-            display: block;
-            font-family: "Playfair Display", serif;
-            font-size: 35px;
-        }
-
-        .stat span {
-            color: #a59d95;
-            font-size: 13px;
-        }
-
-        /* MENU */
-
-        .menu-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 0 80px;
-        }
-
-        .menu-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            gap: 30px;
-            padding: 25px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .menu-item h3 {
-            font-family: "Playfair Display", serif;
-            font-size: 22px;
-            margin-bottom: 5px;
-        }
-
-        .menu-item p {
-            color: #847a70;
-            font-size: 14px;
-        }
-
-        .price {
-            font-weight: 700;
-            white-space: nowrap;
-            color: var(--brown);
-        }
-
-        /* FEATURE */
-
-        .feature {
-            background: #e5dfd5;
-        }
-
-        .feature-grid {
-            display: grid;
-            grid-template-columns: 1fr 1.25fr;
-            gap: 70px;
-            align-items: center;
-        }
-
-        .feature-image {
-            height: 620px;
-            border-radius: 20px;
-            overflow: hidden;
-        }
-
-        .feature-image img {
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .feature-content h2 {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(43px, 5vw, 72px);
-            line-height: 1;
-            margin-bottom: 25px;
-        }
-
-        .feature-content p {
-            color: #6f675f;
-            max-width: 500px;
-            margin-bottom: 30px;
-        }
-
-        /* GALLERY */
-
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr 1fr;
-            grid-template-rows: 280px 280px;
-            gap: 15px;
-        }
-
-        .gallery-item {
-            overflow: hidden;
-            border-radius: 14px;
-        }
-
-        .gallery-item:first-child {
-            grid-row: span 2;
-        }
-
-        .gallery-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.6s ease;
-        }
-
-        .gallery-item:hover img {
-            transform: scale(1.06);
-        }
-
-        /* VISIT */
-
-        .visit {
-            background: var(--brown);
-            color: white;
-        }
-
-        .visit-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 80px;
-        }
-
-        .visit h2 {
-            font-family: "Playfair Display", serif;
-            font-size: clamp(45px, 6vw, 78px);
-            line-height: 1;
-            margin-bottom: 25px;
-        }
-
-        .visit p {
-            color: #e4d7cb;
-            max-width: 480px;
-        }
-
-        .info-box {
-            padding: 25px 0;
-            border-bottom: 1px solid rgba(255,255,255,0.2);
-        }
-
-        .info-box:last-child {
-            border-bottom: none;
-        }
-
-        .info-box span {
-            display: block;
-            font-size: 11px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            color: #cdb6a3;
-            margin-bottom: 5px;
-        }
-
-        .info-box strong {
-            font-size: 18px;
-        }
-
-        /* FOOTER */
-
-        footer {
-            background: #171411;
-            color: white;
-            padding: 70px 5% 30px;
-        }
-
-        .footer-grid {
-            max-width: 1300px;
-            margin: auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr;
-            gap: 60px;
-            padding-bottom: 60px;
-        }
-
-        .footer-logo {
-            font-family: "Playfair Display", serif;
-            font-size: 32px;
-            letter-spacing: 2px;
-            margin-bottom: 15px;
-        }
-
-        .footer-description {
-            color: #958d84;
-            max-width: 350px;
-        }
-
-        .footer-column h4 {
-            margin-bottom: 15px;
-            font-size: 13px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-
-        .footer-column a {
-            display: block;
-            color: #958d84;
-            margin-bottom: 9px;
-            font-size: 14px;
-        }
-
-        .footer-column a:hover {
-            color: white;
-        }
-
-        .copyright {
-            max-width: 1300px;
-            margin: auto;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 25px;
-            color: #716a63;
-            font-size: 12px;
-            display: flex;
-            justify-content: space-between;
-        }
-
-        /* ANIMATIONS */
-
-        .fade-up {
-            opacity: 0;
-            transform: translateY(35px);
-            transition: opacity 0.8s ease, transform 0.8s ease;
-        }
-
-        .fade-up.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* MOBILE */
-
-        @media (max-width: 900px) {
-
-            .nav-links {
-                position: fixed;
-                top: 0;
-                right: -100%;
-                width: 80%;
-                height: 100vh;
-                background: var(--cream);
-                flex-direction: column;
-                justify-content: center;
-                gap: 30px;
-                transition: 0.4s ease;
-                box-shadow: -10px 0 30px rgba(0,0,0,0.08);
-            }
-
-            .nav-links.active {
-                right: 0;
-            }
-
-            .menu-toggle {
-                display: block;
-                z-index: 1001;
-            }
-
-            .hero,
-            .about-grid,
-            .feature-grid,
-            .visit-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .hero {
-                padding-top: 140px;
-            }
-
-            .hero-image {
-                height: 550px;
-            }
-
-            .menu-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr 1fr;
-                grid-template-rows: 280px 200px 200px;
-            }
-
-            .gallery-item:first-child {
-                grid-column: span 2;
-                grid-row: span 1;
-            }
-
-            .about-image,
-            .feature-image {
-                height: 450px;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr 1fr;
-            }
-
-            .footer-grid > div:first-child {
-                grid-column: span 2;
-            }
-        }
-
-        @media (max-width: 600px) {
-
-            section {
-                padding: 80px 6%;
-            }
-
-            .hero {
-                padding-left: 6%;
-                padding-right: 6%;
-                gap: 40px;
-            }
-
-            .hero h1 {
-                font-size: 58px;
-                letter-spacing: -2px;
-            }
-
-            .hero-image {
-                height: 450px;
-                border-radius: 120px 120px 15px 15px;
-            }
-
-            .hero-card {
-                left: 15px;
-                right: 15px;
-                bottom: 15px;
-            }
-
-            .section-header {
-                display: block;
-            }
-
-            .section-description {
-                margin-top: 20px;
-            }
-
-            .stats {
-                gap: 15px;
-            }
-
-            .stat strong {
-                font-size: 27px;
-            }
-
-            .gallery-grid {
-                grid-template-columns: 1fr;
-                grid-template-rows: 300px 220px 220px 220px;
-            }
-
-            .gallery-item:first-child {
-                grid-column: auto;
-            }
-
-            .footer-grid {
-                grid-template-columns: 1fr;
-                gap: 35px;
-            }
-
-            .footer-grid > div:first-child {
-                grid-column: auto;
-            }
-
-            .copyright {
-                flex-direction: column;
-                gap: 10px;
-            }
-
-            .hero-buttons {
-                flex-direction: column;
-                align-items: stretch;
-            }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>AETERNA CHRONO | Haute Horlogerie</title>
+  
+  <!-- Lüks Tipografi -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow-x: hidden;
+      background-color: #050507;
+      color: #f0f0f4;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    #scroll-container {
+      position: relative;
+      width: 100%;
+      height: 500vh;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    #webgl-canvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 1;
+      outline: none;
+      display: block;
+    }
+
+    .ambient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at 50% 45%, #161922 0%, #07080b 60%, #030304 100%);
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 28px 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+      pointer-events: auto;
+    }
+
+    .brand-logo {
+      font-family: 'Cinzel', serif;
+      font-size: 22px;
+      letter-spacing: 0.35em;
+      font-weight: 700;
+      color: #ffffff;
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-logo::before {
+      content: '';
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background: #c5a059;
+      transform: rotate(45deg);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 36px;
+      list-style: none;
+    }
+
+    .nav-links li a {
+      color: rgba(255, 255, 255, 0.55);
+      text-decoration: none;
+      font-size: 11px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      font-weight: 500;
+      transition: color 0.3s ease;
+    }
+
+    .nav-links li a:hover {
+      color: #c5a059;
+    }
+
+    .cta-btn {
+      padding: 10px 24px;
+      border: 1px solid rgba(197, 160, 89, 0.4);
+      background: rgba(197, 160, 89, 0.06);
+      color: #e5c178;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      border-radius: 2px;
+      cursor: pointer;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s ease;
+    }
+
+    .cta-btn:hover {
+      background: #c5a059;
+      color: #0a0a0c;
+      box-shadow: 0 0 25px rgba(197, 160, 89, 0.35);
+    }
+
+    .story-section {
+      position: fixed;
+      top: 50%;
+      transform: translateY(-50%);
+      left: 8%;
+      max-width: 480px;
+      z-index: 50;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .story-section.active {
+      opacity: 1;
+      transform: translateY(-50%) translateX(0);
+    }
+
+    .section-tag {
+      font-size: 11px;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: #c5a059;
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-tag::before {
+      content: '';
+      width: 24px;
+      height: 1px;
+      background: #c5a059;
+    }
+
+    .story-title {
+      font-family: 'Cinzel', serif;
+      font-size: 38px;
+      line-height: 1.15;
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+    }
+
+    .story-desc {
+      font-size: 13px;
+      line-height: 1.8;
+      color: rgba(255, 255, 255, 0.65);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin-bottom: 24px;
+      background: rgba(10, 12, 16, 0.45);
+      padding: 16px 20px;
+      border-left: 2px solid rgba(197, 160, 89, 0.5);
+      backdrop-filter: blur(12px);
+      border-radius: 0 8px 8px 0;
+    }
+
+    .story-specs {
+      display: flex;
+      gap: 24px;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .spec-val {
+      font-family: 'Cinzel', serif;
+      font-size: 18px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .spec-lbl {
+      font-size: 9px;
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      color: rgba(255, 255, 255, 0.4);
+      margin-top: 4px;
+    }
+
+    .part-telemetry {
+      position: fixed;
+      right: 6%;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 50;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      pointer-events: none;
+    }
+
+    .telemetry-item {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      opacity: 0.25;
+      transition: all 0.4s ease;
+    }
+
+    .telemetry-item.active {
+      opacity: 1;
+      transform: translateX(-8px);
+    }
+
+    .telemetry-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #c5a059;
+      box-shadow: 0 0 10px #c5a059;
+    }
+
+    .telemetry-text {
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: #fff;
+    }
+
+    .bottom-hud {
+      position: fixed;
+      bottom: 32px;
+      left: 0;
+      width: 100%;
+      padding: 0 48px;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      z-index: 100;
+      pointer-events: none;
+    }
+
+    .scroll-hint {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: 10px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .mouse-icon {
+      width: 18px;
+      height: 30px;
+      border: 1.5px solid rgba(255, 255, 255, 0.35);
+      border-radius: 12px;
+      position: relative;
+    }
+
+    .mouse-wheel {
+      position: absolute;
+      top: 6px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 3px;
+      height: 6px;
+      background: #c5a059;
+      border-radius: 2px;
+      animation: wheelMove 2s infinite ease-in-out;
+    }
+
+    @keyframes wheelMove {
+      0% { transform: translate(-50%, 0); opacity: 1; }
+      50% { transform: translate(-50%, 8px); opacity: 0.2; }
+      100% { transform: translate(-50%, 0); opacity: 1; }
+    }
+
+    .progress-bar-container {
+      width: 240px;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.1);
+      position: relative;
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #99732b, #e5c178);
+      transition: width 0.1s linear;
+    }
+
+    .explode-degree-text {
+      font-family: 'Cinzel', serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      color: #c5a059;
+      margin-bottom: 6px;
+      text-align: right;
+    }
+
+    .hud-actions {
+      display: flex;
+      gap: 12px;
+      pointer-events: auto;
+    }
+
+    .hud-btn {
+      background: rgba(20, 22, 28, 0.65);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      color: #fff;
+      padding: 10px 16px;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 4px;
+      backdrop-filter: blur(10px);
+      transition: all 0.25s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hud-btn:hover {
+      border-color: #c5a059;
+      color: #c5a059;
+      background: rgba(197, 160, 89, 0.1);
+    }
+
+    @media (max-width: 900px) {
+      header { padding: 20px 24px; }
+      .nav-links { display: none; }
+      .brand-logo { font-size: 16px; }
+      .story-section {
+        left: 20px;
+        right: 20px;
+        max-width: calc(100% - 40px);
+        top: auto;
+        bottom: 120px;
+        transform: translateY(0);
+      }
+      .story-section.active { transform: translateY(0); }
+      .story-title { font-size: 26px; }
+      .story-desc { font-size: 12px; padding: 12px 14px; margin-bottom: 14px; }
+      .part-telemetry { display: none; }
+      .bottom-hud {
+        padding: 0 20px 20px 20px;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+      }
+      .progress-bar-container { width: 180px; }
+      .scroll-hint span { display: none; }
+    }
+  </style>
+
+  <!-- Three.js CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
-
 <body>
 
-    <!-- NAVBAR -->
-
-    <header class="navbar" id="navbar">
-        <div class="nav-inner">
-
-            <a href="#" class="logo">NOIR</a>
-
-            <div class="menu-toggle" id="menuToggle">
-                ☰
-            </div>
-
-            <nav>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#about">Hakkımızda</a></li>
-                    <li><a href="#menu">Menü</a></li>
-                    <li><a href="#gallery">Galeri</a></li>
-                    <li><a href="#visit">Ziyaret Et</a></li>
-                    <li>
-                        <a href="#visit" class="nav-button">Rezervasyon</a>
-                    </li>
-                </ul>
-            </nav>
-
-        </div>
-    </header>
-
-
-    <!-- HERO -->
-
-    <main>
-
-        <section class="hero">
-
-            <div class="hero-content fade-up">
-
-                <div class="eyebrow">
-                    Coffee · Food · People
-                </div>
-
-                <h1>
-                    Good coffee.<br>
-                    <span>Good moments.</span>
-                </h1>
-
-                <p class="hero-description">
-                    Şehrin ritminden biraz uzaklaşın.
-                    Özenle kavrulmuş kahveler, günlük hazırlanan
-                    tatlılar ve uzun sohbetler için sakin bir köşe.
-                </p>
-
-                <div class="hero-buttons">
-                    <a href="#menu" class="btn btn-dark">
-                        Menüyü Keşfet →
-                    </a>
-
-                    <a href="#visit" class="btn btn-outline">
-                        Bizi Bul
-                    </a>
-                </div>
-
-            </div>
-
-            <div class="hero-image fade-up">
-
-                <img
-                    src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=1200&q=85"
-                    alt="Taze kahve hazırlanan kafe"
-                >
-
-                <div class="hero-card">
-                    <div>
-                        <small>Bugünün önerisi</small>
-                        <strong>Flat White</strong>
-                    </div>
-
-                    <strong>₺145</strong>
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- MARQUEE -->
-
-        <div class="marquee">
-            <div class="marquee-track">
-
-                <span>Specialty Coffee <b class="dot">✦</b></span>
-                <span>Fresh Pastries <b class="dot">✦</b></span>
-                <span>Slow Mornings <b class="dot">✦</b></span>
-                <span>Good People <b class="dot">✦</b></span>
-                <span>Specialty Coffee <b class="dot">✦</b></span>
-                <span>Fresh Pastries <b class="dot">✦</b></span>
-                <span>Slow Mornings <b class="dot">✦</b></span>
-                <span>Good People <b class="dot">✦</b></span>
-
-            </div>
-        </div>
-
-
-        <!-- ABOUT -->
-
-        <section class="about" id="about">
-
-            <div class="section-inner about-grid">
-
-                <div class="about-image fade-up">
-                    <img
-                        src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=1000&q=85"
-                        alt="NOIR Coffee House iç mekan"
-                    >
-                </div>
-
-                <div class="about-content fade-up">
-
-                    <div class="eyebrow">
-                        Our Story
-                    </div>
-
-                    <h2>
-                        Kahveden daha fazlası.
-                    </h2>
-
-                    <p>
-                        NOIR, iyi kahvenin insanları bir araya getirdiğine
-                        inanan küçük bir mahalle kahvesi olarak doğdu.
-                    </p>
-
-                    <p>
-                        Çekirdeklerimizi dünyanın farklı bölgelerindeki
-                        küçük üreticilerden seçiyor, her fincanı
-                        büyük bir özenle hazırlıyoruz.
-                    </p>
-
-                    <div class="stats">
-
-                        <div class="stat">
-                            <strong>08</strong>
-                            <span>Yıllık deneyim</span>
-                        </div>
-
-                        <div class="stat">
-                            <strong>12+</strong>
-                            <span>Çekirdek çeşidi</span>
-                        </div>
-
-                        <div class="stat">
-                            <strong>4.9</strong>
-                            <span>Müşteri puanı</span>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- MENU -->
-
-        <section id="menu">
-
-            <div class="section-inner">
-
-                <div class="section-header fade-up">
-
-                    <div>
-                        <div class="eyebrow">
-                            From our bar
-                        </div>
-
-                        <h2 class="section-title">
-                            Menü
-                        </h2>
-                    </div>
-
-                    <p class="section-description">
-                        Günlük olarak hazırladığımız kahveler,
-                        taze hamur işleri ve favori tabaklarımız.
-                    </p>
-
-                </div>
-
-
-                <div class="menu-grid">
-
-                    <div class="menu-item fade-up">
-                        <div>
-                            <h3>Espresso</h3>
-                            <p>Yoğun aromalı, çift shot.</p>
-                        </div>
-                        <div class="price">₺95</div>
-                    </div>
-
-                    <div class="menu-item fade-up">
-                        <div>
-                            <h3>Flat White</h3>
-                            <p>Kadifemsi süt köpüğü ile.</p>
-                        </div>
-                        <div class="price">₺145</div>
-                    </div>
-
-                    <div class="menu-item fade-up">
-                        <div>
-                            <h3>Matcha Latte</h3>
-                            <p>Seremoni sınıfı Japon matcha.</p>
-                        </div>
-                        <div class="price">₺165</div>
-                    </div>
-
-                    <div class="menu-item fade-up">
-                        <div>
-                            <h3>Cold Brew</h3>
-                            <p>18 saatlik soğuk demleme.</p>
-                        </div>
-                        <div class="price">₺150</div>
-                    </div>
-
-                    <div class="menu-item fade-up">
-                        <div>
-                            <h3>Almond Croissant</h3>
-                            <p>Günlük taze, badem kremalı.</p>
-                        </div>
-                        <div class="price">₺135</div>
-                    </div>
-
-                    <div class="menu-item fade-up">
-                        <div>
-                            <h3>Basque Cheesecake</h3>
-                            <p>Karamelize dış, kremamsı iç.</p>
-                        </div>
-                        <div class="price">₺175</div>
-                    </div>
-
-                    <div class="menu-item fade-up">
-                        <div>
-                            <h3>Avocado Toast</h3>
-                            <p>Ekşi mayalı ekmek, avokado.</p>
-                        </div>
-                        <div class="price">₺240</div>
-                    </div>
-
-                    <div class="menu-item fade-up">
-                        <div>
-                            <h3>Granola Bowl</h3>
-                            <p>Yoğurt, meyveler ve ev yapımı granola.</p>
-                        </div>
-                        <div class="price">₺210</div>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- FEATURE -->
-
-        <section class="feature">
-
-            <div class="section-inner feature-grid">
-
-                <div class="feature-image fade-up">
-                    <img
-                        src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1100&q=85"
-                        alt="Kafede arkadaşlarıyla oturan insanlar"
-                    >
-                </div>
-
-                <div class="feature-content fade-up">
-
-                    <div class="eyebrow">
-                        More than coffee
-                    </div>
-
-                    <h2>
-                        Sabah kahvesi,
-                        akşam sohbeti.
-                    </h2>
-
-                    <p>
-                        Sabahları laptopunuzu alıp çalışabileceğiniz,
-                        öğleden sonra arkadaşlarınızla buluşabileceğiniz
-                        ve akşam uzun sohbetlere devam edebileceğiniz
-                        bir alan tasarladık.
-                    </p>
-
-                    <a href="#visit" class="btn btn-dark">
-                        Mekanı Keşfet →
-                    </a>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- GALLERY -->
-
-        <section id="gallery">
-
-            <div class="section-inner">
-
-                <div class="section-header fade-up">
-
-                    <div>
-                        <div class="eyebrow">
-                            Inside NOIR
-                        </div>
-
-                        <h2 class="section-title">
-                            Atmosfer
-                        </h2>
-                    </div>
-
-                </div>
-
-
-                <div class="gallery-grid">
-
-                    <div class="gallery-item fade-up">
-                        <img
-                            src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=1200&q=85"
-                            alt="Kafe iç mekanı"
-                        >
-                    </div>
-
-                    <div class="gallery-item fade-up">
-                        <img
-                            src="https://images.unsplash.com/photo-1498804103079-a6351b050096?auto=format&fit=crop&w=900&q=85"
-                            alt="Kahve"
-                        >
-                    </div>
-
-                    <div class="gallery-item fade-up">
-                        <img
-                            src="https://images.unsplash.com/photo-1481833761820-0509d3217039?auto=format&fit=crop&w=900&q=85"
-                            alt="Kafede masa"
-                        >
-                    </div>
-
-                    <div class="gallery-item fade-up">
-                        <img
-                            src="https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=900&q=85"
-                            alt="Kahve çekirdekleri"
-                        >
-                    </div>
-
-                    <div class="gallery-item fade-up">
-                        <img
-                            src="https://images.unsplash.com/photo-1511081692775-05d0f180a065?auto=format&fit=crop&w=900&q=85"
-                            alt="Kafede kahve"
-                        >
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-
-        <!-- VISIT -->
-
-        <section class="visit" id="visit">
-
-            <div class="section-inner visit-grid">
-
-                <div class="fade-up">
-
-                    <div class="eyebrow">
-                        Come say hello
-                    </div>
-
-                    <h2>
-                        Kahveni
-                        bekliyoruz.
-                    </h2>
-
-                    <p>
-                        Şehrin en güzel köşelerinden birinde,
-                        günün her saatinde taze kahve ve iyi müzik
-                        için kapımız açık.
-                    </p>
-
-                </div>
-
-
-                <div class="fade-up">
-
-                    <div class="info-box">
-                        <span>Adres</span>
-                        <strong>
-                            Moda Caddesi No: 42<br>
-                            Kadıköy / İstanbul
-                        </strong>
-                    </div>
-
-                    <div class="info-box">
-                        <span>Çalışma Saatleri</span>
-                        <strong>
-                            Pazartesi – Pazar<br>
-                            08:00 — 23:30
-                        </strong>
-                    </div>
-
-                    <div class="info-box">
-                        <span>Telefon</span>
-                        <strong>
-                            +90 216 555 42 42
-                        </strong>
-                    </div>
-
-                    <div style="margin-top:30px;">
-                        <a
-                            href="https://maps.google.com"
-                            target="_blank"
-                            class="btn"
-                            style="background:white; color:#211d18;"
-                        >
-                            Yol Tarifi Al →
-                        </a>
-                    </div>
-
-                </div>
-
-            </div>
-
-        </section>
-
-    </main>
-
-
-    <!-- FOOTER -->
-
-    <footer>
-
-        <div class="footer-grid">
-
-            <div>
-                <div class="footer-logo">
-                    NOIR
-                </div>
-
-                <p class="footer-description">
-                    Specialty coffee, good food
-                    and slow mornings.
-                </p>
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>Explore</h4>
-
-                <a href="#about">Hakkımızda</a>
-                <a href="#menu">Menü</a>
-                <a href="#gallery">Galeri</a>
-                <a href="#visit">İletişim</a>
-
-            </div>
-
-
-            <div class="footer-column">
-
-                <h4>Social</h4>
-
-                <a href="#">Instagram</a>
-                <a href="#">TikTok</a>
-                <a href="#">Google Maps</a>
-
-            </div>
-
-        </div>
-
-
-        <div class="copyright">
-
-            <span>
-                © 2026 NOIR Coffee House
-            </span>
-
-            <span>
-                Designed with good coffee.
-            </span>
-
-        </div>
-
-    </footer>
-
-
-    <script>
-
-        /* NAVBAR SCROLL */
-
-        const navbar = document.getElementById("navbar");
-
-        window.addEventListener("scroll", () => {
-
-            if (window.scrollY > 50) {
-                navbar.classList.add("scrolled");
-            } else {
-                navbar.classList.remove("scrolled");
-            }
-
-        });
-
-
-        /* MOBILE MENU */
-
-        const menuToggle = document.getElementById("menuToggle");
-        const navLinks = document.getElementById("navLinks");
-
-        menuToggle.addEventListener("click", () => {
-            navLinks.classList.toggle("active");
-        });
-
-
-        document.querySelectorAll(".nav-links a").forEach(link => {
-
-            link.addEventListener("click", () => {
-                navLinks.classList.remove("active");
-            });
-
-        });
-
-
-        /* SCROLL ANIMATIONS */
-
-        const observer = new IntersectionObserver((entries) => {
-
-            entries.forEach(entry => {
-
-                if (entry.isIntersecting) {
-                    entry.target.classList.add("show");
-                }
-
-            });
-
-        }, {
-            threshold: 0.12
-        });
-
-
-        document.querySelectorAll(".fade-up").forEach(el => {
-            observer.observe(el);
-        });
-
-    </script>
-
+  <div class="ambient-bg"></div>
+
+  <header>
+    <div class="brand-logo">AETERNA</div>
+    <ul class="nav-links">
+      <li><a href="#kalibre">Kalibre 9001</a></li>
+      <li><a href="#safir">Safir Kristal</a></li>
+      <li><a href="#titanyum">Grade 5 Titanyum</a></li>
+      <li><a href="#miras">Haute Horlogerie</a></li>
+    </ul>
+    <button class="cta-btn" onclick="triggerAutoTour()">Otomatik Tur</button>
+  </header>
+
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Katman Kartları -->
+  <div class="story-section active" id="story-0">
+    <div class="section-tag">Aeterna Grand Complication</div>
+    <h1 class="story-title">SAF MÜHENDİSLİK.<br>ZAMANSIZ SANAT.</h1>
+    <p class="story-desc">
+      İsviçre yüksek saatçiliğinin zirvesi. 340 mikro bileşenin milimetrik uyumunu keşfetmek için fare tekerleğini veya ekranı kaydırın.
+    </p>
+    <div class="story-specs">
+      <div class="spec-item">
+        <span class="spec-val">4 Hz</span>
+        <span class="spec-lbl">28,800 Titreşim</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-val">72 Saat</span>
+        <span class="spec-lbl">Güç Rezervi</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-val">Grade 5</span>
+        <span class="spec-lbl">Titanyum Kasa</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-section" id="story-1">
+    <div class="section-tag">Aşama 01 / Dış Zırh</div>
+    <h2 class="story-title">SAFİR KRİSTAL<br>& SEKİZGEN BEZEL</h2>
+    <p class="story-desc">
+      Elmas sertliğinde yansıma önleyici çift kavisli safir kristal cam. Fırçalanmış titanyum bezel ve 8 adet el yapımı mikro kilit vidası.
+    </p>
+    <div class="story-specs">
+      <div class="spec-item">
+        <span class="spec-val">1.8 mm</span>
+        <span class="spec-lbl">Kristal Kalınlığı</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-val">100 M</span>
+        <span class="spec-lbl">Su Basınç Direnci</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-section" id="story-2">
+    <div class="section-tag">Aşama 02 / Arayüz</div>
+    <h2 class="story-title">İSKELET KADRAN<br>& KRONOGRAF</h2>
+    <p class="story-desc">
+      Açık mimarili antrasit iskelet kadran. 18K pembe altın fasetli indeksler ve karanlıkta kusursuz okuma sağlayan Super-LumiNova® ibreler.
+    </p>
+    <div class="story-specs">
+      <div class="spec-item">
+        <span class="spec-val">18K</span>
+        <span class="spec-lbl">Pembe Altın Aksam</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-val">0.05 mm</span>
+        <span class="spec-lbl">Tolerans Hassasiyeti</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-section" id="story-3">
+    <div class="section-tag">Aşama 03 / Kalp</div>
+    <h2 class="story-title">CALIBRE 9001<br>MEKANİK MİMARİ</h2>
+    <p class="story-desc">
+      Sürtünmesiz sentetik yakut taşlar üzerinde dönen eşmerkezli çark treni, maşa mekanizması ve sürekli titreşen salınım dengesi.
+    </p>
+    <div class="story-specs">
+      <div class="spec-item">
+        <span class="spec-val">34</span>
+        <span class="spec-lbl">Değerli Yakut Taş</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-val">Geneva</span>
+        <span class="spec-lbl">Côtes Süsleme</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="story-section" id="story-4">
+    <div class="section-tag">Aşama 04 / Enerji & Kasa</div>
+    <h2 class="story-title">TUNGSTEN ROTOR<br>& ARKA KAPAK</h2>
+    <p class="story-desc">
+      Kullanıcının bilek hareketiyle kinetik enerjiyi depolayan ağır tungsten kütleli açık rotor ve transparan safir sergi arka kapağı.
+    </p>
+    <div class="story-specs">
+      <div class="spec-item">
+        <span class="spec-val">22K / W</span>
+        <span class="spec-lbl">Ağır Rotor Kütlesi</span>
+      </div>
+      <div class="spec-item">
+        <span class="spec-val">Monoblok</span>
+        <span class="spec-lbl">Gövde Yapısı</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Sağ Bölüm Göstergesi -->
+  <div class="part-telemetry">
+    <div class="telemetry-item active" id="tel-0"><div class="telemetry-dot"></div><div class="telemetry-text">00. Birleşik Hal</div></div>
+    <div class="telemetry-item" id="tel-1"><div class="telemetry-dot"></div><div class="telemetry-text">01. Kristal & Bezel</div></div>
+    <div class="telemetry-item" id="tel-2"><div class="telemetry-dot"></div><div class="telemetry-text">02. İskelet Kadran</div></div>
+    <div class="telemetry-item" id="tel-3"><div class="telemetry-dot"></div><div class="telemetry-text">03. Mekanik Kalibre</div></div>
+    <div class="telemetry-item" id="tel-4"><div class="telemetry-dot"></div><div class="telemetry-text">04. Kasa & Rotor</div></div>
+  </div>
+
+  <!-- Alt Kontrol Paneli -->
+  <div class="bottom-hud">
+    <div class="scroll-hint">
+      <div class="mouse-icon"><div class="mouse-wheel"></div></div>
+      <span>Parçaları Ayırmak İçin Kaydırın</span>
+    </div>
+
+    <div>
+      <div class="explode-degree-text" id="explodePercentText">AYRILMA: %0</div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressFill"></div>
+      </div>
+    </div>
+
+    <div class="hud-actions">
+      <button class="hud-btn" id="btnToggleExplode" onclick="toggleExplosion()">
+        <span>☵</span> Parçaları Aç/Kapat
+      </button>
+      <button class="hud-btn" id="btnResetView" onclick="resetCamera()">
+        <span>⟲</span> Bakışı Sıfırla
+      </button>
+    </div>
+  </div>
+
+  <div id="scroll-container"></div>
+
+  <script>
+    let scene, camera, renderer;
+    let watchMainGroup;
+    let watchParts = [];
+    let movingHands = [];
+    let balanceWheel, rotorGroup;
+
+    let scrollProgress = 0;
+    let targetProgress = 0;
+    let isAutoTouring = false;
+    let mouseX = 0, mouseY = 0;
+    let targetMouseX = 0, targetMouseY = 0;
+
+    const canvas = document.getElementById('webgl-canvas');
+
+    let matTitaniumBrushed, matRoseGold, matDarkSteel, matSapphireGlass, matRubyJewel, matBluedSteel;
+
+    function initMaterials() {
+      matTitaniumBrushed = new THREE.MeshStandardMaterial({
+        color: 0x9fa4ad,
+        metalness: 0.92,
+        roughness: 0.28
+      });
+
+      matRoseGold = new THREE.MeshStandardMaterial({
+        color: 0xd49b6a,
+        metalness: 0.95,
+        roughness: 0.22
+      });
+
+      matDarkSteel = new THREE.MeshStandardMaterial({
+        color: 0x1f2229,
+        metalness: 0.85,
+        roughness: 0.35
+      });
+
+      matSapphireGlass = new THREE.MeshPhysicalMaterial({
+        color: 0xffffff,
+        transmission: 0.94,
+        opacity: 1,
+        transparent: true,
+        roughness: 0.04,
+        ior: 1.77,
+        metalness: 0.05,
+        reflectivity: 0.9,
+        clearcoat: 1.0
+      });
+
+      matRubyJewel = new THREE.MeshPhysicalMaterial({
+        color: 0xd61845,
+        transmission: 0.8,
+        transparent: true,
+        roughness: 0.1,
+        metalness: 0.1
+      });
+
+      matBluedSteel = new THREE.MeshStandardMaterial({
+        color: 0x1e4bb5,
+        metalness: 0.95,
+        roughness: 0.15
+      });
+    }
+
+    function initScene() {
+      scene = new THREE.Scene();
+      scene.fog = new THREE.FogExp2(0x050507, 0.015);
+
+      camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 0, 36);
+
+      renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        antialias: true,
+        powerPreference: "high-performance",
+        alpha: true
+      });
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      renderer.toneMapping = THREE.ACESFilmicToneMapping;
+      renderer.toneMappingExposure = 1.35;
+
+      const ambientLight = new THREE.AmbientLight(0xdde5ed, 1.2);
+      scene.add(ambientLight);
+
+      const keyLight = new THREE.DirectionalLight(0xfffaed, 2.4);
+      keyLight.position.set(20, 25, 30);
+      scene.add(keyLight);
+
+      const rimLight = new THREE.DirectionalLight(0x7da4ff, 2.0);
+      rimLight.position.set(-25, -15, 20);
+      scene.add(rimLight);
+
+      const movementPoint = new THREE.PointLight(0xffe6b0, 2.5, 40);
+      movementPoint.position.set(0, 0, 10);
+      scene.add(movementPoint);
+
+      initMaterials();
+      buildLuxuryWatch();
+
+      window.addEventListener('resize', onWindowResize);
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('wheel', onWheel, { passive: false });
+      window.addEventListener('mousemove', onMouseMove);
+      
+      // Mobil Dokunmatik Algılama
+      let touchStartY = 0;
+      window.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+      }, { passive: true });
+
+      window.addEventListener('touchmove', (e) => {
+        const touchY = e.touches[0].clientY;
+        const deltaY = touchStartY - touchY;
+        touchStartY = touchY;
+        targetProgress += deltaY * 0.0018;
+        targetProgress = Math.max(0, Math.min(1, targetProgress));
+      }, { passive: true });
+    }
+
+    function registerPart(meshOrGroup, explodedPos, explodedRot = { x: 0, y: 0, z: 0 }) {
+      watchParts.push({
+        object: meshOrGroup,
+        origPos: meshOrGroup.position.clone(),
+        destPos: new THREE.Vector3(explodedPos.x, explodedPos.y, explodedPos.z),
+        origRot: meshOrGroup.rotation.clone(),
+        destRot: new THREE.Euler(
+          meshOrGroup.rotation.x + explodedRot.x,
+          meshOrGroup.rotation.y + explodedRot.y,
+          meshOrGroup.rotation.z + explodedRot.z
+        )
+      });
+    }
+
+    function buildLuxuryWatch() {
+      watchMainGroup = new THREE.Group();
+      scene.add(watchMainGroup);
+
+      // 1. SAFİR KRİSTAL CAM
+      const glassGeo = new THREE.CylinderGeometry(7.2, 7.2, 0.28, 64);
+      const glassMesh = new THREE.Mesh(glassGeo, matSapphireGlass);
+      glassMesh.rotation.x = Math.PI / 2;
+      glassMesh.position.set(0, 0, 2.6);
+      watchMainGroup.add(glassMesh);
+      registerPart(glassMesh, { x: 0, y: 0, z: 13.5 }, { x: 0.1, y: 0.15, z: 0 });
+
+      // 2. SEKİZGEN BEZEL & ALTIN VİDALAR
+      const bezelGroup = new THREE.Group();
+      bezelGroup.position.set(0, 0, 2.2);
+
+      const bezelGeo = new THREE.CylinderGeometry(7.8, 8.1, 0.55, 8);
+      const bezelMesh = new THREE.Mesh(bezelGeo, matTitaniumBrushed);
+      bezelMesh.rotation.x = Math.PI / 2;
+      bezelGroup.add(bezelMesh);
+
+      const innerBezelGeo = new THREE.TorusGeometry(6.9, 0.22, 16, 64);
+      const innerBezelMesh = new THREE.Mesh(innerBezelGeo, matRoseGold);
+      innerBezelMesh.position.set(0, 0, 0.28);
+      bezelGroup.add(innerBezelMesh);
+
+      for (let i = 0; i < 8; i++) {
+        const angle = (i / 8) * Math.PI * 2;
+        const screwRadius = 7.1;
+        const screwGeo = new THREE.CylinderGeometry(0.28, 0.28, 0.15, 6);
+        const screwMesh = new THREE.Mesh(screwGeo, matRoseGold);
+        screwMesh.rotation.x = Math.PI / 2;
+        screwMesh.rotation.z = angle;
+        screwMesh.position.set(Math.cos(angle) * screwRadius, Math.sin(angle) * screwRadius, 0.32);
+        bezelGroup.add(screwMesh);
+      }
+      watchMainGroup.add(bezelGroup);
+      registerPart(bezelGroup, { x: 0, y: 0, z: 10.0 }, { x: 0.15, y: -0.2, z: 0.05 });
+
+      // 3. İÇ HALKA (CHAPTER RING & DAKİKA ÇİZGİLERİ)
+      const chapterGroup = new THREE.Group();
+      chapterGroup.position.set(0, 0, 1.8);
+      const chapterGeo = new THREE.RingGeometry(6.3, 7.0, 64);
+      const chapterMesh = new THREE.Mesh(chapterGeo, matDarkSteel);
+      chapterGroup.add(chapterMesh);
+
+      for (let i = 0; i < 60; i++) {
+        const angle = (i / 60) * Math.PI * 2;
+        const isFive = i % 5 === 0;
+        const tickGeo = new THREE.PlaneGeometry(isFive ? 0.15 : 0.06, isFive ? 0.5 : 0.25);
+        const tickMesh = new THREE.Mesh(tickGeo, isFive ? matRoseGold : matTitaniumBrushed);
+        tickMesh.position.set(Math.cos(angle) * 6.65, Math.sin(angle) * 6.65, 0.02);
+        tickMesh.rotation.z = angle - Math.PI / 2;
+        chapterGroup.add(tickMesh);
+      }
+      watchMainGroup.add(chapterGroup);
+      registerPart(chapterGroup, { x: 0, y: 0, z: 7.2 }, { x: 0.05, y: 0.1, z: 0 });
+
+      // 4. İBRELER (AKREP, YELKOVAN, KRONOGRAF SANİYE)
+      const handsGroup = new THREE.Group();
+      handsGroup.position.set(0, 0, 1.4);
+
+      const capGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.4, 32);
+      const capMesh = new THREE.Mesh(capGeo, matRoseGold);
+      capMesh.rotation.x = Math.PI / 2;
+      capMesh.position.set(0, 0, 0.2);
+      handsGroup.add(capMesh);
+
+      const hourHandGeo = new THREE.ConeGeometry(0.4, 3.8, 4);
+      const hourHandMesh = new THREE.Mesh(hourHandGeo, matRoseGold);
+      hourHandMesh.position.set(0, 1.6, 0.1);
+      const hourHandPivot = new THREE.Group();
+      hourHandPivot.add(hourHandMesh);
+      hourHandPivot.rotation.z = -Math.PI / 3;
+      handsGroup.add(hourHandPivot);
+      movingHands.push({ obj: hourHandPivot, speed: 0.0004 });
+
+      const minHandGeo = new THREE.ConeGeometry(0.32, 5.2, 4);
+      const minHandMesh = new THREE.Mesh(minHandGeo, matRoseGold);
+      minHandMesh.position.set(0, 2.3, 0.2);
+      const minHandPivot = new THREE.Group();
+      minHandPivot.add(minHandMesh);
+      minHandPivot.rotation.z = Math.PI / 5;
+      handsGroup.add(minHandPivot);
+      movingHands.push({ obj: minHandPivot, speed: 0.003 });
+
+      const secHandGeo = new THREE.CylinderGeometry(0.04, 0.06, 6.2, 16);
+      const secHandMesh = new THREE.Mesh(secHandGeo, matBluedSteel);
+      secHandMesh.position.set(0, 2.2, 0.3);
+      const counterWeight = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.9, 16), matBluedSteel);
+      counterWeight.position.set(0, -0.6, 0.3);
+      const secHandPivot = new THREE.Group();
+      secHandPivot.add(secHandMesh);
+      secHandPivot.add(counterWeight);
+      handsGroup.add(secHandPivot);
+      movingHands.push({ obj: secHandPivot, speed: 0.035 });
+
+      watchMainGroup.add(handsGroup);
+      registerPart(handsGroup, { x: 0, y: 0, z: 5.2 }, { x: 0.05, y: -0.1, z: 0.2 });
+
+      // 5. İSKELET KADRAN & FASETLİ İNDEKSLER
+      const dialGroup = new THREE.Group();
+      dialGroup.position.set(0, 0, 1.0);
+
+      const dialRingGeo = new THREE.RingGeometry(2.5, 6.3, 64);
+      const dialRingMesh = new THREE.Mesh(dialRingGeo, matDarkSteel);
+      dialGroup.add(dialRingMesh);
+
+      for (let i = 0; i < 12; i++) {
+        const angle = (i / 12) * Math.PI * 2;
+        const indexGeo = new THREE.BoxGeometry(0.35, 1.2, 0.25);
+        const indexMesh = new THREE.Mesh(indexGeo, matRoseGold);
+        indexMesh.position.set(Math.cos(angle) * 5.4, Math.sin(angle) * 5.4, 0.15);
+        indexMesh.rotation.z = angle - Math.PI / 2;
+        dialGroup.add(indexMesh);
+      }
+
+      const subdialLeft = new THREE.Mesh(new THREE.TorusGeometry(1.4, 0.12, 16, 48), matRoseGold);
+      subdialLeft.position.set(-2.5, 0, 0.1);
+      dialGroup.add(subdialLeft);
+
+      const subdialRight = new THREE.Mesh(new THREE.TorusGeometry(1.4, 0.12, 16, 48), matRoseGold);
+      subdialRight.position.set(2.5, 0, 0.1);
+      dialGroup.add(subdialRight);
+
+      const tourbillonRing = new THREE.Mesh(new THREE.TorusGeometry(1.7, 0.15, 16, 48), matRoseGold);
+      tourbillonRing.position.set(0, -2.5, 0.1);
+      dialGroup.add(tourbillonRing);
+
+      watchMainGroup.add(dialGroup);
+      registerPart(dialGroup, { x: 0, y: 0, z: 2.8 }, { x: -0.1, y: 0.15, z: -0.05 });
+
+      // 6. MEKANİK ÇARKLAR, YAKUTLAR & BALANS ÇARKI
+      const movementGroup = new THREE.Group();
+      movementGroup.position.set(0, 0, 0.2);
+
+      const bridgeGeo = new THREE.RingGeometry(1.8, 6.0, 48, 1, 0, Math.PI * 1.5);
+      const bridgeMesh = new THREE.Mesh(bridgeGeo, matTitaniumBrushed);
+      bridgeMesh.position.set(0, 0, 0.4);
+      movementGroup.add(bridgeMesh);
+
+      function createGear(radius, teethCount, thickness, material) {
+        const gearGroup = new THREE.Group();
+        const bodyGeo = new THREE.CylinderGeometry(radius * 0.9, radius * 0.9, thickness, 32);
+        const bodyMesh = new THREE.Mesh(bodyGeo, material);
+        bodyMesh.rotation.x = Math.PI / 2;
+        gearGroup.add(bodyMesh);
+
+        for (let i = 0; i < teethCount; i++) {
+          const angle = (i / teethCount) * Math.PI * 2;
+          const tooth = new THREE.Mesh(new THREE.BoxGeometry(radius * 0.18, radius * 0.35, thickness), material);
+          tooth.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
+          tooth.rotation.z = angle;
+          gearGroup.add(tooth);
+        }
+        return gearGroup;
+      }
+
+      const gear1 = createGear(2.4, 28, 0.2, matRoseGold);
+      gear1.position.set(-1.8, 1.8, 0.2);
+      movementGroup.add(gear1);
+      movingHands.push({ obj: gear1, speed: 0.015 });
+
+      const gear2 = createGear(1.6, 20, 0.18, matTitaniumBrushed);
+      gear2.position.set(1.9, 1.5, 0.15);
+      movementGroup.add(gear2);
+      movingHands.push({ obj: gear2, speed: -0.022 });
+
+      balanceWheel = new THREE.Group();
+      balanceWheel.position.set(0, -2.5, 0.25);
+      const balRim = new THREE.Mesh(new THREE.TorusGeometry(1.35, 0.12, 16, 32), matRoseGold);
+      balanceWheel.add(balRim);
+      movementGroup.add(balanceWheel);
+
+      const rubyPositions = [[-1.8, 1.8], [1.9, 1.5], [2.4, -1.2], [0, -2.5], [0, 0], [-2.2, -1.2]];
+      rubyPositions.forEach(([x, y]) => {
+        const rubyMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.25, 24), matRubyJewel);
+        rubyMesh.rotation.x = Math.PI / 2;
+        rubyMesh.position.set(x, y, 0.35);
+        movementGroup.add(rubyMesh);
+
+        const screwBlue = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.2, 16), matBluedSteel);
+        screwBlue.rotation.x = Math.PI / 2;
+        screwBlue.position.set(x + 0.5, y + 0.4, 0.36);
+        movementGroup.add(screwBlue);
+      });
+
+      watchMainGroup.add(movementGroup);
+      registerPart(movementGroup, { x: 0, y: 0, z: -0.5 }, { x: 0.12, y: -0.15, z: 0.1 });
+
+      // 7. ORTA TİTANYUM KASA, BOZNUZLAR & AYAR TEPESİ
+      const caseGroup = new THREE.Group();
+      caseGroup.position.set(0, 0, -0.6);
+
+      const barrelGeo = new THREE.CylinderGeometry(8.2, 8.2, 1.6, 64);
+      const barrelMesh = new THREE.Mesh(barrelGeo, matTitaniumBrushed);
+      barrelMesh.rotation.x = Math.PI / 2;
+      caseGroup.add(barrelMesh);
+
+      const lugGeo = new THREE.BoxGeometry(1.6, 3.8, 1.5);
+      const lugCoords = [[-5.5, 7.6, -0.3], [5.5, 7.6, 0.3], [-5.5, -7.6, 0.3], [5.5, -7.6, -0.3]];
+      lugCoords.forEach(([lx, ly, lrz]) => {
+        const lug = new THREE.Mesh(lugGeo, matTitaniumBrushed);
+        lug.position.set(lx, ly, 0);
+        lug.rotation.z = lrz;
+        caseGroup.add(lug);
+      });
+
+      const crownGeo = new THREE.CylinderGeometry(1.2, 1.1, 1.2, 32);
+      const crownMesh = new THREE.Mesh(crownGeo, matRoseGold);
+      crownMesh.rotation.z = Math.PI / 2;
+      crownMesh.position.set(8.9, 0, 0);
+      caseGroup.add(crownMesh);
+
+      const pusher1 = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 1.0, 24), matTitaniumBrushed);
+      pusher1.rotation.z = Math.PI / 2 - 0.5;
+      pusher1.position.set(8.4, 3.2, 0);
+      caseGroup.add(pusher1);
+
+      const pusher2 = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 1.0, 24), matTitaniumBrushed);
+      pusher2.rotation.z = Math.PI / 2 + 0.5;
+      pusher2.position.set(8.4, -3.2, 0);
+      caseGroup.add(pusher2);
+
+      watchMainGroup.add(caseGroup);
+      registerPart(caseGroup, { x: 0, y: 0, z: -3.8 }, { x: 0.0, y: 0.0, z: 0.0 });
+
+      // 8. TUNGSTEN OTOMATİK KURMA ROTORU
+      rotorGroup = new THREE.Group();
+      rotorGroup.position.set(0, 0, -1.8);
+
+      const rotorGeo = new THREE.CylinderGeometry(6.4, 6.4, 0.32, 48, 1, false, 0, Math.PI);
+      const rotorMesh = new THREE.Mesh(rotorGeo, matRoseGold);
+      rotorMesh.rotation.x = Math.PI / 2;
+      rotorGroup.add(rotorMesh);
+
+      const tungstenMass = new THREE.Mesh(new THREE.TorusGeometry(6.1, 0.45, 16, 48, Math.PI), matDarkSteel);
+      tungstenMass.position.set(0, 0, 0.18);
+      rotorGroup.add(tungstenMass);
+
+      watchMainGroup.add(rotorGroup);
+      registerPart(rotorGroup, { x: 0, y: 0, z: -7.6 }, { x: -0.2, y: 0.25, z: 0.4 });
+
+      // 9. SAFİR SERGİ ARKA KAPAK
+      const casebackGroup = new THREE.Group();
+      casebackGroup.position.set(0, 0, -2.4);
+
+      const backRing = new THREE.Mesh(new THREE.TorusGeometry(7.0, 0.8, 16, 64), matTitaniumBrushed);
+      casebackGroup.add(backRing);
+
+      const backGlass = new THREE.Mesh(new THREE.CylinderGeometry(6.3, 6.3, 0.22, 48), matSapphireGlass);
+      backGlass.rotation.x = Math.PI / 2;
+      casebackGroup.add(backGlass);
+
+      watchMainGroup.add(casebackGroup);
+      registerPart(casebackGroup, { x: 0, y: 0, z: -11.5 }, { x: -0.15, y: -0.2, z: 0.1 });
+
+      // 10. ENTEGRE BİLEZİK / KAYIŞ SEGMENTLERİ
+      const strapGroupTop = new THREE.Group();
+      strapGroupTop.position.set(0, 9.8, -0.6);
+      const strapGroupBottom = new THREE.Group();
+      strapGroupBottom.position.set(0, -9.8, -0.6);
+
+      for (let link = 0; link < 4; link++) {
+        const linkGeo = new THREE.BoxGeometry(6.8 - link * 0.8, 1.8, 0.9);
+        const linkTop = new THREE.Mesh(linkGeo, matDarkSteel);
+        linkTop.position.set(0, link * 1.9, -link * 0.25);
+        strapGroupTop.add(linkTop);
+
+        const linkBottom = new THREE.Mesh(linkGeo, matDarkSteel);
+        linkBottom.position.set(0, -link * 1.9, -link * 0.25);
+        strapGroupBottom.add(linkBottom);
+      }
+      watchMainGroup.add(strapGroupTop);
+      registerPart(strapGroupTop, { x: 0, y: 15.0, z: -5.0 }, { x: -0.35, y: 0, z: 0 });
+
+      watchMainGroup.add(strapGroupBottom);
+      registerPart(strapGroupBottom, { x: 0, y: -15.0, z: -5.0 }, { x: 0.35, y: 0, z: 0 });
+    }
+
+    function onWheel(e) {
+      targetProgress += e.deltaY * 0.0009;
+      targetProgress = Math.max(0, Math.min(1, targetProgress));
+    }
+
+    function onScroll() {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      if (maxScroll > 0) {
+        targetProgress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+      }
+    }
+
+    function onMouseMove(e) {
+      targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
+      targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
+    }
+
+    function onWindowResize() {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    }
+
+    let manualExplodeState = false;
+    function toggleExplosion() {
+      manualExplodeState = !manualExplodeState;
+      targetProgress = manualExplodeState ? 0.95 : 0.0;
+    }
+
+    function resetCamera() {
+      targetProgress = 0;
+      targetMouseX = 0;
+      targetMouseY = 0;
+    }
+
+    function triggerAutoTour() {
+      isAutoTouring = true;
+      let startProg = scrollProgress;
+      let targetP = scrollProgress > 0.5 ? 0.0 : 1.0;
+      let startTime = performance.now();
+      let duration = 2600;
+
+      function stepTour(now) {
+        let elapsed = (now - startTime) / duration;
+        if (elapsed < 1) {
+          targetProgress = startProg + (targetP - startProg) * Math.sin(elapsed * Math.PI / 2);
+          requestAnimationFrame(stepTour);
+        } else {
+          targetProgress = targetP;
+          isAutoTouring = false;
+        }
+      }
+      requestAnimationFrame(stepTour);
+    }
+
+    const storySections = [
+      document.getElementById('story-0'),
+      document.getElementById('story-1'),
+      document.getElementById('story-2'),
+      document.getElementById('story-3'),
+      document.getElementById('story-4')
+    ];
+
+    const telemetryItems = [
+      document.getElementById('tel-0'),
+      document.getElementById('tel-1'),
+      document.getElementById('tel-2'),
+      document.getElementById('tel-3'),
+      document.getElementById('tel-4')
+    ];
+
+    const progressFill = document.getElementById('progressFill');
+    const explodePercentText = document.getElementById('explodePercentText');
+
+    function updateUI(prog) {
+      const percent = Math.round(prog * 100);
+      progressFill.style.width = percent + '%';
+      explodePercentText.textContent = `AYRILMA: %${percent}`;
+
+      let activeIdx = 0;
+      if (prog < 0.15) activeIdx = 0;
+      else if (prog < 0.40) activeIdx = 1;
+      else if (prog < 0.65) activeIdx = 2;
+      else if (prog < 0.85) activeIdx = 3;
+      else activeIdx = 4;
+
+      storySections.forEach((sec, idx) => {
+        if (idx === activeIdx) sec.classList.add('active');
+        else sec.classList.remove('active');
+      });
+
+      telemetryItems.forEach((tel, idx) => {
+        if (idx === activeIdx) tel.classList.add('active');
+        else tel.classList.remove('active');
+      });
+    }
+
+    const clock = new THREE.Clock();
+
+    function animate() {
+      requestAnimationFrame(animate);
+      const elapsedTime = clock.getElapsedTime();
+
+      // Yumuşak Lerp Geçişleri
+      scrollProgress += (targetProgress - scrollProgress) * 0.075;
+      mouseX += (targetMouseX - mouseX) * 0.05;
+      mouseY += (targetMouseY - mouseY) * 0.05;
+
+      // İbreler ve dişlilerin gerçek zamanlı dönüşü
+      movingHands.forEach(item => {
+        item.obj.rotation.z -= item.speed;
+      });
+
+      // Balans çarkı 4Hz titreşimi
+      if (balanceWheel) {
+        balanceWheel.rotation.z = Math.sin(elapsedTime * 28) * 0.45;
+      }
+
+      // Rotor salınımı
+      if (rotorGroup) {
+        rotorGroup.rotation.z = Math.sin(elapsedTime * 0.8) * 0.8 + Math.cos(elapsedTime * 0.3) * 0.3;
+      }
+
+      const easeProgress = Math.pow(scrollProgress, 1.2);
+
+      // Parçaların koordinatlara dağılması
+      watchParts.forEach(part => {
+        part.object.position.lerpVectors(part.origPos, part.destPos, easeProgress);
+        part.object.rotation.x = THREE.MathUtils.lerp(part.origRot.x, part.destRot.x, easeProgress);
+        part.object.rotation.y = THREE.MathUtils.lerp(part.origRot.y, part.destRot.y, easeProgress);
+        part.object.rotation.z = THREE.MathUtils.lerp(part.origRot.z, part.destRot.z, easeProgress);
+      });
+
+      // Saatin genel kamera açısı ve parallaks eğimi
+      const idleRotation = Math.sin(elapsedTime * 0.3) * 0.05;
+      const targetWatchRotX = THREE.MathUtils.lerp(0.25, 0.65, easeProgress) + (mouseY * 0.2);
+      const targetWatchRotY = THREE.MathUtils.lerp(idleRotation, 0.95, easeProgress) + (mouseX * 0.3);
+
+      watchMainGroup.rotation.x = targetWatchRotX;
+      watchMainGroup.rotation.y = targetWatchRotY;
+
+      // Kamera derinlik kontrolü
+      camera.position.z = THREE.MathUtils.lerp(34, 40, easeProgress);
+      camera.position.x = THREE.MathUtils.lerp(0, 3.5, easeProgress);
+      camera.lookAt(0, 0, 0);
+
+      updateUI(scrollProgress);
+      renderer.render(scene, camera);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initScene();
+      animate();
+    });
+  </script>
 </body>
 </html>

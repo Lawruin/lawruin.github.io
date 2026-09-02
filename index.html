@@ -5,7 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>AETERNA CHRONO | Haute Horlogerie</title>
   
-  <!-- Lüks Tipografi -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Montserrat:wght@200;300;400;500;600&display=swap" rel="stylesheet">
@@ -23,7 +22,7 @@
       width: 100%;
       height: 100%;
       overflow-x: hidden;
-      background-color: #050507;
+      background-color: #030406;
       color: #f0f0f4;
       font-family: 'Montserrat', sans-serif;
     }
@@ -53,7 +52,7 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: radial-gradient(circle at 50% 45%, #161922 0%, #07080b 60%, #030304 100%);
+      background: radial-gradient(circle at 50% 40%, #151821 0%, #08090d 55%, #020304 100%);
       z-index: 0;
       pointer-events: none;
     }
@@ -63,7 +62,7 @@
       top: 0;
       left: 0;
       width: 100%;
-      padding: 28px 48px;
+      padding: 24px 44px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -73,7 +72,7 @@
 
     .brand-logo {
       font-family: 'Cinzel', serif;
-      font-size: 22px;
+      font-size: 20px;
       letter-spacing: 0.35em;
       font-weight: 700;
       color: #ffffff;
@@ -86,23 +85,24 @@
     .brand-logo::before {
       content: '';
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       background: #c5a059;
       transform: rotate(45deg);
+      box-shadow: 0 0 10px rgba(197, 160, 89, 0.8);
     }
 
     .nav-links {
       display: flex;
-      gap: 36px;
+      gap: 32px;
       list-style: none;
     }
 
     .nav-links li a {
-      color: rgba(255, 255, 255, 0.55);
+      color: rgba(255, 255, 255, 0.5);
       text-decoration: none;
       font-size: 11px;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       font-weight: 500;
       transition: color 0.3s ease;
@@ -113,11 +113,11 @@
     }
 
     .cta-btn {
-      padding: 10px 24px;
-      border: 1px solid rgba(197, 160, 89, 0.4);
-      background: rgba(197, 160, 89, 0.06);
+      padding: 9px 22px;
+      border: 1px solid rgba(197, 160, 89, 0.45);
+      background: rgba(197, 160, 89, 0.08);
       color: #e5c178;
-      font-size: 11px;
+      font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
       border-radius: 2px;
@@ -129,19 +129,20 @@
     .cta-btn:hover {
       background: #c5a059;
       color: #0a0a0c;
-      box-shadow: 0 0 25px rgba(197, 160, 89, 0.35);
+      box-shadow: 0 0 25px rgba(197, 160, 89, 0.4);
     }
 
+    /* Sol Bilgi Kartları (Masaüstü) */
     .story-section {
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      left: 8%;
-      max-width: 480px;
+      left: 6%;
+      max-width: 440px;
       z-index: 50;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1), transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .story-section.active {
@@ -150,11 +151,11 @@
     }
 
     .section-tag {
-      font-size: 11px;
-      letter-spacing: 0.35em;
+      font-size: 10px;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
       color: #c5a059;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
       display: flex;
       align-items: center;
       gap: 8px;
@@ -162,39 +163,39 @@
 
     .section-tag::before {
       content: '';
-      width: 24px;
+      width: 20px;
       height: 1px;
       background: #c5a059;
     }
 
     .story-title {
       font-family: 'Cinzel', serif;
-      font-size: 38px;
-      line-height: 1.15;
+      font-size: 34px;
+      line-height: 1.18;
       font-weight: 700;
       color: #ffffff;
       letter-spacing: 0.04em;
-      margin-bottom: 16px;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8);
+      margin-bottom: 14px;
+      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9);
     }
 
     .story-desc {
       font-size: 13px;
-      line-height: 1.8;
-      color: rgba(255, 255, 255, 0.65);
+      line-height: 1.75;
+      color: rgba(255, 255, 255, 0.7);
       font-weight: 300;
-      letter-spacing: 0.05em;
-      margin-bottom: 24px;
-      background: rgba(10, 12, 16, 0.45);
-      padding: 16px 20px;
-      border-left: 2px solid rgba(197, 160, 89, 0.5);
-      backdrop-filter: blur(12px);
-      border-radius: 0 8px 8px 0;
+      letter-spacing: 0.04em;
+      margin-bottom: 20px;
+      background: rgba(10, 12, 18, 0.5);
+      padding: 14px 18px;
+      border-left: 2px solid rgba(197, 160, 89, 0.6);
+      backdrop-filter: blur(16px);
+      border-radius: 0 6px 6px 0;
     }
 
     .story-specs {
       display: flex;
-      gap: 24px;
+      gap: 20px;
     }
 
     .spec-item {
@@ -204,65 +205,65 @@
 
     .spec-val {
       font-family: 'Cinzel', serif;
-      font-size: 18px;
+      font-size: 16px;
       color: #fff;
       font-weight: 600;
     }
 
     .spec-lbl {
-      font-size: 9px;
+      font-size: 8.5px;
       text-transform: uppercase;
       letter-spacing: 0.2em;
       color: rgba(255, 255, 255, 0.4);
-      margin-top: 4px;
+      margin-top: 3px;
     }
 
     .part-telemetry {
       position: fixed;
-      right: 6%;
+      right: 5%;
       top: 50%;
       transform: translateY(-50%);
       z-index: 50;
       display: flex;
       flex-direction: column;
-      gap: 16px;
+      gap: 14px;
       pointer-events: none;
     }
 
     .telemetry-item {
       display: flex;
       align-items: center;
-      gap: 14px;
+      gap: 12px;
       opacity: 0.25;
-      transition: all 0.4s ease;
+      transition: all 0.35s ease;
     }
 
     .telemetry-item.active {
       opacity: 1;
-      transform: translateX(-8px);
+      transform: translateX(-6px);
     }
 
     .telemetry-dot {
-      width: 6px;
-      height: 6px;
+      width: 5px;
+      height: 5px;
       border-radius: 50%;
       background: #c5a059;
-      box-shadow: 0 0 10px #c5a059;
+      box-shadow: 0 0 8px #c5a059;
     }
 
     .telemetry-text {
-      font-size: 10px;
-      letter-spacing: 0.25em;
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: #fff;
     }
 
     .bottom-hud {
       position: fixed;
-      bottom: 32px;
+      bottom: 28px;
       left: 0;
       width: 100%;
-      padding: 0 48px;
+      padding: 0 44px;
       display: flex;
       justify-content: space-between;
       align-items: flex-end;
@@ -273,28 +274,28 @@
     .scroll-hint {
       display: flex;
       align-items: center;
-      gap: 14px;
-      font-size: 10px;
-      letter-spacing: 0.25em;
+      gap: 12px;
+      font-size: 9.5px;
+      letter-spacing: 0.22em;
       text-transform: uppercase;
       color: rgba(255, 255, 255, 0.5);
     }
 
     .mouse-icon {
-      width: 18px;
-      height: 30px;
+      width: 16px;
+      height: 26px;
       border: 1.5px solid rgba(255, 255, 255, 0.35);
-      border-radius: 12px;
+      border-radius: 10px;
       position: relative;
     }
 
     .mouse-wheel {
       position: absolute;
-      top: 6px;
+      top: 5px;
       left: 50%;
       transform: translateX(-50%);
-      width: 3px;
-      height: 6px;
+      width: 2.5px;
+      height: 5px;
       background: #c5a059;
       border-radius: 2px;
       animation: wheelMove 2s infinite ease-in-out;
@@ -302,12 +303,12 @@
 
     @keyframes wheelMove {
       0% { transform: translate(-50%, 0); opacity: 1; }
-      50% { transform: translate(-50%, 8px); opacity: 0.2; }
+      50% { transform: translate(-50%, 7px); opacity: 0.2; }
       100% { transform: translate(-50%, 0); opacity: 1; }
     }
 
     .progress-bar-container {
-      width: 240px;
+      width: 220px;
       height: 2px;
       background: rgba(255, 255, 255, 0.1);
       position: relative;
@@ -327,70 +328,121 @@
 
     .explode-degree-text {
       font-family: 'Cinzel', serif;
-      font-size: 11px;
+      font-size: 10.5px;
       letter-spacing: 0.2em;
       color: #c5a059;
-      margin-bottom: 6px;
+      margin-bottom: 5px;
       text-align: right;
     }
 
     .hud-actions {
       display: flex;
-      gap: 12px;
+      gap: 10px;
       pointer-events: auto;
     }
 
     .hud-btn {
-      background: rgba(20, 22, 28, 0.65);
+      background: rgba(18, 20, 26, 0.7);
       border: 1px solid rgba(255, 255, 255, 0.12);
       color: #fff;
-      padding: 10px 16px;
-      font-size: 10px;
-      letter-spacing: 0.18em;
+      padding: 9px 15px;
+      font-size: 9.5px;
+      letter-spacing: 0.16em;
       text-transform: uppercase;
       cursor: pointer;
-      border-radius: 4px;
-      backdrop-filter: blur(10px);
+      border-radius: 3px;
+      backdrop-filter: blur(12px);
       transition: all 0.25s ease;
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
     }
 
     .hud-btn:hover {
       border-color: #c5a059;
       color: #c5a059;
-      background: rgba(197, 160, 89, 0.1);
+      background: rgba(197, 160, 89, 0.12);
     }
 
+    /* Mobil Görünüm: Saati Kapatmayan ve Tam Ortalayan Yapı */
     @media (max-width: 900px) {
-      header { padding: 20px 24px; }
-      .nav-links { display: none; }
-      .brand-logo { font-size: 16px; }
+      header {
+        padding: 16px 20px;
+      }
+      .nav-links {
+        display: none;
+      }
+      .brand-logo {
+        font-size: 15px;
+      }
+      .cta-btn {
+        padding: 7px 14px;
+        font-size: 9px;
+      }
+
       .story-section {
-        left: 20px;
-        right: 20px;
-        max-width: calc(100% - 40px);
+        left: 16px;
+        right: 16px;
+        width: auto;
+        max-width: none;
         top: auto;
-        bottom: 120px;
+        bottom: 84px;
         transform: translateY(0);
       }
-      .story-section.active { transform: translateY(0); }
-      .story-title { font-size: 26px; }
-      .story-desc { font-size: 12px; padding: 12px 14px; margin-bottom: 14px; }
-      .part-telemetry { display: none; }
-      .bottom-hud {
-        padding: 0 20px 20px 20px;
-        flex-direction: column;
-        align-items: center;
-        gap: 14px;
+      .story-section.active {
+        transform: translateY(0);
       }
-      .progress-bar-container { width: 180px; }
-      .scroll-hint span { display: none; }
+      .section-tag {
+        font-size: 8.5px;
+        margin-bottom: 4px;
+      }
+      .story-title {
+        font-size: 20px;
+        line-height: 1.15;
+        margin-bottom: 6px;
+      }
+      .story-desc {
+        font-size: 11.5px;
+        line-height: 1.5;
+        padding: 8px 12px;
+        margin-bottom: 8px;
+        background: rgba(8, 10, 14, 0.75);
+      }
+      .story-specs {
+        display: none;
+      }
+
+      .part-telemetry {
+        display: none;
+      }
+
+      .bottom-hud {
+        padding: 0 16px 14px 16px;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .scroll-hint {
+        display: none;
+      }
+      .progress-bar-container {
+        width: 110px;
+      }
+      .explode-degree-text {
+        font-size: 9px;
+        text-align: left;
+      }
+      .hud-actions {
+        gap: 6px;
+      }
+      .hud-btn {
+        padding: 7px 10px;
+        font-size: 8.5px;
+        letter-spacing: 0.1em;
+      }
     }
   </style>
 
-  <!-- Three.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
@@ -410,12 +462,11 @@
 
   <canvas id="webgl-canvas"></canvas>
 
-  <!-- Katman Kartları -->
   <div class="story-section active" id="story-0">
     <div class="section-tag">Aeterna Grand Complication</div>
     <h1 class="story-title">SAF MÜHENDİSLİK.<br>ZAMANSIZ SANAT.</h1>
     <p class="story-desc">
-      İsviçre yüksek saatçiliğinin zirvesi. 340 mikro bileşenin milimetrik uyumunu keşfetmek için fare tekerleğini veya ekranı kaydırın.
+      İsviçre yüksek saatçiliğinin zirvesi. 340 mikro bileşeni tek tek incelemek için kaydırın.
     </p>
     <div class="story-specs">
       <div class="spec-item">
@@ -437,7 +488,7 @@
     <div class="section-tag">Aşama 01 / Dış Zırh</div>
     <h2 class="story-title">SAFİR KRİSTAL<br>& SEKİZGEN BEZEL</h2>
     <p class="story-desc">
-      Elmas sertliğinde yansıma önleyici çift kavisli safir kristal cam. Fırçalanmış titanyum bezel ve 8 adet el yapımı mikro kilit vidası.
+      Elmas sertliğinde yansıma önleyici çift kavisli safir kristal cam ve fırçalanmış titanyum sekizgen çerçeve.
     </p>
     <div class="story-specs">
       <div class="spec-item">
@@ -455,7 +506,7 @@
     <div class="section-tag">Aşama 02 / Arayüz</div>
     <h2 class="story-title">İSKELET KADRAN<br>& KRONOGRAF</h2>
     <p class="story-desc">
-      Açık mimarili antrasit iskelet kadran. 18K pembe altın fasetli indeksler ve karanlıkta kusursuz okuma sağlayan Super-LumiNova® ibreler.
+      Güneş ışını dokulu açık iskelet kadran, altın fasetli indeksler ve Super-LumiNova® ibreler.
     </p>
     <div class="story-specs">
       <div class="spec-item">
@@ -473,7 +524,7 @@
     <div class="section-tag">Aşama 03 / Kalp</div>
     <h2 class="story-title">CALIBRE 9001<br>MEKANİK MİMARİ</h2>
     <p class="story-desc">
-      Sürtünmesiz sentetik yakut taşlar üzerinde dönen eşmerkezli çark treni, maşa mekanizması ve sürekli titreşen salınım dengesi.
+      Sentetik yakut yataklar üzerinde dönen çark treni, maşa mekanizması ve sürekli titreşen salınım dengesi.
     </p>
     <div class="story-specs">
       <div class="spec-item">
@@ -491,7 +542,7 @@
     <div class="section-tag">Aşama 04 / Enerji & Kasa</div>
     <h2 class="story-title">TUNGSTEN ROTOR<br>& ARKA KAPAK</h2>
     <p class="story-desc">
-      Kullanıcının bilek hareketiyle kinetik enerjiyi depolayan ağır tungsten kütleli açık rotor ve transparan safir sergi arka kapağı.
+      Bilek hareketiyle enerji depolayan ağır tungsten kütleli rotor ve safir sergi arka kapağı.
     </p>
     <div class="story-specs">
       <div class="spec-item">
@@ -505,7 +556,6 @@
     </div>
   </div>
 
-  <!-- Sağ Bölüm Göstergesi -->
   <div class="part-telemetry">
     <div class="telemetry-item active" id="tel-0"><div class="telemetry-dot"></div><div class="telemetry-text">00. Birleşik Hal</div></div>
     <div class="telemetry-item" id="tel-1"><div class="telemetry-dot"></div><div class="telemetry-text">01. Kristal & Bezel</div></div>
@@ -514,7 +564,6 @@
     <div class="telemetry-item" id="tel-4"><div class="telemetry-dot"></div><div class="telemetry-text">04. Kasa & Rotor</div></div>
   </div>
 
-  <!-- Alt Kontrol Paneli -->
   <div class="bottom-hud">
     <div class="scroll-hint">
       <div class="mouse-icon"><div class="mouse-wheel"></div></div>
@@ -530,10 +579,10 @@
 
     <div class="hud-actions">
       <button class="hud-btn" id="btnToggleExplode" onclick="toggleExplosion()">
-        <span>☵</span> Parçaları Aç/Kapat
+        <span>☵</span> Aç / Kapat
       </button>
       <button class="hud-btn" id="btnResetView" onclick="resetCamera()">
-        <span>⟲</span> Bakışı Sıfırla
+        <span>⟲</span> Sıfırla
       </button>
     </div>
   </div>
@@ -555,60 +604,211 @@
 
     const canvas = document.getElementById('webgl-canvas');
 
-    let matTitaniumBrushed, matRoseGold, matDarkSteel, matSapphireGlass, matRubyJewel, matBluedSteel;
+    let matTitaniumBrushed, matRoseGold, matDarkSteel, matSapphireGlass, matRubyJewel, matBluedSteel, matDialPlate;
+
+    // Gerçekçi Stüdyo Işıklandırması (Metallerin Işıldamasını Sağlar)
+    function setupStudioEnvironment() {
+      const pmremGenerator = new THREE.PMREMGenerator(renderer);
+      pmremGenerator.compileEquirectangularShader();
+
+      const envScene = new THREE.Scene();
+      
+      const topLightGeo = new THREE.PlaneGeometry(35, 35);
+      const topLightMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+      const topLight = new THREE.Mesh(topLightGeo, topLightMat);
+      topLight.position.set(0, 30, 0);
+      topLight.rotation.x = Math.PI / 2;
+      envScene.add(topLight);
+
+      const rightLightGeo = new THREE.PlaneGeometry(12, 40);
+      const rightLightMat = new THREE.MeshBasicMaterial({ color: 0xffdfa0 });
+      const rightLight = new THREE.Mesh(rightLightGeo, rightLightMat);
+      rightLight.position.set(25, 5, 10);
+      rightLight.rotation.y = -Math.PI / 3;
+      envScene.add(rightLight);
+
+      const leftLightGeo = new THREE.PlaneGeometry(12, 40);
+      const leftLightMat = new THREE.MeshBasicMaterial({ color: 0x90baff });
+      const leftLight = new THREE.Mesh(leftLightGeo, leftLightMat);
+      leftLight.position.set(-25, 5, 10);
+      leftLight.rotation.y = Math.PI / 3;
+      envScene.add(leftLight);
+
+      const envTexture = pmremGenerator.fromScene(envScene, 0.04).texture;
+      scene.environment = envTexture;
+      pmremGenerator.dispose();
+    }
+
+    // Yüksek Çözünürlüklü İsviçre Kadran Dokusu
+    function createRealisticDialTexture() {
+      const cvs = document.createElement('canvas');
+      cvs.width = 1024;
+      cvs.height = 1024;
+      const ctx = cvs.getContext('2d');
+      const cx = 512, cy = 512;
+
+      const radGrad = ctx.createRadialGradient(cx, cy, 50, cx, cy, 510);
+      radGrad.addColorStop(0, '#22262e');
+      radGrad.addColorStop(0.65, '#121419');
+      radGrad.addColorStop(1, '#08090c');
+      ctx.fillStyle = radGrad;
+      ctx.fillRect(0, 0, 1024, 1024);
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
+      ctx.lineWidth = 1;
+      for (let a = 0; a < Math.PI * 2; a += Math.PI / 90) {
+        ctx.beginPath();
+        ctx.moveTo(cx, cy);
+        ctx.lineTo(cx + Math.cos(a) * 500, cy + Math.sin(a) * 500);
+        ctx.stroke();
+      }
+
+      ctx.strokeStyle = 'rgba(212, 175, 106, 0.5)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 460, 0, Math.PI * 2);
+      ctx.stroke();
+
+      for (let i = 0; i < 60; i++) {
+        const ang = (i / 60) * Math.PI * 2;
+        const isMajor = i % 5 === 0;
+        const r1 = isMajor ? 435 : 448;
+        const r2 = 460;
+        ctx.strokeStyle = isMajor ? '#d4af6a' : 'rgba(255, 255, 255, 0.35)';
+        ctx.lineWidth = isMajor ? 3.5 : 1.5;
+        ctx.beginPath();
+        ctx.moveTo(cx + Math.cos(ang) * r1, cy + Math.sin(ang) * r1);
+        ctx.lineTo(cx + Math.cos(ang) * r2, cy + Math.sin(ang) * r2);
+        ctx.stroke();
+      }
+
+      ctx.textAlign = 'center';
+      ctx.fillStyle = '#ffffff';
+      ctx.font = 'bold 24px Cinzel, serif';
+      ctx.letterSpacing = '8px';
+      ctx.fillText('AETERNA', cx, cy - 170);
+
+      ctx.fillStyle = '#c5a059';
+      ctx.font = '12px Montserrat, sans-serif';
+      ctx.letterSpacing = '5px';
+      ctx.fillText('CHRONOMÈTRE AUTOMATIQUE', cx, cy - 145);
+
+      ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
+      ctx.font = '10px Montserrat, sans-serif';
+      ctx.fillText('SWISS MADE', cx, cy + 415);
+
+      drawSubdial(ctx, cx - 180, cy, 110, '60', '30');
+      drawSubdial(ctx, cx + 180, cy, 110, '30', '15');
+      drawSubdial(ctx, cx, cy + 180, 110, '12', '6');
+
+      const texture = new THREE.CanvasTexture(cvs);
+      texture.anisotropy = 8;
+      return texture;
+    }
+
+    function drawSubdial(ctx, x, y, r, topTxt, btmTxt) {
+      const grad = ctx.createRadialGradient(x, y, 10, x, y, r);
+      grad.addColorStop(0, '#0d0f13');
+      grad.addColorStop(1, '#161920');
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.fill();
+
+      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
+      ctx.lineWidth = 1;
+      for (let cr = 20; cr < r; cr += 18) {
+        ctx.beginPath();
+        ctx.arc(x, y, cr, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      ctx.strokeStyle = 'rgba(212, 175, 106, 0.7)';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.arc(x, y, r, 0, Math.PI * 2);
+      ctx.stroke();
+
+      ctx.fillStyle = '#ffffff';
+      ctx.font = '11px Montserrat, sans-serif';
+      ctx.textAlign = 'center';
+      ctx.fillText(topTxt, x, y - r + 18);
+      ctx.fillText(btmTxt, x, y + r - 10);
+    }
 
     function initMaterials() {
+      const dialTexture = createRealisticDialTexture();
+
       matTitaniumBrushed = new THREE.MeshStandardMaterial({
-        color: 0x9fa4ad,
-        metalness: 0.92,
-        roughness: 0.28
+        color: 0xb5b9c2,
+        metalness: 0.94,
+        roughness: 0.26
       });
 
       matRoseGold = new THREE.MeshStandardMaterial({
-        color: 0xd49b6a,
-        metalness: 0.95,
-        roughness: 0.22
+        color: 0xdf9d6b,
+        metalness: 0.96,
+        roughness: 0.18
       });
 
       matDarkSteel = new THREE.MeshStandardMaterial({
-        color: 0x1f2229,
-        metalness: 0.85,
-        roughness: 0.35
+        color: 0x22252c,
+        metalness: 0.88,
+        roughness: 0.32
       });
 
       matSapphireGlass = new THREE.MeshPhysicalMaterial({
         color: 0xffffff,
-        transmission: 0.94,
+        transmission: 0.96,
         opacity: 1,
         transparent: true,
-        roughness: 0.04,
+        roughness: 0.03,
         ior: 1.77,
-        metalness: 0.05,
-        reflectivity: 0.9,
-        clearcoat: 1.0
+        metalness: 0.08,
+        reflectivity: 0.95,
+        clearcoat: 1.0,
+        clearcoatRoughness: 0.04
+      });
+
+      matDialPlate = new THREE.MeshStandardMaterial({
+        map: dialTexture,
+        metalness: 0.65,
+        roughness: 0.35
       });
 
       matRubyJewel = new THREE.MeshPhysicalMaterial({
-        color: 0xd61845,
-        transmission: 0.8,
+        color: 0xe61044,
+        transmission: 0.85,
         transparent: true,
-        roughness: 0.1,
-        metalness: 0.1
+        roughness: 0.08,
+        metalness: 0.1,
+        clearcoat: 1.0
       });
 
       matBluedSteel = new THREE.MeshStandardMaterial({
-        color: 0x1e4bb5,
+        color: 0x1a46b8,
         metalness: 0.95,
-        roughness: 0.15
+        roughness: 0.16
       });
+    }
+
+    // Mobil ve masaüstü için saatin ekrandan taşmasını önleyen mesafe hesabı
+    function getResponsiveCameraDistance() {
+      const aspect = window.innerWidth / window.innerHeight;
+      if (aspect < 1) {
+        return Math.max(56, 28 / aspect);
+      } else {
+        return 34;
+      }
     }
 
     function initScene() {
       scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x050507, 0.015);
+      scene.fog = new THREE.FogExp2(0x030406, 0.012);
 
-      camera = new THREE.PerspectiveCamera(38, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.set(0, 0, 36);
+      const initialDist = getResponsiveCameraDistance();
+      camera = new THREE.PerspectiveCamera(36, window.innerWidth / window.innerHeight, 0.1, 1000);
+      camera.position.set(0, 0, initialDist);
 
       renderer = new THREE.WebGLRenderer({
         canvas: canvas,
@@ -621,30 +821,35 @@
       renderer.toneMapping = THREE.ACESFilmicToneMapping;
       renderer.toneMappingExposure = 1.35;
 
-      const ambientLight = new THREE.AmbientLight(0xdde5ed, 1.2);
+      setupStudioEnvironment();
+
+      const ambientLight = new THREE.AmbientLight(0xdbe4ee, 0.8);
       scene.add(ambientLight);
 
-      const keyLight = new THREE.DirectionalLight(0xfffaed, 2.4);
+      const keyLight = new THREE.DirectionalLight(0xfff6ea, 2.5);
       keyLight.position.set(20, 25, 30);
       scene.add(keyLight);
 
-      const rimLight = new THREE.DirectionalLight(0x7da4ff, 2.0);
+      const rimLight = new THREE.DirectionalLight(0x769eff, 2.0);
       rimLight.position.set(-25, -15, 20);
       scene.add(rimLight);
 
-      const movementPoint = new THREE.PointLight(0xffe6b0, 2.5, 40);
-      movementPoint.position.set(0, 0, 10);
-      scene.add(movementPoint);
+      const fillLight = new THREE.DirectionalLight(0xffffff, 0.9);
+      fillLight.position.set(0, 30, -15);
+      scene.add(fillLight);
 
       initMaterials();
       buildLuxuryWatch();
+
+      if (window.innerWidth < 900) {
+        watchMainGroup.position.y = 2.4;
+      }
 
       window.addEventListener('resize', onWindowResize);
       window.addEventListener('scroll', onScroll, { passive: true });
       window.addEventListener('wheel', onWheel, { passive: false });
       window.addEventListener('mousemove', onMouseMove);
       
-      // Mobil Dokunmatik Algılama
       let touchStartY = 0;
       window.addEventListener('touchstart', (e) => {
         touchStartY = e.touches[0].clientY;
@@ -654,12 +859,12 @@
         const touchY = e.touches[0].clientY;
         const deltaY = touchStartY - touchY;
         touchStartY = touchY;
-        targetProgress += deltaY * 0.0018;
+        targetProgress += deltaY * 0.0016;
         targetProgress = Math.max(0, Math.min(1, targetProgress));
       }, { passive: true });
     }
 
-    function registerPart(meshOrGroup, explodedPos, explodedRot = { x: 0, y: 0, z: 0 }) {
+    function registerPart(meshOrGroup, explodedPos, explodedRot = { x: 0, y: 0, z: 0 }, startT = 0.0, endT = 1.0) {
       watchParts.push({
         object: meshOrGroup,
         origPos: meshOrGroup.position.clone(),
@@ -669,7 +874,9 @@
           meshOrGroup.rotation.x + explodedRot.x,
           meshOrGroup.rotation.y + explodedRot.y,
           meshOrGroup.rotation.z + explodedRot.z
-        )
+        ),
+        startT: startT,
+        endT: endT
       });
     }
 
@@ -678,43 +885,42 @@
       scene.add(watchMainGroup);
 
       // 1. SAFİR KRİSTAL CAM
-      const glassGeo = new THREE.CylinderGeometry(7.2, 7.2, 0.28, 64);
+      const glassGeo = new THREE.CylinderGeometry(7.1, 7.1, 0.28, 64);
       const glassMesh = new THREE.Mesh(glassGeo, matSapphireGlass);
       glassMesh.rotation.x = Math.PI / 2;
-      glassMesh.position.set(0, 0, 2.6);
+      glassMesh.position.set(0, 0, 2.5);
       watchMainGroup.add(glassMesh);
-      registerPart(glassMesh, { x: 0, y: 0, z: 13.5 }, { x: 0.1, y: 0.15, z: 0 });
+      registerPart(glassMesh, { x: 0, y: 0, z: 14.0 }, { x: 0.12, y: 0.15, z: 0 }, 0.0, 0.7);
 
-      // 2. SEKİZGEN BEZEL & ALTIN VİDALAR
+      // 2. SEKİZGEN ÇERÇEVE & ALTIN VİDALAR
       const bezelGroup = new THREE.Group();
-      bezelGroup.position.set(0, 0, 2.2);
+      bezelGroup.position.set(0, 0, 2.1);
 
-      const bezelGeo = new THREE.CylinderGeometry(7.8, 8.1, 0.55, 8);
+      const bezelGeo = new THREE.CylinderGeometry(7.8, 8.0, 0.5, 8);
       const bezelMesh = new THREE.Mesh(bezelGeo, matTitaniumBrushed);
       bezelMesh.rotation.x = Math.PI / 2;
       bezelGroup.add(bezelMesh);
 
-      const innerBezelGeo = new THREE.TorusGeometry(6.9, 0.22, 16, 64);
+      const innerBezelGeo = new THREE.TorusGeometry(6.9, 0.18, 16, 64);
       const innerBezelMesh = new THREE.Mesh(innerBezelGeo, matRoseGold);
-      innerBezelMesh.position.set(0, 0, 0.28);
+      innerBezelMesh.position.set(0, 0, 0.26);
       bezelGroup.add(innerBezelMesh);
 
       for (let i = 0; i < 8; i++) {
         const angle = (i / 8) * Math.PI * 2;
-        const screwRadius = 7.1;
-        const screwGeo = new THREE.CylinderGeometry(0.28, 0.28, 0.15, 6);
+        const screwGeo = new THREE.CylinderGeometry(0.26, 0.26, 0.15, 6);
         const screwMesh = new THREE.Mesh(screwGeo, matRoseGold);
         screwMesh.rotation.x = Math.PI / 2;
         screwMesh.rotation.z = angle;
-        screwMesh.position.set(Math.cos(angle) * screwRadius, Math.sin(angle) * screwRadius, 0.32);
+        screwMesh.position.set(Math.cos(angle) * 7.1, Math.sin(angle) * 7.1, 0.3);
         bezelGroup.add(screwMesh);
       }
       watchMainGroup.add(bezelGroup);
-      registerPart(bezelGroup, { x: 0, y: 0, z: 10.0 }, { x: 0.15, y: -0.2, z: 0.05 });
+      registerPart(bezelGroup, { x: 0, y: 0, z: 10.5 }, { x: 0.1, y: -0.15, z: 0.05 }, 0.05, 0.8);
 
-      // 3. İÇ HALKA (CHAPTER RING & DAKİKA ÇİZGİLERİ)
+      // 3. İÇ DAKİKA ÇEMBERİ
       const chapterGroup = new THREE.Group();
-      chapterGroup.position.set(0, 0, 1.8);
+      chapterGroup.position.set(0, 0, 1.7);
       const chapterGeo = new THREE.RingGeometry(6.3, 7.0, 64);
       const chapterMesh = new THREE.Mesh(chapterGeo, matDarkSteel);
       chapterGroup.add(chapterMesh);
@@ -722,26 +928,26 @@
       for (let i = 0; i < 60; i++) {
         const angle = (i / 60) * Math.PI * 2;
         const isFive = i % 5 === 0;
-        const tickGeo = new THREE.PlaneGeometry(isFive ? 0.15 : 0.06, isFive ? 0.5 : 0.25);
+        const tickGeo = new THREE.PlaneGeometry(isFive ? 0.14 : 0.05, isFive ? 0.45 : 0.2);
         const tickMesh = new THREE.Mesh(tickGeo, isFive ? matRoseGold : matTitaniumBrushed);
         tickMesh.position.set(Math.cos(angle) * 6.65, Math.sin(angle) * 6.65, 0.02);
         tickMesh.rotation.z = angle - Math.PI / 2;
         chapterGroup.add(tickMesh);
       }
       watchMainGroup.add(chapterGroup);
-      registerPart(chapterGroup, { x: 0, y: 0, z: 7.2 }, { x: 0.05, y: 0.1, z: 0 });
+      registerPart(chapterGroup, { x: 0, y: 0, z: 7.5 }, { x: 0.05, y: 0.1, z: 0 }, 0.1, 0.85);
 
-      // 4. İBRELER (AKREP, YELKOVAN, KRONOGRAF SANİYE)
+      // 4. İBRELER
       const handsGroup = new THREE.Group();
-      handsGroup.position.set(0, 0, 1.4);
+      handsGroup.position.set(0, 0, 1.35);
 
-      const capGeo = new THREE.CylinderGeometry(0.5, 0.5, 0.4, 32);
+      const capGeo = new THREE.CylinderGeometry(0.48, 0.48, 0.38, 32);
       const capMesh = new THREE.Mesh(capGeo, matRoseGold);
       capMesh.rotation.x = Math.PI / 2;
       capMesh.position.set(0, 0, 0.2);
       handsGroup.add(capMesh);
 
-      const hourHandGeo = new THREE.ConeGeometry(0.4, 3.8, 4);
+      const hourHandGeo = new THREE.ConeGeometry(0.38, 3.7, 4);
       const hourHandMesh = new THREE.Mesh(hourHandGeo, matRoseGold);
       hourHandMesh.position.set(0, 1.6, 0.1);
       const hourHandPivot = new THREE.Group();
@@ -750,7 +956,7 @@
       handsGroup.add(hourHandPivot);
       movingHands.push({ obj: hourHandPivot, speed: 0.0004 });
 
-      const minHandGeo = new THREE.ConeGeometry(0.32, 5.2, 4);
+      const minHandGeo = new THREE.ConeGeometry(0.3, 5.2, 4);
       const minHandMesh = new THREE.Mesh(minHandGeo, matRoseGold);
       minHandMesh.position.set(0, 2.3, 0.2);
       const minHandPivot = new THREE.Group();
@@ -762,7 +968,7 @@
       const secHandGeo = new THREE.CylinderGeometry(0.04, 0.06, 6.2, 16);
       const secHandMesh = new THREE.Mesh(secHandGeo, matBluedSteel);
       secHandMesh.position.set(0, 2.2, 0.3);
-      const counterWeight = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.9, 16), matBluedSteel);
+      const counterWeight = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.8, 16), matBluedSteel);
       counterWeight.position.set(0, -0.6, 0.3);
       const secHandPivot = new THREE.Group();
       secHandPivot.add(secHandMesh);
@@ -771,47 +977,35 @@
       movingHands.push({ obj: secHandPivot, speed: 0.035 });
 
       watchMainGroup.add(handsGroup);
-      registerPart(handsGroup, { x: 0, y: 0, z: 5.2 }, { x: 0.05, y: -0.1, z: 0.2 });
+      registerPart(handsGroup, { x: 0, y: 0, z: 5.2 }, { x: 0.05, y: -0.1, z: 0.15 }, 0.15, 0.9);
 
-      // 5. İSKELET KADRAN & FASETLİ İNDEKSLER
+      // 5. KADRAN & 18K İNDEKSLER
       const dialGroup = new THREE.Group();
-      dialGroup.position.set(0, 0, 1.0);
+      dialGroup.position.set(0, 0, 0.95);
 
-      const dialRingGeo = new THREE.RingGeometry(2.5, 6.3, 64);
-      const dialRingMesh = new THREE.Mesh(dialRingGeo, matDarkSteel);
-      dialGroup.add(dialRingMesh);
+      const dialBaseGeo = new THREE.CircleGeometry(6.3, 64);
+      const dialBaseMesh = new THREE.Mesh(dialBaseGeo, matDialPlate);
+      dialGroup.add(dialBaseMesh);
 
       for (let i = 0; i < 12; i++) {
         const angle = (i / 12) * Math.PI * 2;
-        const indexGeo = new THREE.BoxGeometry(0.35, 1.2, 0.25);
+        const indexGeo = new THREE.BoxGeometry(0.32, 1.15, 0.22);
         const indexMesh = new THREE.Mesh(indexGeo, matRoseGold);
-        indexMesh.position.set(Math.cos(angle) * 5.4, Math.sin(angle) * 5.4, 0.15);
+        indexMesh.position.set(Math.cos(angle) * 5.35, Math.sin(angle) * 5.35, 0.12);
         indexMesh.rotation.z = angle - Math.PI / 2;
         dialGroup.add(indexMesh);
       }
 
-      const subdialLeft = new THREE.Mesh(new THREE.TorusGeometry(1.4, 0.12, 16, 48), matRoseGold);
-      subdialLeft.position.set(-2.5, 0, 0.1);
-      dialGroup.add(subdialLeft);
-
-      const subdialRight = new THREE.Mesh(new THREE.TorusGeometry(1.4, 0.12, 16, 48), matRoseGold);
-      subdialRight.position.set(2.5, 0, 0.1);
-      dialGroup.add(subdialRight);
-
-      const tourbillonRing = new THREE.Mesh(new THREE.TorusGeometry(1.7, 0.15, 16, 48), matRoseGold);
-      tourbillonRing.position.set(0, -2.5, 0.1);
-      dialGroup.add(tourbillonRing);
-
       watchMainGroup.add(dialGroup);
-      registerPart(dialGroup, { x: 0, y: 0, z: 2.8 }, { x: -0.1, y: 0.15, z: -0.05 });
+      registerPart(dialGroup, { x: 0, y: 0, z: 2.6 }, { x: -0.08, y: 0.12, z: -0.04 }, 0.2, 0.95);
 
-      // 6. MEKANİK ÇARKLAR, YAKUTLAR & BALANS ÇARKI
+      // 6. MEKANİK KALİBRE (DİŞLİLER & YAKUTLAR)
       const movementGroup = new THREE.Group();
-      movementGroup.position.set(0, 0, 0.2);
+      movementGroup.position.set(0, 0, 0.15);
 
-      const bridgeGeo = new THREE.RingGeometry(1.8, 6.0, 48, 1, 0, Math.PI * 1.5);
+      const bridgeGeo = new THREE.RingGeometry(1.6, 6.0, 48, 1, 0, Math.PI * 1.55);
       const bridgeMesh = new THREE.Mesh(bridgeGeo, matTitaniumBrushed);
-      bridgeMesh.position.set(0, 0, 0.4);
+      bridgeMesh.position.set(0, 0, 0.35);
       movementGroup.add(bridgeMesh);
 
       function createGear(radius, teethCount, thickness, material) {
@@ -823,7 +1017,7 @@
 
         for (let i = 0; i < teethCount; i++) {
           const angle = (i / teethCount) * Math.PI * 2;
-          const tooth = new THREE.Mesh(new THREE.BoxGeometry(radius * 0.18, radius * 0.35, thickness), material);
+          const tooth = new THREE.Mesh(new THREE.BoxGeometry(radius * 0.17, radius * 0.32, thickness), material);
           tooth.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
           tooth.rotation.z = angle;
           gearGroup.add(tooth);
@@ -849,31 +1043,31 @@
 
       const rubyPositions = [[-1.8, 1.8], [1.9, 1.5], [2.4, -1.2], [0, -2.5], [0, 0], [-2.2, -1.2]];
       rubyPositions.forEach(([x, y]) => {
-        const rubyMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.25, 24), matRubyJewel);
+        const rubyMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.22, 24), matRubyJewel);
         rubyMesh.rotation.x = Math.PI / 2;
-        rubyMesh.position.set(x, y, 0.35);
+        rubyMesh.position.set(x, y, 0.32);
         movementGroup.add(rubyMesh);
 
-        const screwBlue = new THREE.Mesh(new THREE.CylinderGeometry(0.2, 0.2, 0.2, 16), matBluedSteel);
+        const screwBlue = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.18, 16), matBluedSteel);
         screwBlue.rotation.x = Math.PI / 2;
-        screwBlue.position.set(x + 0.5, y + 0.4, 0.36);
+        screwBlue.position.set(x + 0.45, y + 0.38, 0.33);
         movementGroup.add(screwBlue);
       });
 
       watchMainGroup.add(movementGroup);
-      registerPart(movementGroup, { x: 0, y: 0, z: -0.5 }, { x: 0.12, y: -0.15, z: 0.1 });
+      registerPart(movementGroup, { x: 0, y: 0, z: -0.6 }, { x: 0.1, y: -0.12, z: 0.08 }, 0.25, 1.0);
 
-      // 7. ORTA TİTANYUM KASA, BOZNUZLAR & AYAR TEPESİ
+      // 7. ORTA TİTANYUM KASA & BUTONLAR
       const caseGroup = new THREE.Group();
       caseGroup.position.set(0, 0, -0.6);
 
-      const barrelGeo = new THREE.CylinderGeometry(8.2, 8.2, 1.6, 64);
+      const barrelGeo = new THREE.CylinderGeometry(8.0, 8.0, 1.5, 64);
       const barrelMesh = new THREE.Mesh(barrelGeo, matTitaniumBrushed);
       barrelMesh.rotation.x = Math.PI / 2;
       caseGroup.add(barrelMesh);
 
-      const lugGeo = new THREE.BoxGeometry(1.6, 3.8, 1.5);
-      const lugCoords = [[-5.5, 7.6, -0.3], [5.5, 7.6, 0.3], [-5.5, -7.6, 0.3], [5.5, -7.6, -0.3]];
+      const lugGeo = new THREE.BoxGeometry(1.5, 3.6, 1.4);
+      const lugCoords = [[-5.4, 7.4, -0.3], [5.4, 7.4, 0.3], [-5.4, -7.4, 0.3], [5.4, -7.4, -0.3]];
       lugCoords.forEach(([lx, ly, lrz]) => {
         const lug = new THREE.Mesh(lugGeo, matTitaniumBrushed);
         lug.position.set(lx, ly, 0);
@@ -881,76 +1075,76 @@
         caseGroup.add(lug);
       });
 
-      const crownGeo = new THREE.CylinderGeometry(1.2, 1.1, 1.2, 32);
+      const crownGeo = new THREE.CylinderGeometry(1.1, 1.0, 1.1, 32);
       const crownMesh = new THREE.Mesh(crownGeo, matRoseGold);
       crownMesh.rotation.z = Math.PI / 2;
-      crownMesh.position.set(8.9, 0, 0);
+      crownMesh.position.set(8.7, 0, 0);
       caseGroup.add(crownMesh);
 
-      const pusher1 = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 1.0, 24), matTitaniumBrushed);
+      const pusher1 = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.9, 24), matTitaniumBrushed);
       pusher1.rotation.z = Math.PI / 2 - 0.5;
-      pusher1.position.set(8.4, 3.2, 0);
+      pusher1.position.set(8.2, 3.1, 0);
       caseGroup.add(pusher1);
 
-      const pusher2 = new THREE.Mesh(new THREE.CylinderGeometry(0.6, 0.6, 1.0, 24), matTitaniumBrushed);
+      const pusher2 = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.9, 24), matTitaniumBrushed);
       pusher2.rotation.z = Math.PI / 2 + 0.5;
-      pusher2.position.set(8.4, -3.2, 0);
+      pusher2.position.set(8.2, -3.1, 0);
       caseGroup.add(pusher2);
 
       watchMainGroup.add(caseGroup);
-      registerPart(caseGroup, { x: 0, y: 0, z: -3.8 }, { x: 0.0, y: 0.0, z: 0.0 });
+      registerPart(caseGroup, { x: 0, y: 0, z: -3.8 }, { x: 0, y: 0, z: 0 }, 0.3, 1.0);
 
-      // 8. TUNGSTEN OTOMATİK KURMA ROTORU
+      // 8. TUNGSTEN ROTOR
       rotorGroup = new THREE.Group();
-      rotorGroup.position.set(0, 0, -1.8);
+      rotorGroup.position.set(0, 0, -1.7);
 
-      const rotorGeo = new THREE.CylinderGeometry(6.4, 6.4, 0.32, 48, 1, false, 0, Math.PI);
+      const rotorGeo = new THREE.CylinderGeometry(6.3, 6.3, 0.3, 48, 1, false, 0, Math.PI);
       const rotorMesh = new THREE.Mesh(rotorGeo, matRoseGold);
       rotorMesh.rotation.x = Math.PI / 2;
       rotorGroup.add(rotorMesh);
 
-      const tungstenMass = new THREE.Mesh(new THREE.TorusGeometry(6.1, 0.45, 16, 48, Math.PI), matDarkSteel);
-      tungstenMass.position.set(0, 0, 0.18);
+      const tungstenMass = new THREE.Mesh(new THREE.TorusGeometry(6.0, 0.42, 16, 48, Math.PI), matDarkSteel);
+      tungstenMass.position.set(0, 0, 0.16);
       rotorGroup.add(tungstenMass);
 
       watchMainGroup.add(rotorGroup);
-      registerPart(rotorGroup, { x: 0, y: 0, z: -7.6 }, { x: -0.2, y: 0.25, z: 0.4 });
+      registerPart(rotorGroup, { x: 0, y: 0, z: -7.6 }, { x: -0.15, y: 0.2, z: 0.3 }, 0.35, 1.0);
 
       // 9. SAFİR SERGİ ARKA KAPAK
       const casebackGroup = new THREE.Group();
-      casebackGroup.position.set(0, 0, -2.4);
+      casebackGroup.position.set(0, 0, -2.3);
 
-      const backRing = new THREE.Mesh(new THREE.TorusGeometry(7.0, 0.8, 16, 64), matTitaniumBrushed);
+      const backRing = new THREE.Mesh(new THREE.TorusGeometry(6.9, 0.75, 16, 64), matTitaniumBrushed);
       casebackGroup.add(backRing);
 
-      const backGlass = new THREE.Mesh(new THREE.CylinderGeometry(6.3, 6.3, 0.22, 48), matSapphireGlass);
+      const backGlass = new THREE.Mesh(new THREE.CylinderGeometry(6.2, 6.2, 0.2, 48), matSapphireGlass);
       backGlass.rotation.x = Math.PI / 2;
       casebackGroup.add(backGlass);
 
       watchMainGroup.add(casebackGroup);
-      registerPart(casebackGroup, { x: 0, y: 0, z: -11.5 }, { x: -0.15, y: -0.2, z: 0.1 });
+      registerPart(casebackGroup, { x: 0, y: 0, z: -11.5 }, { x: -0.12, y: -0.15, z: 0.08 }, 0.4, 1.0);
 
-      // 10. ENTEGRE BİLEZİK / KAYIŞ SEGMENTLERİ
+      // 10. ENTEGRE BİLEZİK
       const strapGroupTop = new THREE.Group();
-      strapGroupTop.position.set(0, 9.8, -0.6);
+      strapGroupTop.position.set(0, 9.6, -0.6);
       const strapGroupBottom = new THREE.Group();
-      strapGroupBottom.position.set(0, -9.8, -0.6);
+      strapGroupBottom.position.set(0, -9.6, -0.6);
 
       for (let link = 0; link < 4; link++) {
-        const linkGeo = new THREE.BoxGeometry(6.8 - link * 0.8, 1.8, 0.9);
+        const linkGeo = new THREE.BoxGeometry(6.6 - link * 0.75, 1.7, 0.85);
         const linkTop = new THREE.Mesh(linkGeo, matDarkSteel);
-        linkTop.position.set(0, link * 1.9, -link * 0.25);
+        linkTop.position.set(0, link * 1.85, -link * 0.22);
         strapGroupTop.add(linkTop);
 
         const linkBottom = new THREE.Mesh(linkGeo, matDarkSteel);
-        linkBottom.position.set(0, -link * 1.9, -link * 0.25);
+        linkBottom.position.set(0, -link * 1.85, -link * 0.22);
         strapGroupBottom.add(linkBottom);
       }
       watchMainGroup.add(strapGroupTop);
-      registerPart(strapGroupTop, { x: 0, y: 15.0, z: -5.0 }, { x: -0.35, y: 0, z: 0 });
+      registerPart(strapGroupTop, { x: 0, y: 15.0, z: -5.0 }, { x: -0.3, y: 0, z: 0 }, 0.45, 1.0);
 
       watchMainGroup.add(strapGroupBottom);
-      registerPart(strapGroupBottom, { x: 0, y: -15.0, z: -5.0 }, { x: 0.35, y: 0, z: 0 });
+      registerPart(strapGroupBottom, { x: 0, y: -15.0, z: -5.0 }, { x: 0.3, y: 0, z: 0 }, 0.45, 1.0);
     }
 
     function onWheel(e) {
@@ -974,6 +1168,12 @@
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
       renderer.setSize(window.innerWidth, window.innerHeight);
+
+      if (window.innerWidth < 900) {
+        watchMainGroup.position.y = 2.4;
+      } else {
+        watchMainGroup.position.y = 0;
+      }
     }
 
     let manualExplodeState = false;
@@ -993,12 +1193,12 @@
       let startProg = scrollProgress;
       let targetP = scrollProgress > 0.5 ? 0.0 : 1.0;
       let startTime = performance.now();
-      let duration = 2600;
+      let duration = 2800;
 
       function stepTour(now) {
         let elapsed = (now - startTime) / duration;
         if (elapsed < 1) {
-          targetProgress = startProg + (targetP - startProg) * Math.sin(elapsed * Math.PI / 2);
+          targetProgress = startProg + (targetP - startProg) * (0.5 - 0.5 * Math.cos(elapsed * Math.PI));
           requestAnimationFrame(stepTour);
         } else {
           targetProgress = targetP;
@@ -1056,48 +1256,48 @@
       requestAnimationFrame(animate);
       const elapsedTime = clock.getElapsedTime();
 
-      // Yumuşak Lerp Geçişleri
-      scrollProgress += (targetProgress - scrollProgress) * 0.075;
+      scrollProgress += (targetProgress - scrollProgress) * 0.07;
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
 
-      // İbreler ve dişlilerin gerçek zamanlı dönüşü
       movingHands.forEach(item => {
         item.obj.rotation.z -= item.speed;
       });
 
-      // Balans çarkı 4Hz titreşimi
       if (balanceWheel) {
-        balanceWheel.rotation.z = Math.sin(elapsedTime * 28) * 0.45;
+        balanceWheel.rotation.z = Math.sin(elapsedTime * 28) * 0.42;
       }
 
-      // Rotor salınımı
       if (rotorGroup) {
-        rotorGroup.rotation.z = Math.sin(elapsedTime * 0.8) * 0.8 + Math.cos(elapsedTime * 0.3) * 0.3;
+        rotorGroup.rotation.z = Math.sin(elapsedTime * 0.8) * 0.7 + Math.cos(elapsedTime * 0.3) * 0.25;
       }
 
-      const easeProgress = Math.pow(scrollProgress, 1.2);
-
-      // Parçaların koordinatlara dağılması
+      // Kademeli ayrılma ve organik hız eğrisi
       watchParts.forEach(part => {
-        part.object.position.lerpVectors(part.origPos, part.destPos, easeProgress);
-        part.object.rotation.x = THREE.MathUtils.lerp(part.origRot.x, part.destRot.x, easeProgress);
-        part.object.rotation.y = THREE.MathUtils.lerp(part.origRot.y, part.destRot.y, easeProgress);
-        part.object.rotation.z = THREE.MathUtils.lerp(part.origRot.z, part.destRot.z, easeProgress);
+        let localT = (scrollProgress - part.startT) / (part.endT - part.startT);
+        localT = Math.max(0, Math.min(1, localT));
+        
+        const easeLocalT = localT * localT * (3 - 2 * localT);
+
+        part.object.position.lerpVectors(part.origPos, part.destPos, easeLocalT);
+        part.object.rotation.x = THREE.MathUtils.lerp(part.origRot.x, part.destRot.x, easeLocalT);
+        part.object.rotation.y = THREE.MathUtils.lerp(part.origRot.y, part.destRot.y, easeLocalT);
+        part.object.rotation.z = THREE.MathUtils.lerp(part.origRot.z, part.destRot.z, easeLocalT);
       });
 
-      // Saatin genel kamera açısı ve parallaks eğimi
-      const idleRotation = Math.sin(elapsedTime * 0.3) * 0.05;
-      const targetWatchRotX = THREE.MathUtils.lerp(0.25, 0.65, easeProgress) + (mouseY * 0.2);
-      const targetWatchRotY = THREE.MathUtils.lerp(idleRotation, 0.95, easeProgress) + (mouseX * 0.3);
+      const easeGlobal = scrollProgress * scrollProgress * (3 - 2 * scrollProgress);
+      const idleRotation = Math.sin(elapsedTime * 0.3) * 0.04;
+      
+      const targetWatchRotX = THREE.MathUtils.lerp(0.2, 0.65, easeGlobal) + (mouseY * 0.18);
+      const targetWatchRotY = THREE.MathUtils.lerp(idleRotation, 0.92, easeGlobal) + (mouseX * 0.25);
 
       watchMainGroup.rotation.x = targetWatchRotX;
       watchMainGroup.rotation.y = targetWatchRotY;
 
-      // Kamera derinlik kontrolü
-      camera.position.z = THREE.MathUtils.lerp(34, 40, easeProgress);
-      camera.position.x = THREE.MathUtils.lerp(0, 3.5, easeProgress);
-      camera.lookAt(0, 0, 0);
+      const baseCamDist = getResponsiveCameraDistance();
+      camera.position.z = THREE.MathUtils.lerp(baseCamDist, baseCamDist + 7, easeGlobal);
+      camera.position.x = THREE.MathUtils.lerp(0, 3.2, easeGlobal);
+      camera.lookAt(0, watchMainGroup.position.y, 0);
 
       updateUI(scrollProgress);
       renderer.render(scene, camera);

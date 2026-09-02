@@ -3,12 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Rolex Oyster Perpetual | Celebration</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  
+  <title>Rolex Oyster Perpetual | Parçalarına Ayrılan Gerçek Saat</title>
   <style>
     * {
       box-sizing: border-box;
@@ -22,95 +17,87 @@
     body, html {
       width: 100%;
       height: 100%;
-      background-color: #0b1825;
-      color: #ffffff;
-      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0b1926;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       overflow-x: hidden;
       touch-action: pan-y;
     }
 
-    /* 350vh Sanal Kaydırma Alanı (Scroll scrubbing) */
-    #scrollTrack {
+    /* 400vh Sanal Kaydırma Alanı */
+    #scrollContainer {
       position: relative;
       width: 100%;
-      height: 350vh;
+      height: 400vh;
     }
 
-    /* Sabit Ekran Sahnesi */
-    .viewport-scene {
+    /* Ekrana Sabitlenmiş Görünüm */
+    .viewport {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      overflow: hidden;
       display: flex;
-      flex-direction: column;
       justify-content: center;
       align-items: center;
-      z-index: 10;
+      overflow: hidden;
+      /* Orijinal fotoğraftaki gökyüzü ve su yansıması geçişi */
+      background: radial-gradient(circle at 50% 30%, #76baf2 0%, #3e81b6 40%, #153754 75%, #0b1926 100%);
     }
 
-    /* Görselle Birebir Uyumlu Lüks Arka Plan */
-    .sky-background {
+    .water-line {
       position: absolute;
-      top: 0;
+      bottom: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      background: radial-gradient(circle at 50% 30%, #76baf2 0%, #3e81b6 40%, #153754 75%, #0b1825 100%);
+      right: 0;
+      height: 32vh;
+      background: linear-gradient(to bottom, rgba(54, 115, 161, 0.25) 0%, rgba(11, 25, 38, 0.95) 90%);
+      border-top: 1px solid rgba(255, 255, 255, 0.25);
+      pointer-events: none;
       z-index: 1;
+    }
+
+    /* Üst Minimalist Başlık (Saatin üzerinde değil, en tepede ince durur) */
+    .top-header {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      z-index: 50;
       pointer-events: none;
     }
 
-    /* Üst Menü / Header */
-    .luxury-header {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 60px;
-      padding: 0 20px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(11, 24, 37, 0.65);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-      z-index: 100;
-    }
-
-    .brand-title {
+    .top-header h1 {
       font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.25em;
+      letter-spacing: 0.3em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.95);
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      color: rgba(255, 255, 255, 0.9);
+      font-weight: 600;
     }
 
-    .rolex-crown {
-      color: #ffd700;
-      font-size: 15px;
+    .top-header p {
+      font-size: 9px;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #38bdf8;
+      margin-top: 2px;
     }
 
-    /* Saat Sahnesi (Ekranın Tam Merkezinde, Önünde Engel Yok) */
+    /* SAAT SAHNESİ: EKRANIN TAM ORTASINDA VE ÖNÜ %100 AÇIK */
     .watch-stage {
       position: relative;
-      width: 100%;
-      max-width: 480px;
-      height: 76vh;
+      width: 85vw;
+      max-width: 440px;
+      height: 75vh;
       display: flex;
       justify-content: center;
       align-items: center;
       z-index: 20;
     }
 
-    /* SAF GPU DESTEKLİ GÖRSEL KATMANLARI (60 FPS) */
-    .watch-asset {
+    /* Gerçek Fotoğraf Katmanları - GPU Hızlandırmalı (60 FPS) */
+    .watch-layer {
       position: absolute;
       top: 0;
       left: 0;
@@ -119,197 +106,148 @@
       object-fit: contain;
       pointer-events: none;
       will-change: transform, opacity;
-      transform: translate3d(0, 0, 0);
     }
 
-    /* 1. Montajlı Orijinal Saat Görseli */
-    #watchAssembled {
+    /* 1. Birleşik Gerçek Saat Görseli */
+    #watchMerged {
       opacity: 1;
       transform: translate3d(0, 0, 0) scale(1);
     }
 
-    /* 2. Katmanlarına Ayrılmış Orijinal Saat Görseli */
+    /* 2. Parçalarına Ayrılmış Gerçek Saat Görseli */
     #watchExploded {
       opacity: 0;
-      transform: translate3d(0, 30px, 0) scale(0.96);
+      transform: translate3d(0, 20px, 0) scale(0.96);
     }
 
-    /* Alt Durum ve Dokunmatik Kontrol Paneli */
+    /* Alt İlerleme Çubuğu */
     .bottom-bar {
-      position: fixed;
-      bottom: 20px;
+      position: absolute;
+      bottom: 24px;
       left: 50%;
       transform: translateX(-50%);
-      width: calc(100% - 32px);
-      max-width: 400px;
-      background: rgba(11, 24, 37, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 12px 18px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      z-index: 100;
+      width: 280px;
+      z-index: 50;
       display: flex;
       flex-direction: column;
-      gap: 8px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-    }
-
-    .status-row {
-      display: flex;
-      justify-content: space-between;
       align-items: center;
-      font-size: 11px;
+      gap: 6px;
     }
 
-    .slider-track {
+    .progress-track {
       width: 100%;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.15);
-      border-radius: 3px;
-      position: relative;
-      cursor: pointer;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 2px;
+      overflow: hidden;
     }
 
-    .slider-fill {
-      height: 100%;
+    .progress-fill {
       width: 0%;
-      background: linear-gradient(90deg, #38bdf8, #818cf8);
-      border-radius: 3px;
-      pointer-events: none;
+      height: 100%;
+      background: #38bdf8;
+      border-radius: 2px;
     }
 
-    /* Kaydırma Rehberi */
-    .scroll-hint {
-      position: fixed;
-      bottom: 90px;
+    .status-text {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .scroll-arrow {
+      position: absolute;
+      bottom: 60px;
       left: 50%;
       transform: translateX(-50%);
       font-size: 10px;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: rgba(255, 255, 255, 0.75);
-      background: rgba(11, 24, 37, 0.6);
-      padding: 6px 14px;
-      border-radius: 20px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      backdrop-filter: blur(10px);
-      z-index: 90;
+      color: rgba(255, 255, 255, 0.6);
+      animation: pulse 1.5s infinite;
       pointer-events: none;
-      transition: opacity 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      z-index: 40;
     }
 
-    .btn-action {
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 11px;
-      font-weight: 600;
-      cursor: pointer;
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      background: rgba(56, 189, 248, 0.15);
-      color: #38bdf8;
-      transition: all 0.2s;
-    }
-
-    .btn-action:active {
-      transform: scale(0.96);
+    @keyframes pulse {
+      0%, 100% { transform: translate(-50%, 0); opacity: 0.8; }
+      50% { transform: translate(-50%, 6px); opacity: 0.3; }
     }
   </style>
 </head>
 <body>
 
-  <!-- ARKA PLAN -->
-  <div class="sky-background"></div>
+  <div class="viewport">
+    <div class="water-line"></div>
 
-  <!-- ÜST MENÜ -->
-  <header class="luxury-header">
-    <div class="brand-title">
-      <span class="rolex-crown">♛</span>
-      <span>Oyster Perpetual</span>
+    <!-- Üst Başlık -->
+    <div class="top-header">
+      <h1>Rolex Oyster Perpetual</h1>
+      <p id="stateSubtitle">BİRLEŞİK MONTAJLI SAAT</p>
     </div>
-    <button id="autoPlayBtn" class="btn-action">Otomatik Oynat</button>
-  </header>
 
-  <!-- SABİT SAHNE -->
-  <div class="viewport-scene">
-    
-    <!-- ORİJİNAL GERÇEK SAAT GÖRSELLERİ -->
+    <!-- SAAT SAHNESİ -->
     <div class="watch-stage">
-      <!-- 1. Montajlı Gerçek Saat -->
+      <!-- 1. BİRLEŞİK GERÇEK SAAT FOTOĞRAFI -->
       <img 
-        id="watchAssembled" 
-        src="watch_assembled.jpg" 
-        alt="Rolex Oyster Perpetual Montajlı Görünüm"
-        class="watch-asset"
+        id="watchMerged" 
+        src="saat_birlesik.jpg" 
+        alt="Rolex Oyster Perpetual Gerçek Saat"
+        class="watch-layer"
       />
 
-      <!-- 2. Katmanlarına Ayrılmış Gerçek Saat -->
+      <!-- 2. PARÇALARINA AYRILMIŞ GERÇEK SAAT FOTOĞRAFI -->
       <img 
         id="watchExploded" 
-        src="watch_exploded.png" 
-        alt="Rolex Oyster Perpetual Katmanlarına Ayrılmış Görünüm"
-        class="watch-asset"
+        src="saat_parcali.png" 
+        alt="Rolex Oyster Perpetual Parçalara Ayrılmış Saat"
+        class="watch-layer"
       />
     </div>
 
-    <!-- Aşağı Kaydırın İpucu -->
-    <div class="scroll-hint" id="scrollHint">
-      <span>Aşağı Kaydırın</span>
-      <span>↓</span>
+    <!-- Kaydırma İpucu -->
+    <div class="scroll-arrow" id="scrollArrow">
+      Aşağı Kaydırın ↓
     </div>
 
-  </div>
-
-  <!-- ALT KONTROL PANELİ (DOKUNMATİK & SLIDER) -->
-  <div class="bottom-bar">
-    <div class="status-row">
-      <span id="statusLabel" style="color: #10b981; font-weight: 600;">Montajlı Durum (%0)</span>
-      <span id="percentLabel" style="font-family: 'Space Mono', monospace; color: #38bdf8; font-weight: 700;">0%</span>
-    </div>
-
-    <div class="slider-track" id="sliderTrack">
-      <div class="slider-fill" id="sliderFill"></div>
-    </div>
-
-    <div style="display: flex; justify-content: space-between; font-size: 8.5px; color: rgba(255,255,255,0.4); font-family: 'Space Mono', monospace; letter-spacing: 0.1em;">
-      <span>BİRLEŞİK</span>
-      <span>KATMANLARA AYRILDI</span>
+    <!-- Alt İlerleme Çubuğu -->
+    <div class="bottom-bar">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span class="status-text" id="statusText">BİRLEŞİK (%0)</span>
     </div>
   </div>
 
-  <!-- 350vh Kaydırma Yolu -->
-  <div id="scrollTrack"></div>
+  <!-- SANAL KAYDIRMA YOLU -->
+  <div id="scrollContainer"></div>
 
   <script>
     // -------------------------------------------------------------
-    // 60/120 FPS SAF GPU DESTEKLİ ANİMASYON MOTORU
+    // SAF 60 FPS GPU TABANLI GEÇİŞ MOTORU
     // -------------------------------------------------------------
-    const watchAssembled = document.getElementById('watchAssembled');
+    const watchMerged = document.getElementById('watchMerged');
     const watchExploded = document.getElementById('watchExploded');
-    const sliderFill = document.getElementById('sliderFill');
-    const statusLabel = document.getElementById('statusLabel');
-    const percentLabel = document.getElementById('percentLabel');
-    const scrollHint = document.getElementById('scrollHint');
-    const sliderTrack = document.getElementById('sliderTrack');
-    const autoPlayBtn = document.getElementById('autoPlayBtn');
+    const progressFill = document.getElementById('progressFill');
+    const statusText = document.getElementById('statusText');
+    const stateSubtitle = document.getElementById('stateSubtitle');
+    const scrollArrow = document.getElementById('scrollArrow');
 
-    let currentProgress = 0;
-    let targetProgress = 0;
+    let currentP = 0;
+    let targetP = 0;
 
-    // 1. Mouse Tekerleği
+    // 1. Mouse Tekerleği (Desktop)
     window.addEventListener('wheel', (e) => {
-      targetProgress += e.deltaY * 0.0009;
-      targetProgress = Math.max(0, Math.min(1, targetProgress));
+      targetP += e.deltaY * 0.0008;
+      targetP = Math.max(0, Math.min(1, targetP));
     }, { passive: true });
 
     // 2. Sayfa Kaydırması
     window.addEventListener('scroll', () => {
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (maxScroll > 0) {
-        targetProgress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+        targetP = Math.max(0, Math.min(1, window.scrollY / maxScroll));
       }
     }, { passive: true });
 
@@ -323,109 +261,58 @@
       const touchY = e.touches[0].clientY;
       const deltaY = touchStartY - touchY;
       touchStartY = touchY;
-      targetProgress += deltaY * 0.003;
-      targetProgress = Math.max(0, Math.min(1, targetProgress));
+      targetP += deltaY * 0.0028;
+      targetP = Math.max(0, Math.min(1, targetP));
     }, { passive: true });
 
-    // 4. Alt Slider Barı İle Sürükleme
-    let isDragging = false;
-    function handleSlider(e) {
-      const rect = sliderTrack.getBoundingClientRect();
-      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
-      const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
-      targetProgress = x / rect.width;
-      
-      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      window.scrollTo({
-        top: targetProgress * maxScroll,
-        behavior: 'instant'
-      });
-    }
-
-    sliderTrack.addEventListener('mousedown', (e) => { isDragging = true; handleSlider(e); });
-    window.addEventListener('mousemove', (e) => { if (isDragging) handleSlider(e); });
-    window.addEventListener('mouseup', () => isDragging = false);
-
-    sliderTrack.addEventListener('touchstart', (e) => { isDragging = true; handleSlider(e); }, { passive: true });
-    window.addEventListener('touchmove', (e) => { if (isDragging) handleSlider(e); }, { passive: true });
-    window.addEventListener('touchend', () => isDragging = false);
-
-    // 5. Otomatik Oynat Butonu
-    let isAutoPlaying = false;
-    let autoStartTime = 0;
-    let autoStartProg = 0;
-    let autoTargetProg = 1;
-
-    autoPlayBtn.addEventListener('click', () => {
-      if (isAutoPlaying) {
-        isAutoPlaying = false;
-        autoPlayBtn.textContent = 'Otomatik Oynat';
-      } else {
-        isAutoPlaying = true;
-        autoPlayBtn.textContent = 'Durdur';
-        autoStartProg = currentProgress;
-        autoTargetProg = currentProgress > 0.5 ? 0 : 1;
-        autoStartTime = performance.now();
-      }
-    });
-
     // 60 / 120 FPS Donanım Hızlandırmalı Render Döngüsü
-    function render(now) {
+    function render() {
       requestAnimationFrame(render);
 
-      if (isAutoPlaying) {
-        const elapsed = (now - autoStartTime) / 2600;
-        if (elapsed < 1) {
-          targetProgress = autoStartProg + (autoTargetProg - autoStartProg) * (0.5 - 0.5 * Math.cos(elapsed * Math.PI));
-        } else {
-          targetProgress = autoTargetProg;
-          isAutoPlaying = false;
-          autoPlayBtn.textContent = 'Otomatik Oynat';
-        }
-      }
+      // Pürüzsüz yaylanma
+      currentP += (targetP - currentP) * 0.14;
+      const p = currentP;
 
-      // Linear Interpolation (Pürüzsüz Akış)
-      currentProgress += (targetProgress - currentProgress) * 0.12;
-      const p = currentProgress;
+      // 1. Birleşik Gerçek Saat: Aşağı kaydırdıkça solar ve hafif yukarı süzülür
+      const mergedOpacity = Math.max(0, 1 - (p * 1.5));
+      const mergedY = -20 * p;
+      const mergedScale = 1 - (0.04 * p);
+      watchMerged.style.opacity = mergedOpacity;
+      watchMerged.style.transform = `translate3d(0, ${mergedY}px, 0) scale(${mergedScale})`;
 
-      // 1. Montajlı Saat: Aşağı kaydırdıkça solar ve hafif yukarı süzülür
-      const assembledOpacity = Math.max(0, 1 - (p * 1.6));
-      const assembledY = -25 * p;
-      const assembledScale = 1 - (0.05 * p);
-      watchAssembled.style.opacity = assembledOpacity;
-      watchAssembled.style.transform = `translate3d(0, ${assembledY}px, 0) scale(${assembledScale})`;
-
-      // 2. Parçalanmış Saat: Aşağı kaydırdıkça belirir ve yerine oturur
-      const explodedOpacity = Math.min(1, Math.max(0, (p - 0.1) * 1.4));
-      const explodedY = 25 * (1 - p);
-      const explodedScale = 0.94 + (0.06 * p);
+      // 2. Parçalanmış Gerçek Saat: Aşağı kaydırdıkça belirir ve yerine oturur
+      const explodedOpacity = Math.min(1, Math.max(0, (p - 0.1) * 1.35));
+      const explodedY = 20 * (1 - p);
+      const explodedScale = 0.95 + (0.05 * p);
       watchExploded.style.opacity = explodedOpacity;
       watchExploded.style.transform = `translate3d(0, ${explodedY}px, 0) scale(${explodedScale})`;
 
       // UI Güncellemeleri
       const pct = Math.round(p * 100);
-      sliderFill.style.width = pct + '%';
-      percentLabel.textContent = pct + '%';
+      progressFill.style.width = pct + '%';
 
       if (p > 0.05) {
-        scrollHint.style.opacity = '0';
+        scrollArrow.style.opacity = '0';
       } else {
-        scrollHint.style.opacity = '1';
+        scrollArrow.style.opacity = '1';
       }
 
       if (p < 0.2) {
-        statusLabel.textContent = 'Montajlı Durum (%' + pct + ')';
-        statusLabel.style.color = '#10b981';
+        statusText.textContent = `BİRLEŞİK (%${pct})`;
+        statusText.style.color = '#10b981';
+        stateSubtitle.textContent = 'BİRLEŞİK MONTAJLI SAAT';
       } else if (p > 0.8) {
-        statusLabel.textContent = 'Katmanlar Ayrıldı (%' + pct + ')';
-        statusLabel.style.color = '#38bdf8';
+        statusText.textContent = `PARÇALARA AYRILDI (%${pct})`;
+        statusText.style.color = '#38bdf8';
+        stateSubtitle.textContent = 'KATMANLARINA AYRILMIŞ ANATOMİ';
       } else {
-        statusLabel.textContent = 'Ayrışıyor (%' + pct + ')';
-        statusLabel.style.color = '#f59e0b';
+        statusText.textContent = `AYRIŞIYOR (%${pct})`;
+        statusText.style.color = '#f59e0b';
+        stateSubtitle.textContent = 'MEKANİK KATMAN GEÇİŞİ';
       }
     }
 
-    render(performance.now());
+    render();
   </script>
 </body>
 </html>

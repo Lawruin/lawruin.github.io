@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>AETERNA CHRONO | Haute Horlogerie</title>
+  <title>AETERNA | Haute Horlogerie (Exploded View)</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,39 +20,27 @@
 
     body, html {
       width: 100%;
-      height: 100%;
-      overflow-x: hidden;
-      background-color: #030406;
+      min-height: 100%;
+      background-color: #06070a;
       color: #f0f0f4;
       font-family: 'Montserrat', sans-serif;
+      overflow-x: hidden;
     }
 
-    #scroll-container {
+    #scroll-track {
       position: relative;
       width: 100%;
-      height: 500vh;
-      z-index: 10;
+      height: 450vh;
       pointer-events: none;
     }
 
-    #webgl-canvas {
+    .studio-bg {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      z-index: 1;
-      outline: none;
-      display: block;
-    }
-
-    .ambient-bg {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      background: radial-gradient(circle at 50% 40%, #151821 0%, #08090d 55%, #020304 100%);
+      background: radial-gradient(circle at 50% 38%, #171a23 0%, #090a0e 55%, #030405 100%);
       z-index: 0;
       pointer-events: none;
     }
@@ -67,7 +55,6 @@
       justify-content: space-between;
       align-items: center;
       z-index: 100;
-      pointer-events: auto;
     }
 
     .brand-logo {
@@ -102,10 +89,9 @@
       color: rgba(255, 255, 255, 0.5);
       text-decoration: none;
       font-size: 11px;
-      letter-spacing: 0.22em;
+      letter-spacing: 0.2em;
       text-transform: uppercase;
-      font-weight: 500;
-      transition: color 0.3s ease;
+      transition: color 0.3s;
     }
 
     .nav-links li a:hover {
@@ -123,7 +109,7 @@
       border-radius: 2px;
       cursor: pointer;
       backdrop-filter: blur(8px);
-      transition: all 0.3s ease;
+      transition: all 0.3s;
     }
 
     .cta-btn:hover {
@@ -132,17 +118,110 @@
       box-shadow: 0 0 25px rgba(197, 160, 89, 0.4);
     }
 
-    /* Sol Bilgi Kartları (Masaüstü) */
+    /* 3D SAAT SAHNESİ */
+    .watch-stage {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      perspective: 1400px;
+      z-index: 10;
+      pointer-events: none;
+    }
+
+    .watch-container {
+      position: relative;
+      width: 320px;
+      height: 480px;
+      transform-style: preserve-3d;
+      will-change: transform;
+      transition: transform 0.08s linear;
+    }
+
+    .watch-layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transform-style: preserve-3d;
+      will-change: transform, filter;
+      pointer-events: auto;
+    }
+
+    .watch-layer svg,
+    .watch-layer img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.4));
+      transition: filter 0.2s ease;
+    }
+
+    /* Lazer Çizgili Parça Pinleri */
+    .layer-pin {
+      position: absolute;
+      right: -30px;
+      top: 50%;
+      transform: translateY(-50%) translateZ(10px);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      white-space: nowrap;
+    }
+
+    .layer-pin.visible {
+      opacity: 1;
+      transform: translateY(-50%) translateX(20px) translateZ(10px);
+    }
+
+    .pin-line {
+      width: 35px;
+      height: 1px;
+      background: linear-gradient(90deg, #c5a059, rgba(197, 160, 89, 0.2));
+    }
+
+    .pin-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #c5a059;
+      box-shadow: 0 0 8px #c5a059;
+    }
+
+    .pin-tag {
+      font-size: 9.5px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #e5c178;
+      background: rgba(12, 14, 18, 0.85);
+      padding: 5px 10px;
+      border-radius: 3px;
+      border: 1px solid rgba(197, 160, 89, 0.3);
+      backdrop-filter: blur(8px);
+    }
+
+    /* Bilgi Kartları (Masaüstü) */
     .story-section {
       position: fixed;
       top: 50%;
       transform: translateY(-50%);
-      left: 6%;
-      max-width: 440px;
+      left: 7%;
+      max-width: 420px;
       z-index: 50;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transition: opacity 0.5s ease, transform 0.5s ease;
     }
 
     .story-section.active {
@@ -170,26 +249,23 @@
 
     .story-title {
       font-family: 'Cinzel', serif;
-      font-size: 34px;
+      font-size: 32px;
       line-height: 1.18;
       font-weight: 700;
       color: #ffffff;
-      letter-spacing: 0.04em;
       margin-bottom: 14px;
-      text-shadow: 0 4px 24px rgba(0, 0, 0, 0.9);
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.9);
     }
 
     .story-desc {
       font-size: 13px;
       line-height: 1.75;
       color: rgba(255, 255, 255, 0.7);
-      font-weight: 300;
-      letter-spacing: 0.04em;
       margin-bottom: 20px;
-      background: rgba(10, 12, 18, 0.5);
+      background: rgba(10, 12, 18, 0.55);
       padding: 14px 18px;
       border-left: 2px solid rgba(197, 160, 89, 0.6);
-      backdrop-filter: blur(16px);
+      backdrop-filter: blur(14px);
       border-radius: 0 6px 6px 0;
     }
 
@@ -216,46 +292,6 @@
       letter-spacing: 0.2em;
       color: rgba(255, 255, 255, 0.4);
       margin-top: 3px;
-    }
-
-    .part-telemetry {
-      position: fixed;
-      right: 5%;
-      top: 50%;
-      transform: translateY(-50%);
-      z-index: 50;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      pointer-events: none;
-    }
-
-    .telemetry-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      opacity: 0.25;
-      transition: all 0.35s ease;
-    }
-
-    .telemetry-item.active {
-      opacity: 1;
-      transform: translateX(-6px);
-    }
-
-    .telemetry-dot {
-      width: 5px;
-      height: 5px;
-      border-radius: 50%;
-      background: #c5a059;
-      box-shadow: 0 0 8px #c5a059;
-    }
-
-    .telemetry-text {
-      font-size: 9.5px;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: #fff;
     }
 
     .bottom-hud {
@@ -364,7 +400,7 @@
       background: rgba(197, 160, 89, 0.12);
     }
 
-    /* Mobil Görünüm: Saati Kapatmayan ve Tam Ortalayan Yapı */
+    /* MOBİL GÖRÜNÜM: SAAT EKRANA TAM OTURUR, ASLA TAŞMAZ */
     @media (max-width: 900px) {
       header {
         padding: 16px 20px;
@@ -375,9 +411,12 @@
       .brand-logo {
         font-size: 15px;
       }
-      .cta-btn {
-        padding: 7px 14px;
-        font-size: 9px;
+
+      .watch-container {
+        width: 250px;
+        height: 380px;
+        transform-origin: center 42%;
+        margin-top: -50px;
       }
 
       .story-section {
@@ -386,33 +425,29 @@
         width: auto;
         max-width: none;
         top: auto;
-        bottom: 84px;
+        bottom: 80px;
         transform: translateY(0);
       }
       .story-section.active {
         transform: translateY(0);
       }
-      .section-tag {
-        font-size: 8.5px;
-        margin-bottom: 4px;
-      }
       .story-title {
-        font-size: 20px;
+        font-size: 18px;
         line-height: 1.15;
         margin-bottom: 6px;
       }
       .story-desc {
-        font-size: 11.5px;
-        line-height: 1.5;
+        font-size: 11px;
+        line-height: 1.45;
         padding: 8px 12px;
-        margin-bottom: 8px;
-        background: rgba(8, 10, 14, 0.75);
+        margin-bottom: 6px;
+        background: rgba(6, 8, 12, 0.82);
       }
       .story-specs {
         display: none;
       }
 
-      .part-telemetry {
+      .layer-pin {
         display: none;
       }
 
@@ -426,7 +461,7 @@
         display: none;
       }
       .progress-bar-container {
-        width: 110px;
+        width: 100px;
       }
       .explode-degree-text {
         font-size: 9px;
@@ -436,134 +471,240 @@
         gap: 6px;
       }
       .hud-btn {
-        padding: 7px 10px;
+        padding: 6px 10px;
         font-size: 8.5px;
-        letter-spacing: 0.1em;
       }
     }
   </style>
-
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 </head>
 <body>
 
-  <div class="ambient-bg"></div>
+  <div class="studio-bg"></div>
 
   <header>
     <div class="brand-logo">AETERNA</div>
     <ul class="nav-links">
-      <li><a href="#kalibre">Kalibre 9001</a></li>
       <li><a href="#safir">Safir Kristal</a></li>
-      <li><a href="#titanyum">Grade 5 Titanyum</a></li>
-      <li><a href="#miras">Haute Horlogerie</a></li>
+      <li><a href="#bezel">Titanyum Bezel</a></li>
+      <li><a href="#kadran">İskelet Kadran</a></li>
+      <li><a href="#kalibre">Calibre 9001</a></li>
     </ul>
     <button class="cta-btn" onclick="triggerAutoTour()">Otomatik Tur</button>
   </header>
 
-  <canvas id="webgl-canvas"></canvas>
+  <!-- 3D GERÇEK SAAT KATMANLARI -->
+  <div class="watch-stage">
+    <div class="watch-container" id="watchContainer">
 
+      <!-- KATMAN 08: BİLEZİK -->
+      <div class="watch-layer" id="layer-strap">
+        <svg viewBox="0 0 320 480" fill="none">
+          <defs>
+            <linearGradient id="strapGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a2d36"/>
+              <stop offset="50%" stop-color="#1b1d24"/>
+              <stop offset="100%" stop-color="#121318"/>
+            </linearGradient>
+            <linearGradient id="linkHighlight" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#4a4f5c"/>
+              <stop offset="100%" stop-color="#15171d"/>
+            </linearGradient>
+          </defs>
+          <rect x="95" y="10" width="130" height="42" rx="4" fill="url(#strapGrad)" stroke="#3a3e4a" stroke-width="1.5"/>
+          <rect x="105" y="55" width="110" height="38" rx="4" fill="url(#linkHighlight)"/>
+          <rect x="115" y="96" width="90" height="32" rx="4" fill="url(#strapGrad)"/>
+          
+          <rect x="115" y="352" width="90" height="32" rx="4" fill="url(#strapGrad)"/>
+          <rect x="105" y="387" width="110" height="38" rx="4" fill="url(#linkHighlight)"/>
+          <rect x="95" y="428" width="130" height="42" rx="4" fill="url(#strapGrad)" stroke="#3a3e4a" stroke-width="1.5"/>
+        </svg>
+        <div class="layer-pin" id="pin-strap"><div class="pin-line"></div><div class="pin-dot"></div><div class="pin-tag">Entegre Titanyum Bilezik</div></div>
+      </div>
+
+      <!-- KATMAN 07: ARKA KAPAK -->
+      <div class="watch-layer" id="layer-caseback">
+        <svg viewBox="0 0 320 480" fill="none">
+          <circle cx="160" cy="240" r="108" fill="#14161d" stroke="#5a606e" stroke-width="5"/>
+          <circle cx="160" cy="240" r="95" fill="none" stroke="rgba(197,160,89,0.35)" stroke-dasharray="6 4"/>
+          <circle cx="160" cy="240" r="82" fill="rgba(8,12,18,0.7)" stroke="#333842" stroke-width="1.5"/>
+        </svg>
+        <div class="layer-pin" id="pin-caseback"><div class="pin-line"></div><div class="pin-dot"></div><div class="pin-tag">Safir Sergi Kapak</div></div>
+      </div>
+
+      <!-- KATMAN 06: ROTOR -->
+      <div class="watch-layer" id="layer-rotor">
+        <svg viewBox="0 0 320 480" fill="none">
+          <defs>
+            <linearGradient id="rotorGold" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#ecc880"/>
+              <stop offset="40%" stop-color="#b88b3e"/>
+              <stop offset="100%" stop-color="#7a5518"/>
+            </linearGradient>
+          </defs>
+          <path d="M 85 240 A 75 75 0 0 1 235 240 Z" fill="url(#rotorGold)" stroke="#d4af6a" stroke-width="2"/>
+          <circle cx="160" cy="240" r="22" fill="#252932" stroke="#d4af6a" stroke-width="3"/>
+          <circle cx="160" cy="240" r="6" fill="#fff"/>
+        </svg>
+        <div class="layer-pin" id="pin-rotor"><div class="pin-line"></div><div class="pin-dot"></div><div class="pin-tag">22K Ağır Tungsten Rotor</div></div>
+      </div>
+
+      <!-- KATMAN 05: ORTA KASA & TEPE -->
+      <div class="watch-layer" id="layer-case">
+        <svg viewBox="0 0 320 480" fill="none">
+          <polygon points="75,125 105,120 100,165 65,175" fill="#363a45" stroke="#4e5463" stroke-width="1.5"/>
+          <polygon points="245,125 215,120 220,165 255,175" fill="#363a45" stroke="#4e5463" stroke-width="1.5"/>
+          <polygon points="75,355 105,360 100,315 65,305" fill="#363a45" stroke="#4e5463" stroke-width="1.5"/>
+          <polygon points="245,355 215,360 220,315 255,305" fill="#363a45" stroke="#4e5463" stroke-width="1.5"/>
+          <circle cx="160" cy="240" r="114" fill="#252830" stroke="#545a69" stroke-width="4"/>
+          <rect x="272" y="226" width="18" height="28" rx="3" fill="url(#rotorGold)" stroke="#664918" stroke-width="1.5"/>
+          <rect x="264" y="175" width="14" height="22" rx="2" fill="#4a505e" stroke="#687082"/>
+          <rect x="264" y="283" width="14" height="22" rx="2" fill="#4a505e" stroke="#687082"/>
+        </svg>
+        <div class="layer-pin" id="pin-case"><div class="pin-line"></div><div class="pin-dot"></div><div class="pin-tag">Grade 5 Monoblok Kasa</div></div>
+      </div>
+
+      <!-- KATMAN 04: MEKANİK DİŞLİLER & YAKUTLAR -->
+      <div class="watch-layer" id="layer-movement">
+        <svg viewBox="0 0 320 480" fill="none">
+          <circle cx="160" cy="240" r="96" fill="#181a20" stroke="#333742" stroke-width="2"/>
+          <circle cx="125" cy="205" r="34" fill="none" stroke="#d4af6a" stroke-width="5" stroke-dasharray="4 2"/>
+          <circle cx="125" cy="205" r="14" fill="#20232a" stroke="#d4af6a" stroke-width="2"/>
+          <circle cx="195" cy="200" r="26" fill="none" stroke="#ecc880" stroke-width="4" stroke-dasharray="3 2"/>
+          <circle cx="160" cy="285" r="24" fill="none" stroke="#df9d6b" stroke-width="3.5"/>
+          <line x1="160" y1="261" x2="160" y2="309" stroke="#df9d6b" stroke-width="2"/>
+          <line x1="136" y1="285" x2="184" y2="285" stroke="#df9d6b" stroke-width="2"/>
+          <circle cx="125" cy="205" r="5" fill="#e61044" stroke="#ff5c82" stroke-width="1.5"/>
+          <circle cx="195" cy="200" r="5" fill="#e61044" stroke="#ff5c82" stroke-width="1.5"/>
+          <circle cx="160" cy="285" r="5.5" fill="#e61044" stroke="#ff5c82" stroke-width="1.5"/>
+          <circle cx="160" cy="240" r="6" fill="#e61044" stroke="#ff5c82" stroke-width="1.5"/>
+          <circle cx="100" cy="240" r="3.5" fill="#1a46b8" stroke="#3d6de3"/>
+          <circle cx="218" cy="240" r="3.5" fill="#1a46b8" stroke="#3d6de3"/>
+        </svg>
+        <div class="layer-pin" id="pin-movement"><div class="pin-line"></div><div class="pin-dot"></div><div class="pin-tag">Calibre 9001 (34 Yakut)</div></div>
+      </div>
+
+      <!-- KATMAN 03: İSKELET KADRAN -->
+      <div class="watch-layer" id="layer-dial">
+        <svg viewBox="0 0 320 480" fill="none">
+          <circle cx="160" cy="240" r="92" fill="rgba(15, 17, 23, 0.92)" stroke="#c5a059" stroke-width="1.5"/>
+          <circle cx="160" cy="240" r="88" fill="none" stroke="rgba(255,255,255,0.25)" stroke-dasharray="2 3"/>
+          <circle cx="160" cy="240" r="76" fill="none" stroke="rgba(197,160,89,0.4)"/>
+          <circle cx="120" cy="240" r="19" fill="#0d0e12" stroke="#d4af6a" stroke-width="1.5"/>
+          <circle cx="200" cy="240" r="19" fill="#0d0e12" stroke="#d4af6a" stroke-width="1.5"/>
+          <text x="160" y="195" font-family="'Cinzel', serif" font-size="10" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="3">AETERNA</text>
+          <text x="160" y="206" font-family="'Montserrat', sans-serif" font-size="5" fill="#c5a059" text-anchor="middle" letter-spacing="1.5">CHRONOMÈTRE</text>
+
+          <rect x="157" y="152" width="6" height="15" rx="1.5" fill="#ecc880"/>
+          <rect x="157" y="313" width="6" height="15" rx="1.5" fill="#ecc880"/>
+          <rect x="72" y="237" width="15" height="6" rx="1.5" fill="#ecc880"/>
+          <rect x="233" y="237" width="15" height="6" rx="1.5" fill="#ecc880"/>
+          <rect x="212" y="180" width="5" height="12" rx="1" fill="#ecc880" transform="rotate(45 212 180)"/>
+          <rect x="103" y="289" width="5" height="12" rx="1" fill="#ecc880" transform="rotate(45 103 289)"/>
+          <rect x="103" y="180" width="5" height="12" rx="1" fill="#ecc880" transform="rotate(-45 103 180)"/>
+          <rect x="212" y="289" width="5" height="12" rx="1" fill="#ecc880" transform="rotate(-45 212 289)"/>
+        </svg>
+        <div class="layer-pin" id="pin-dial"><div class="pin-line"></div><div class="pin-dot"></div><div class="pin-tag">İskelet Kadran & İndeksler</div></div>
+      </div>
+
+      <!-- KATMAN 02: İBRELER -->
+      <div class="watch-layer" id="layer-hands">
+        <svg viewBox="0 0 320 480" fill="none">
+          <circle cx="160" cy="240" r="7" fill="#d4af6a" stroke="#684a14" stroke-width="1.5"/>
+          <polygon points="160,240 157,240 138,198 141,195 160,237" fill="#ecc880" stroke="#8b6824" stroke-width="1"/>
+          <polygon points="160,240 163,240 198,172 195,170 160,237" fill="#ecc880" stroke="#8b6824" stroke-width="1"/>
+          <line x1="160" y1="262" x2="160" y2="160" stroke="#e61044" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="160" cy="240" r="3" fill="#fff"/>
+        </svg>
+        <div class="layer-pin" id="pin-hands"><div class="pin-line"></div><div class="pin-dot"></div><div class="pin-tag">Super-LumiNova® İbreler</div></div>
+      </div>
+
+      <!-- KATMAN 01: SEKİZGEN BEZEL -->
+      <div class="watch-layer" id="layer-bezel">
+        <svg viewBox="0 0 320 480" fill="none">
+          <polygon points="120,135 200,135 265,200 265,280 200,345 120,345 55,280 55,200" 
+                   fill="none" stroke="#505663" stroke-width="22" stroke-linejoin="round"/>
+          <polygon points="120,135 200,135 265,200 265,280 200,345 120,345 55,280 55,200" 
+                   fill="none" stroke="#7a8294" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="160" cy="240" r="95" fill="none" stroke="#d4af6a" stroke-width="2"/>
+          <circle cx="120" cy="144" r="3.5" fill="#ecc880" stroke="#333"/>
+          <circle cx="200" cy="144" r="3.5" fill="#ecc880" stroke="#333"/>
+          <circle cx="256" cy="200" r="3.5" fill="#ecc880" stroke="#333"/>
+          <circle cx="256" cy="280" r="3.5" fill="#ecc880" stroke="#333"/>
+          <circle cx="200" cy="336" r="3.5" fill="#ecc880" stroke="#333"/>
+          <circle cx="120" cy="336" r="3.5" fill="#ecc880" stroke="#333"/>
+          <circle cx="64" cy="280" r="3.5" fill="#ecc880" stroke="#333"/>
+          <circle cx="64" cy="200" r="3.5" fill="#ecc880" stroke="#333"/>
+        </svg>
+        <div class="layer-pin" id="pin-bezel"><div class="pin-line"></div><div class="pin-dot"></div><div class="pin-tag">Sekizgen Titanyum Bezel</div></div>
+      </div>
+
+      <!-- KATMAN 00: SAFİR KRİSTAL CAM -->
+      <div class="watch-layer" id="layer-crystal">
+        <svg viewBox="0 0 320 480" fill="none">
+          <defs>
+            <linearGradient id="glareGrad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="rgba(255,255,255,0.55)"/>
+              <stop offset="35%" stop-color="rgba(180,215,255,0.18)"/>
+              <stop offset="70%" stop-color="rgba(255,255,255,0.02)"/>
+              <stop offset="100%" stop-color="rgba(255,255,255,0.2)"/>
+            </linearGradient>
+          </defs>
+          <circle cx="160" cy="240" r="94" fill="url(#glareGrad)" stroke="rgba(255,255,255,0.6)" stroke-width="1"/>
+          <ellipse cx="140" cy="185" rx="55" ry="25" fill="rgba(255,255,255,0.18)" transform="rotate(-30 140 185)"/>
+        </svg>
+        <div class="layer-pin" id="pin-crystal"><div class="pin-line"></div><div class="pin-dot"></div><div class="pin-tag">Mohs 9 Safir Kristal</div></div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- BİLGİ KARTLARI -->
   <div class="story-section active" id="story-0">
     <div class="section-tag">Aeterna Grand Complication</div>
     <h1 class="story-title">SAF MÜHENDİSLİK.<br>ZAMANSIZ SANAT.</h1>
     <p class="story-desc">
-      İsviçre yüksek saatçiliğinin zirvesi. 340 mikro bileşeni tek tek incelemek için kaydırın.
+      İsviçre yüksek saatçiliğinin zirvesi. 8 bağımsız katmanı milimetrik ayrılmış halde görmek için kaydırın.
     </p>
     <div class="story-specs">
-      <div class="spec-item">
-        <span class="spec-val">4 Hz</span>
-        <span class="spec-lbl">28,800 Titreşim</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-val">72 Saat</span>
-        <span class="spec-lbl">Güç Rezervi</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-val">Grade 5</span>
-        <span class="spec-lbl">Titanyum Kasa</span>
-      </div>
+      <div class="spec-item"><span class="spec-val">4 Hz</span><span class="spec-lbl">28,800 Titreşim</span></div>
+      <div class="spec-item"><span class="spec-val">72 Saat</span><span class="spec-lbl">Güç Rezervi</span></div>
+      <div class="spec-item"><span class="spec-val">Grade 5</span><span class="spec-lbl">Titanyum</span></div>
     </div>
   </div>
 
   <div class="story-section" id="story-1">
-    <div class="section-tag">Aşama 01 / Dış Zırh</div>
+    <div class="section-tag">Aşama 01 / Dış Katmanlar</div>
     <h2 class="story-title">SAFİR KRİSTAL<br>& SEKİZGEN BEZEL</h2>
     <p class="story-desc">
-      Elmas sertliğinde yansıma önleyici çift kavisli safir kristal cam ve fırçalanmış titanyum sekizgen çerçeve.
+      Yansıma önleyici çift kavisli safir kristal cam ve fırçalanmış sekizgen titanyum çerçeve.
     </p>
-    <div class="story-specs">
-      <div class="spec-item">
-        <span class="spec-val">1.8 mm</span>
-        <span class="spec-lbl">Kristal Kalınlığı</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-val">100 M</span>
-        <span class="spec-lbl">Su Basınç Direnci</span>
-      </div>
-    </div>
   </div>
 
   <div class="story-section" id="story-2">
-    <div class="section-tag">Aşama 02 / Arayüz</div>
+    <div class="section-tag">Aşama 02 / Arayüz & İbreler</div>
     <h2 class="story-title">İSKELET KADRAN<br>& KRONOGRAF</h2>
     <p class="story-desc">
-      Güneş ışını dokulu açık iskelet kadran, altın fasetli indeksler ve Super-LumiNova® ibreler.
+      Açık mimarili iskelet kadran, altın fasetli indeksler ve Super-LumiNova® dolgulu ibreler.
     </p>
-    <div class="story-specs">
-      <div class="spec-item">
-        <span class="spec-val">18K</span>
-        <span class="spec-lbl">Pembe Altın Aksam</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-val">0.05 mm</span>
-        <span class="spec-lbl">Tolerans Hassasiyeti</span>
-      </div>
-    </div>
   </div>
 
   <div class="story-section" id="story-3">
-    <div class="section-tag">Aşama 03 / Kalp</div>
-    <h2 class="story-title">CALIBRE 9001<br>MEKANİK MİMARİ</h2>
+    <div class="section-tag">Aşama 03 / Mekanik Kalp</div>
+    <h2 class="story-title">CALIBRE 9001<br>ÇARK DÜZENEĞİ</h2>
     <p class="story-desc">
-      Sentetik yakut yataklar üzerinde dönen çark treni, maşa mekanizması ve sürekli titreşen salınım dengesi.
+      34 sentetik yakut rulman üzerinde dönen pirinç çark treni ve yüksek hassasiyetli maşa.
     </p>
-    <div class="story-specs">
-      <div class="spec-item">
-        <span class="spec-val">34</span>
-        <span class="spec-lbl">Değerli Yakut Taş</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-val">Geneva</span>
-        <span class="spec-lbl">Côtes Süsleme</span>
-      </div>
-    </div>
   </div>
 
   <div class="story-section" id="story-4">
     <div class="section-tag">Aşama 04 / Enerji & Kasa</div>
     <h2 class="story-title">TUNGSTEN ROTOR<br>& ARKA KAPAK</h2>
     <p class="story-desc">
-      Bilek hareketiyle enerji depolayan ağır tungsten kütleli rotor ve safir sergi arka kapağı.
+      Bilek hareketiyle enerji depolayan ağır tungsten kütleli açık rotor ve titanyum kasa.
     </p>
-    <div class="story-specs">
-      <div class="spec-item">
-        <span class="spec-val">22K / W</span>
-        <span class="spec-lbl">Ağır Rotor Kütlesi</span>
-      </div>
-      <div class="spec-item">
-        <span class="spec-val">Monoblok</span>
-        <span class="spec-lbl">Gövde Yapısı</span>
-      </div>
-    </div>
   </div>
 
-  <div class="part-telemetry">
-    <div class="telemetry-item active" id="tel-0"><div class="telemetry-dot"></div><div class="telemetry-text">00. Birleşik Hal</div></div>
-    <div class="telemetry-item" id="tel-1"><div class="telemetry-dot"></div><div class="telemetry-text">01. Kristal & Bezel</div></div>
-    <div class="telemetry-item" id="tel-2"><div class="telemetry-dot"></div><div class="telemetry-text">02. İskelet Kadran</div></div>
-    <div class="telemetry-item" id="tel-3"><div class="telemetry-dot"></div><div class="telemetry-text">03. Mekanik Kalibre</div></div>
-    <div class="telemetry-item" id="tel-4"><div class="telemetry-dot"></div><div class="telemetry-text">04. Kasa & Rotor</div></div>
-  </div>
-
+  <!-- ALT PANEL -->
   <div class="bottom-hud">
     <div class="scroll-hint">
       <div class="mouse-icon"><div class="mouse-wheel"></div></div>
@@ -578,634 +719,93 @@
     </div>
 
     <div class="hud-actions">
-      <button class="hud-btn" id="btnToggleExplode" onclick="toggleExplosion()">
-        <span>☵</span> Aç / Kapat
-      </button>
-      <button class="hud-btn" id="btnResetView" onclick="resetCamera()">
-        <span>⟲</span> Sıfırla
-      </button>
+      <button class="hud-btn" onclick="toggleExplosion()"><span>☵</span> Aç / Kapat</button>
+      <button class="hud-btn" onclick="resetView()"><span>⟲</span> Sıfırla</button>
     </div>
   </div>
 
-  <div id="scroll-container"></div>
+  <div id="scroll-track"></div>
 
   <script>
-    let scene, camera, renderer;
-    let watchMainGroup;
-    let watchParts = [];
-    let movingHands = [];
-    let balanceWheel, rotorGroup;
+    const watchContainer = document.getElementById('watchContainer');
+    const layers = [
+      { el: document.getElementById('layer-crystal'), pin: document.getElementById('pin-crystal'), dist: 260, rot: 8 },
+      { el: document.getElementById('layer-bezel'), pin: document.getElementById('pin-bezel'), dist: 200, rot: -7 },
+      { el: document.getElementById('layer-hands'), pin: document.getElementById('pin-hands'), dist: 145, rot: 0 },
+      { el: document.getElementById('layer-dial'), pin: document.getElementById('pin-dial'), dist: 85, rot: -5 },
+      { el: document.getElementById('layer-movement'), pin: document.getElementById('pin-movement'), dist: 15, rot: 8 },
+      { el: document.getElementById('layer-case'), pin: document.getElementById('pin-case'), dist: -55, rot: 0 },
+      { el: document.getElementById('layer-rotor'), pin: document.getElementById('pin-rotor'), dist: -125, rot: -20 },
+      { el: document.getElementById('layer-caseback'), pin: document.getElementById('pin-caseback'), dist: -185, rot: 6 },
+      { el: document.getElementById('layer-strap'), pin: document.getElementById('pin-strap'), dist: -245, rot: 0 }
+    ];
 
-    let scrollProgress = 0;
-    let targetProgress = 0;
-    let isAutoTouring = false;
+    let scrollProg = 0;
+    let targetProg = 0;
     let mouseX = 0, mouseY = 0;
     let targetMouseX = 0, targetMouseY = 0;
 
-    const canvas = document.getElementById('webgl-canvas');
-
-    let matTitaniumBrushed, matRoseGold, matDarkSteel, matSapphireGlass, matRubyJewel, matBluedSteel, matDialPlate;
-
-    // Gerçekçi Stüdyo Işıklandırması (Metallerin Işıldamasını Sağlar)
-    function setupStudioEnvironment() {
-      const pmremGenerator = new THREE.PMREMGenerator(renderer);
-      pmremGenerator.compileEquirectangularShader();
-
-      const envScene = new THREE.Scene();
-      
-      const topLightGeo = new THREE.PlaneGeometry(35, 35);
-      const topLightMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
-      const topLight = new THREE.Mesh(topLightGeo, topLightMat);
-      topLight.position.set(0, 30, 0);
-      topLight.rotation.x = Math.PI / 2;
-      envScene.add(topLight);
-
-      const rightLightGeo = new THREE.PlaneGeometry(12, 40);
-      const rightLightMat = new THREE.MeshBasicMaterial({ color: 0xffdfa0 });
-      const rightLight = new THREE.Mesh(rightLightGeo, rightLightMat);
-      rightLight.position.set(25, 5, 10);
-      rightLight.rotation.y = -Math.PI / 3;
-      envScene.add(rightLight);
-
-      const leftLightGeo = new THREE.PlaneGeometry(12, 40);
-      const leftLightMat = new THREE.MeshBasicMaterial({ color: 0x90baff });
-      const leftLight = new THREE.Mesh(leftLightGeo, leftLightMat);
-      leftLight.position.set(-25, 5, 10);
-      leftLight.rotation.y = Math.PI / 3;
-      envScene.add(leftLight);
-
-      const envTexture = pmremGenerator.fromScene(envScene, 0.04).texture;
-      scene.environment = envTexture;
-      pmremGenerator.dispose();
-    }
-
-    // Yüksek Çözünürlüklü İsviçre Kadran Dokusu
-    function createRealisticDialTexture() {
-      const cvs = document.createElement('canvas');
-      cvs.width = 1024;
-      cvs.height = 1024;
-      const ctx = cvs.getContext('2d');
-      const cx = 512, cy = 512;
-
-      const radGrad = ctx.createRadialGradient(cx, cy, 50, cx, cy, 510);
-      radGrad.addColorStop(0, '#22262e');
-      radGrad.addColorStop(0.65, '#121419');
-      radGrad.addColorStop(1, '#08090c');
-      ctx.fillStyle = radGrad;
-      ctx.fillRect(0, 0, 1024, 1024);
-
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.035)';
-      ctx.lineWidth = 1;
-      for (let a = 0; a < Math.PI * 2; a += Math.PI / 90) {
-        ctx.beginPath();
-        ctx.moveTo(cx, cy);
-        ctx.lineTo(cx + Math.cos(a) * 500, cy + Math.sin(a) * 500);
-        ctx.stroke();
-      }
-
-      ctx.strokeStyle = 'rgba(212, 175, 106, 0.5)';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(cx, cy, 460, 0, Math.PI * 2);
-      ctx.stroke();
-
-      for (let i = 0; i < 60; i++) {
-        const ang = (i / 60) * Math.PI * 2;
-        const isMajor = i % 5 === 0;
-        const r1 = isMajor ? 435 : 448;
-        const r2 = 460;
-        ctx.strokeStyle = isMajor ? '#d4af6a' : 'rgba(255, 255, 255, 0.35)';
-        ctx.lineWidth = isMajor ? 3.5 : 1.5;
-        ctx.beginPath();
-        ctx.moveTo(cx + Math.cos(ang) * r1, cy + Math.sin(ang) * r1);
-        ctx.lineTo(cx + Math.cos(ang) * r2, cy + Math.sin(ang) * r2);
-        ctx.stroke();
-      }
-
-      ctx.textAlign = 'center';
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'bold 24px Cinzel, serif';
-      ctx.letterSpacing = '8px';
-      ctx.fillText('AETERNA', cx, cy - 170);
-
-      ctx.fillStyle = '#c5a059';
-      ctx.font = '12px Montserrat, sans-serif';
-      ctx.letterSpacing = '5px';
-      ctx.fillText('CHRONOMÈTRE AUTOMATIQUE', cx, cy - 145);
-
-      ctx.fillStyle = 'rgba(255, 255, 255, 0.45)';
-      ctx.font = '10px Montserrat, sans-serif';
-      ctx.fillText('SWISS MADE', cx, cy + 415);
-
-      drawSubdial(ctx, cx - 180, cy, 110, '60', '30');
-      drawSubdial(ctx, cx + 180, cy, 110, '30', '15');
-      drawSubdial(ctx, cx, cy + 180, 110, '12', '6');
-
-      const texture = new THREE.CanvasTexture(cvs);
-      texture.anisotropy = 8;
-      return texture;
-    }
-
-    function drawSubdial(ctx, x, y, r, topTxt, btmTxt) {
-      const grad = ctx.createRadialGradient(x, y, 10, x, y, r);
-      grad.addColorStop(0, '#0d0f13');
-      grad.addColorStop(1, '#161920');
-      ctx.fillStyle = grad;
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.fill();
-
-      ctx.strokeStyle = 'rgba(255, 255, 255, 0.08)';
-      ctx.lineWidth = 1;
-      for (let cr = 20; cr < r; cr += 18) {
-        ctx.beginPath();
-        ctx.arc(x, y, cr, 0, Math.PI * 2);
-        ctx.stroke();
-      }
-
-      ctx.strokeStyle = 'rgba(212, 175, 106, 0.7)';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.arc(x, y, r, 0, Math.PI * 2);
-      ctx.stroke();
-
-      ctx.fillStyle = '#ffffff';
-      ctx.font = '11px Montserrat, sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(topTxt, x, y - r + 18);
-      ctx.fillText(btmTxt, x, y + r - 10);
-    }
-
-    function initMaterials() {
-      const dialTexture = createRealisticDialTexture();
-
-      matTitaniumBrushed = new THREE.MeshStandardMaterial({
-        color: 0xb5b9c2,
-        metalness: 0.94,
-        roughness: 0.26
-      });
-
-      matRoseGold = new THREE.MeshStandardMaterial({
-        color: 0xdf9d6b,
-        metalness: 0.96,
-        roughness: 0.18
-      });
-
-      matDarkSteel = new THREE.MeshStandardMaterial({
-        color: 0x22252c,
-        metalness: 0.88,
-        roughness: 0.32
-      });
-
-      matSapphireGlass = new THREE.MeshPhysicalMaterial({
-        color: 0xffffff,
-        transmission: 0.96,
-        opacity: 1,
-        transparent: true,
-        roughness: 0.03,
-        ior: 1.77,
-        metalness: 0.08,
-        reflectivity: 0.95,
-        clearcoat: 1.0,
-        clearcoatRoughness: 0.04
-      });
-
-      matDialPlate = new THREE.MeshStandardMaterial({
-        map: dialTexture,
-        metalness: 0.65,
-        roughness: 0.35
-      });
-
-      matRubyJewel = new THREE.MeshPhysicalMaterial({
-        color: 0xe61044,
-        transmission: 0.85,
-        transparent: true,
-        roughness: 0.08,
-        metalness: 0.1,
-        clearcoat: 1.0
-      });
-
-      matBluedSteel = new THREE.MeshStandardMaterial({
-        color: 0x1a46b8,
-        metalness: 0.95,
-        roughness: 0.16
-      });
-    }
-
-    // Mobil ve masaüstü için saatin ekrandan taşmasını önleyen mesafe hesabı
-    function getResponsiveCameraDistance() {
-      const aspect = window.innerWidth / window.innerHeight;
-      if (aspect < 1) {
-        return Math.max(56, 28 / aspect);
-      } else {
-        return 34;
-      }
-    }
-
-    function initScene() {
-      scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x030406, 0.012);
-
-      const initialDist = getResponsiveCameraDistance();
-      camera = new THREE.PerspectiveCamera(36, window.innerWidth / window.innerHeight, 0.1, 1000);
-      camera.position.set(0, 0, initialDist);
-
-      renderer = new THREE.WebGLRenderer({
-        canvas: canvas,
-        antialias: true,
-        powerPreference: "high-performance",
-        alpha: true
-      });
-      renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-      renderer.toneMapping = THREE.ACESFilmicToneMapping;
-      renderer.toneMappingExposure = 1.35;
-
-      setupStudioEnvironment();
-
-      const ambientLight = new THREE.AmbientLight(0xdbe4ee, 0.8);
-      scene.add(ambientLight);
-
-      const keyLight = new THREE.DirectionalLight(0xfff6ea, 2.5);
-      keyLight.position.set(20, 25, 30);
-      scene.add(keyLight);
-
-      const rimLight = new THREE.DirectionalLight(0x769eff, 2.0);
-      rimLight.position.set(-25, -15, 20);
-      scene.add(rimLight);
-
-      const fillLight = new THREE.DirectionalLight(0xffffff, 0.9);
-      fillLight.position.set(0, 30, -15);
-      scene.add(fillLight);
-
-      initMaterials();
-      buildLuxuryWatch();
-
-      if (window.innerWidth < 900) {
-        watchMainGroup.position.y = 2.4;
-      }
-
-      window.addEventListener('resize', onWindowResize);
-      window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('wheel', onWheel, { passive: false });
-      window.addEventListener('mousemove', onMouseMove);
-      
-      let touchStartY = 0;
-      window.addEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-      }, { passive: true });
-
-      window.addEventListener('touchmove', (e) => {
-        const touchY = e.touches[0].clientY;
-        const deltaY = touchStartY - touchY;
-        touchStartY = touchY;
-        targetProgress += deltaY * 0.0016;
-        targetProgress = Math.max(0, Math.min(1, targetProgress));
-      }, { passive: true });
-    }
-
-    function registerPart(meshOrGroup, explodedPos, explodedRot = { x: 0, y: 0, z: 0 }, startT = 0.0, endT = 1.0) {
-      watchParts.push({
-        object: meshOrGroup,
-        origPos: meshOrGroup.position.clone(),
-        destPos: new THREE.Vector3(explodedPos.x, explodedPos.y, explodedPos.z),
-        origRot: meshOrGroup.rotation.clone(),
-        destRot: new THREE.Euler(
-          meshOrGroup.rotation.x + explodedRot.x,
-          meshOrGroup.rotation.y + explodedRot.y,
-          meshOrGroup.rotation.z + explodedRot.z
-        ),
-        startT: startT,
-        endT: endT
-      });
-    }
-
-    function buildLuxuryWatch() {
-      watchMainGroup = new THREE.Group();
-      scene.add(watchMainGroup);
-
-      // 1. SAFİR KRİSTAL CAM
-      const glassGeo = new THREE.CylinderGeometry(7.1, 7.1, 0.28, 64);
-      const glassMesh = new THREE.Mesh(glassGeo, matSapphireGlass);
-      glassMesh.rotation.x = Math.PI / 2;
-      glassMesh.position.set(0, 0, 2.5);
-      watchMainGroup.add(glassMesh);
-      registerPart(glassMesh, { x: 0, y: 0, z: 14.0 }, { x: 0.12, y: 0.15, z: 0 }, 0.0, 0.7);
-
-      // 2. SEKİZGEN ÇERÇEVE & ALTIN VİDALAR
-      const bezelGroup = new THREE.Group();
-      bezelGroup.position.set(0, 0, 2.1);
-
-      const bezelGeo = new THREE.CylinderGeometry(7.8, 8.0, 0.5, 8);
-      const bezelMesh = new THREE.Mesh(bezelGeo, matTitaniumBrushed);
-      bezelMesh.rotation.x = Math.PI / 2;
-      bezelGroup.add(bezelMesh);
-
-      const innerBezelGeo = new THREE.TorusGeometry(6.9, 0.18, 16, 64);
-      const innerBezelMesh = new THREE.Mesh(innerBezelGeo, matRoseGold);
-      innerBezelMesh.position.set(0, 0, 0.26);
-      bezelGroup.add(innerBezelMesh);
-
-      for (let i = 0; i < 8; i++) {
-        const angle = (i / 8) * Math.PI * 2;
-        const screwGeo = new THREE.CylinderGeometry(0.26, 0.26, 0.15, 6);
-        const screwMesh = new THREE.Mesh(screwGeo, matRoseGold);
-        screwMesh.rotation.x = Math.PI / 2;
-        screwMesh.rotation.z = angle;
-        screwMesh.position.set(Math.cos(angle) * 7.1, Math.sin(angle) * 7.1, 0.3);
-        bezelGroup.add(screwMesh);
-      }
-      watchMainGroup.add(bezelGroup);
-      registerPart(bezelGroup, { x: 0, y: 0, z: 10.5 }, { x: 0.1, y: -0.15, z: 0.05 }, 0.05, 0.8);
-
-      // 3. İÇ DAKİKA ÇEMBERİ
-      const chapterGroup = new THREE.Group();
-      chapterGroup.position.set(0, 0, 1.7);
-      const chapterGeo = new THREE.RingGeometry(6.3, 7.0, 64);
-      const chapterMesh = new THREE.Mesh(chapterGeo, matDarkSteel);
-      chapterGroup.add(chapterMesh);
-
-      for (let i = 0; i < 60; i++) {
-        const angle = (i / 60) * Math.PI * 2;
-        const isFive = i % 5 === 0;
-        const tickGeo = new THREE.PlaneGeometry(isFive ? 0.14 : 0.05, isFive ? 0.45 : 0.2);
-        const tickMesh = new THREE.Mesh(tickGeo, isFive ? matRoseGold : matTitaniumBrushed);
-        tickMesh.position.set(Math.cos(angle) * 6.65, Math.sin(angle) * 6.65, 0.02);
-        tickMesh.rotation.z = angle - Math.PI / 2;
-        chapterGroup.add(tickMesh);
-      }
-      watchMainGroup.add(chapterGroup);
-      registerPart(chapterGroup, { x: 0, y: 0, z: 7.5 }, { x: 0.05, y: 0.1, z: 0 }, 0.1, 0.85);
-
-      // 4. İBRELER
-      const handsGroup = new THREE.Group();
-      handsGroup.position.set(0, 0, 1.35);
-
-      const capGeo = new THREE.CylinderGeometry(0.48, 0.48, 0.38, 32);
-      const capMesh = new THREE.Mesh(capGeo, matRoseGold);
-      capMesh.rotation.x = Math.PI / 2;
-      capMesh.position.set(0, 0, 0.2);
-      handsGroup.add(capMesh);
-
-      const hourHandGeo = new THREE.ConeGeometry(0.38, 3.7, 4);
-      const hourHandMesh = new THREE.Mesh(hourHandGeo, matRoseGold);
-      hourHandMesh.position.set(0, 1.6, 0.1);
-      const hourHandPivot = new THREE.Group();
-      hourHandPivot.add(hourHandMesh);
-      hourHandPivot.rotation.z = -Math.PI / 3;
-      handsGroup.add(hourHandPivot);
-      movingHands.push({ obj: hourHandPivot, speed: 0.0004 });
-
-      const minHandGeo = new THREE.ConeGeometry(0.3, 5.2, 4);
-      const minHandMesh = new THREE.Mesh(minHandGeo, matRoseGold);
-      minHandMesh.position.set(0, 2.3, 0.2);
-      const minHandPivot = new THREE.Group();
-      minHandPivot.add(minHandMesh);
-      minHandPivot.rotation.z = Math.PI / 5;
-      handsGroup.add(minHandPivot);
-      movingHands.push({ obj: minHandPivot, speed: 0.003 });
-
-      const secHandGeo = new THREE.CylinderGeometry(0.04, 0.06, 6.2, 16);
-      const secHandMesh = new THREE.Mesh(secHandGeo, matBluedSteel);
-      secHandMesh.position.set(0, 2.2, 0.3);
-      const counterWeight = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.8, 16), matBluedSteel);
-      counterWeight.position.set(0, -0.6, 0.3);
-      const secHandPivot = new THREE.Group();
-      secHandPivot.add(secHandMesh);
-      secHandPivot.add(counterWeight);
-      handsGroup.add(secHandPivot);
-      movingHands.push({ obj: secHandPivot, speed: 0.035 });
-
-      watchMainGroup.add(handsGroup);
-      registerPart(handsGroup, { x: 0, y: 0, z: 5.2 }, { x: 0.05, y: -0.1, z: 0.15 }, 0.15, 0.9);
-
-      // 5. KADRAN & 18K İNDEKSLER
-      const dialGroup = new THREE.Group();
-      dialGroup.position.set(0, 0, 0.95);
-
-      const dialBaseGeo = new THREE.CircleGeometry(6.3, 64);
-      const dialBaseMesh = new THREE.Mesh(dialBaseGeo, matDialPlate);
-      dialGroup.add(dialBaseMesh);
-
-      for (let i = 0; i < 12; i++) {
-        const angle = (i / 12) * Math.PI * 2;
-        const indexGeo = new THREE.BoxGeometry(0.32, 1.15, 0.22);
-        const indexMesh = new THREE.Mesh(indexGeo, matRoseGold);
-        indexMesh.position.set(Math.cos(angle) * 5.35, Math.sin(angle) * 5.35, 0.12);
-        indexMesh.rotation.z = angle - Math.PI / 2;
-        dialGroup.add(indexMesh);
-      }
-
-      watchMainGroup.add(dialGroup);
-      registerPart(dialGroup, { x: 0, y: 0, z: 2.6 }, { x: -0.08, y: 0.12, z: -0.04 }, 0.2, 0.95);
-
-      // 6. MEKANİK KALİBRE (DİŞLİLER & YAKUTLAR)
-      const movementGroup = new THREE.Group();
-      movementGroup.position.set(0, 0, 0.15);
-
-      const bridgeGeo = new THREE.RingGeometry(1.6, 6.0, 48, 1, 0, Math.PI * 1.55);
-      const bridgeMesh = new THREE.Mesh(bridgeGeo, matTitaniumBrushed);
-      bridgeMesh.position.set(0, 0, 0.35);
-      movementGroup.add(bridgeMesh);
-
-      function createGear(radius, teethCount, thickness, material) {
-        const gearGroup = new THREE.Group();
-        const bodyGeo = new THREE.CylinderGeometry(radius * 0.9, radius * 0.9, thickness, 32);
-        const bodyMesh = new THREE.Mesh(bodyGeo, material);
-        bodyMesh.rotation.x = Math.PI / 2;
-        gearGroup.add(bodyMesh);
-
-        for (let i = 0; i < teethCount; i++) {
-          const angle = (i / teethCount) * Math.PI * 2;
-          const tooth = new THREE.Mesh(new THREE.BoxGeometry(radius * 0.17, radius * 0.32, thickness), material);
-          tooth.position.set(Math.cos(angle) * radius, Math.sin(angle) * radius, 0);
-          tooth.rotation.z = angle;
-          gearGroup.add(tooth);
-        }
-        return gearGroup;
-      }
-
-      const gear1 = createGear(2.4, 28, 0.2, matRoseGold);
-      gear1.position.set(-1.8, 1.8, 0.2);
-      movementGroup.add(gear1);
-      movingHands.push({ obj: gear1, speed: 0.015 });
-
-      const gear2 = createGear(1.6, 20, 0.18, matTitaniumBrushed);
-      gear2.position.set(1.9, 1.5, 0.15);
-      movementGroup.add(gear2);
-      movingHands.push({ obj: gear2, speed: -0.022 });
-
-      balanceWheel = new THREE.Group();
-      balanceWheel.position.set(0, -2.5, 0.25);
-      const balRim = new THREE.Mesh(new THREE.TorusGeometry(1.35, 0.12, 16, 32), matRoseGold);
-      balanceWheel.add(balRim);
-      movementGroup.add(balanceWheel);
-
-      const rubyPositions = [[-1.8, 1.8], [1.9, 1.5], [2.4, -1.2], [0, -2.5], [0, 0], [-2.2, -1.2]];
-      rubyPositions.forEach(([x, y]) => {
-        const rubyMesh = new THREE.Mesh(new THREE.CylinderGeometry(0.35, 0.35, 0.22, 24), matRubyJewel);
-        rubyMesh.rotation.x = Math.PI / 2;
-        rubyMesh.position.set(x, y, 0.32);
-        movementGroup.add(rubyMesh);
-
-        const screwBlue = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.18, 0.18, 16), matBluedSteel);
-        screwBlue.rotation.x = Math.PI / 2;
-        screwBlue.position.set(x + 0.45, y + 0.38, 0.33);
-        movementGroup.add(screwBlue);
-      });
-
-      watchMainGroup.add(movementGroup);
-      registerPart(movementGroup, { x: 0, y: 0, z: -0.6 }, { x: 0.1, y: -0.12, z: 0.08 }, 0.25, 1.0);
-
-      // 7. ORTA TİTANYUM KASA & BUTONLAR
-      const caseGroup = new THREE.Group();
-      caseGroup.position.set(0, 0, -0.6);
-
-      const barrelGeo = new THREE.CylinderGeometry(8.0, 8.0, 1.5, 64);
-      const barrelMesh = new THREE.Mesh(barrelGeo, matTitaniumBrushed);
-      barrelMesh.rotation.x = Math.PI / 2;
-      caseGroup.add(barrelMesh);
-
-      const lugGeo = new THREE.BoxGeometry(1.5, 3.6, 1.4);
-      const lugCoords = [[-5.4, 7.4, -0.3], [5.4, 7.4, 0.3], [-5.4, -7.4, 0.3], [5.4, -7.4, -0.3]];
-      lugCoords.forEach(([lx, ly, lrz]) => {
-        const lug = new THREE.Mesh(lugGeo, matTitaniumBrushed);
-        lug.position.set(lx, ly, 0);
-        lug.rotation.z = lrz;
-        caseGroup.add(lug);
-      });
-
-      const crownGeo = new THREE.CylinderGeometry(1.1, 1.0, 1.1, 32);
-      const crownMesh = new THREE.Mesh(crownGeo, matRoseGold);
-      crownMesh.rotation.z = Math.PI / 2;
-      crownMesh.position.set(8.7, 0, 0);
-      caseGroup.add(crownMesh);
-
-      const pusher1 = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.9, 24), matTitaniumBrushed);
-      pusher1.rotation.z = Math.PI / 2 - 0.5;
-      pusher1.position.set(8.2, 3.1, 0);
-      caseGroup.add(pusher1);
-
-      const pusher2 = new THREE.Mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.9, 24), matTitaniumBrushed);
-      pusher2.rotation.z = Math.PI / 2 + 0.5;
-      pusher2.position.set(8.2, -3.1, 0);
-      caseGroup.add(pusher2);
-
-      watchMainGroup.add(caseGroup);
-      registerPart(caseGroup, { x: 0, y: 0, z: -3.8 }, { x: 0, y: 0, z: 0 }, 0.3, 1.0);
-
-      // 8. TUNGSTEN ROTOR
-      rotorGroup = new THREE.Group();
-      rotorGroup.position.set(0, 0, -1.7);
-
-      const rotorGeo = new THREE.CylinderGeometry(6.3, 6.3, 0.3, 48, 1, false, 0, Math.PI);
-      const rotorMesh = new THREE.Mesh(rotorGeo, matRoseGold);
-      rotorMesh.rotation.x = Math.PI / 2;
-      rotorGroup.add(rotorMesh);
-
-      const tungstenMass = new THREE.Mesh(new THREE.TorusGeometry(6.0, 0.42, 16, 48, Math.PI), matDarkSteel);
-      tungstenMass.position.set(0, 0, 0.16);
-      rotorGroup.add(tungstenMass);
-
-      watchMainGroup.add(rotorGroup);
-      registerPart(rotorGroup, { x: 0, y: 0, z: -7.6 }, { x: -0.15, y: 0.2, z: 0.3 }, 0.35, 1.0);
-
-      // 9. SAFİR SERGİ ARKA KAPAK
-      const casebackGroup = new THREE.Group();
-      casebackGroup.position.set(0, 0, -2.3);
-
-      const backRing = new THREE.Mesh(new THREE.TorusGeometry(6.9, 0.75, 16, 64), matTitaniumBrushed);
-      casebackGroup.add(backRing);
-
-      const backGlass = new THREE.Mesh(new THREE.CylinderGeometry(6.2, 6.2, 0.2, 48), matSapphireGlass);
-      backGlass.rotation.x = Math.PI / 2;
-      casebackGroup.add(backGlass);
-
-      watchMainGroup.add(casebackGroup);
-      registerPart(casebackGroup, { x: 0, y: 0, z: -11.5 }, { x: -0.12, y: -0.15, z: 0.08 }, 0.4, 1.0);
-
-      // 10. ENTEGRE BİLEZİK
-      const strapGroupTop = new THREE.Group();
-      strapGroupTop.position.set(0, 9.6, -0.6);
-      const strapGroupBottom = new THREE.Group();
-      strapGroupBottom.position.set(0, -9.6, -0.6);
-
-      for (let link = 0; link < 4; link++) {
-        const linkGeo = new THREE.BoxGeometry(6.6 - link * 0.75, 1.7, 0.85);
-        const linkTop = new THREE.Mesh(linkGeo, matDarkSteel);
-        linkTop.position.set(0, link * 1.85, -link * 0.22);
-        strapGroupTop.add(linkTop);
-
-        const linkBottom = new THREE.Mesh(linkGeo, matDarkSteel);
-        linkBottom.position.set(0, -link * 1.85, -link * 0.22);
-        strapGroupBottom.add(linkBottom);
-      }
-      watchMainGroup.add(strapGroupTop);
-      registerPart(strapGroupTop, { x: 0, y: 15.0, z: -5.0 }, { x: -0.3, y: 0, z: 0 }, 0.45, 1.0);
-
-      watchMainGroup.add(strapGroupBottom);
-      registerPart(strapGroupBottom, { x: 0, y: -15.0, z: -5.0 }, { x: 0.3, y: 0, z: 0 }, 0.45, 1.0);
-    }
-
-    function onWheel(e) {
-      targetProgress += e.deltaY * 0.0009;
-      targetProgress = Math.max(0, Math.min(1, targetProgress));
-    }
-
-    function onScroll() {
+    window.addEventListener('wheel', (e) => {
+      targetProg += e.deltaY * 0.0009;
+      targetProg = Math.max(0, Math.min(1, targetProg));
+    }, { passive: true });
+
+    window.addEventListener('scroll', () => {
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (maxScroll > 0) {
-        targetProgress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+        targetProg = Math.max(0, Math.min(1, window.scrollY / maxScroll));
       }
-    }
+    }, { passive: true });
 
-    function onMouseMove(e) {
+    let touchStartY = 0;
+    window.addEventListener('touchstart', (e) => {
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+      const touchY = e.touches[0].clientY;
+      const deltaY = touchStartY - touchY;
+      touchStartY = touchY;
+      targetProg += deltaY * 0.0022;
+      targetProg = Math.max(0, Math.min(1, targetProg));
+    }, { passive: true });
+
+    window.addEventListener('mousemove', (e) => {
       targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
       targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    }
+    });
 
-    function onWindowResize() {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-
-      if (window.innerWidth < 900) {
-        watchMainGroup.position.y = 2.4;
-      } else {
-        watchMainGroup.position.y = 0;
-      }
-    }
-
-    let manualExplodeState = false;
-    function toggleExplosion() {
-      manualExplodeState = !manualExplodeState;
-      targetProgress = manualExplodeState ? 0.95 : 0.0;
-    }
-
-    function resetCamera() {
-      targetProgress = 0;
-      targetMouseX = 0;
-      targetMouseY = 0;
-    }
-
+    let isAuto = false;
     function triggerAutoTour() {
-      isAutoTouring = true;
-      let startProg = scrollProgress;
-      let targetP = scrollProgress > 0.5 ? 0.0 : 1.0;
-      let startTime = performance.now();
-      let duration = 2800;
+      isAuto = true;
+      const startP = scrollProg;
+      const endP = scrollProg > 0.5 ? 0.0 : 1.0;
+      const startTime = performance.now();
+      const dur = 2800;
 
-      function stepTour(now) {
-        let elapsed = (now - startTime) / duration;
+      function step(now) {
+        const elapsed = (now - startTime) / dur;
         if (elapsed < 1) {
-          targetProgress = startProg + (targetP - startProg) * (0.5 - 0.5 * Math.cos(elapsed * Math.PI));
-          requestAnimationFrame(stepTour);
+          targetProg = startP + (endP - startP) * (0.5 - 0.5 * Math.cos(elapsed * Math.PI));
+          requestAnimationFrame(step);
         } else {
-          targetProgress = targetP;
-          isAutoTouring = false;
+          targetProg = endP;
+          isAuto = false;
         }
       }
-      requestAnimationFrame(stepTour);
+      requestAnimationFrame(step);
+    }
+
+    let toggleState = false;
+    function toggleExplosion() {
+      toggleState = !toggleState;
+      targetProg = toggleState ? 0.95 : 0.0;
+    }
+
+    function resetView() {
+      targetProg = 0;
+      targetMouseX = 0;
+      targetMouseY = 0;
     }
 
     const storySections = [
@@ -1215,98 +815,70 @@
       document.getElementById('story-3'),
       document.getElementById('story-4')
     ];
-
-    const telemetryItems = [
-      document.getElementById('tel-0'),
-      document.getElementById('tel-1'),
-      document.getElementById('tel-2'),
-      document.getElementById('tel-3'),
-      document.getElementById('tel-4')
-    ];
-
     const progressFill = document.getElementById('progressFill');
     const explodePercentText = document.getElementById('explodePercentText');
 
-    function updateUI(prog) {
-      const percent = Math.round(prog * 100);
+    function updateCards(p) {
+      const percent = Math.round(p * 100);
       progressFill.style.width = percent + '%';
       explodePercentText.textContent = `AYRILMA: %${percent}`;
 
-      let activeIdx = 0;
-      if (prog < 0.15) activeIdx = 0;
-      else if (prog < 0.40) activeIdx = 1;
-      else if (prog < 0.65) activeIdx = 2;
-      else if (prog < 0.85) activeIdx = 3;
-      else activeIdx = 4;
+      let idx = 0;
+      if (p < 0.15) idx = 0;
+      else if (p < 0.40) idx = 1;
+      else if (p < 0.65) idx = 2;
+      else if (p < 0.85) idx = 3;
+      else idx = 4;
 
-      storySections.forEach((sec, idx) => {
-        if (idx === activeIdx) sec.classList.add('active');
+      storySections.forEach((sec, i) => {
+        if (i === idx) sec.classList.add('active');
         else sec.classList.remove('active');
-      });
-
-      telemetryItems.forEach((tel, idx) => {
-        if (idx === activeIdx) tel.classList.add('active');
-        else tel.classList.remove('active');
       });
     }
 
-    const clock = new THREE.Clock();
+    function render() {
+      requestAnimationFrame(render);
 
-    function animate() {
-      requestAnimationFrame(animate);
-      const elapsedTime = clock.getElapsedTime();
-
-      scrollProgress += (targetProgress - scrollProgress) * 0.07;
+      scrollProg += (targetProg - scrollProg) * 0.08;
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
 
-      movingHands.forEach(item => {
-        item.obj.rotation.z -= item.speed;
-      });
+      const ease = scrollProg * scrollProg * (3 - 2 * scrollProg);
 
-      if (balanceWheel) {
-        balanceWheel.rotation.z = Math.sin(elapsedTime * 28) * 0.42;
-      }
+      const rotX = 22 * ease + (mouseY * 8);
+      const rotY = -34 * ease + (mouseX * 12);
+      const rotZ = 8 * ease;
 
-      if (rotorGroup) {
-        rotorGroup.rotation.z = Math.sin(elapsedTime * 0.8) * 0.7 + Math.cos(elapsedTime * 0.3) * 0.25;
-      }
+      watchContainer.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg)`;
 
-      // Kademeli ayrılma ve organik hız eğrisi
-      watchParts.forEach(part => {
-        let localT = (scrollProgress - part.startT) / (part.endT - part.startT);
-        localT = Math.max(0, Math.min(1, localT));
+      layers.forEach((layer) => {
+        const currentZ = layer.dist * ease;
+        const currentRotZ = layer.rot * ease;
         
-        const easeLocalT = localT * localT * (3 - 2 * localT);
+        const shadowDist = Math.abs(currentZ) * 0.25;
+        const shadowBlur = Math.abs(currentZ) * 0.35 + 10;
+        const shadowOpacity = Math.min(0.55, 0.2 + ease * 0.3);
 
-        part.object.position.lerpVectors(part.origPos, part.destPos, easeLocalT);
-        part.object.rotation.x = THREE.MathUtils.lerp(part.origRot.x, part.destRot.x, easeLocalT);
-        part.object.rotation.y = THREE.MathUtils.lerp(part.origRot.y, part.destRot.y, easeLocalT);
-        part.object.rotation.z = THREE.MathUtils.lerp(part.origRot.z, part.destRot.z, easeLocalT);
+        layer.el.style.transform = `translateZ(${currentZ}px) rotateZ(${currentRotZ}deg)`;
+        
+        const svgChild = layer.el.querySelector('svg');
+        if (svgChild) {
+          svgChild.style.filter = `drop-shadow(0 ${shadowDist}px ${shadowBlur}px rgba(0, 0, 0, ${shadowOpacity}))`;
+        }
+
+        if (layer.pin) {
+          if (ease > 0.45) {
+            layer.pin.classList.add('visible');
+          } else {
+            layer.pin.classList.remove('visible');
+          }
+        }
       });
 
-      const easeGlobal = scrollProgress * scrollProgress * (3 - 2 * scrollProgress);
-      const idleRotation = Math.sin(elapsedTime * 0.3) * 0.04;
-      
-      const targetWatchRotX = THREE.MathUtils.lerp(0.2, 0.65, easeGlobal) + (mouseY * 0.18);
-      const targetWatchRotY = THREE.MathUtils.lerp(idleRotation, 0.92, easeGlobal) + (mouseX * 0.25);
-
-      watchMainGroup.rotation.x = targetWatchRotX;
-      watchMainGroup.rotation.y = targetWatchRotY;
-
-      const baseCamDist = getResponsiveCameraDistance();
-      camera.position.z = THREE.MathUtils.lerp(baseCamDist, baseCamDist + 7, easeGlobal);
-      camera.position.x = THREE.MathUtils.lerp(0, 3.2, easeGlobal);
-      camera.lookAt(0, watchMainGroup.position.y, 0);
-
-      updateUI(scrollProgress);
-      renderer.render(scene, camera);
+      updateCards(scrollProg);
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      initScene();
-      animate();
-    });
+    render();
   </script>
 </body>
 </html>

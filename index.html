@@ -30,7 +30,7 @@
     #scroll-track {
       position: relative;
       width: 100%;
-      height: 100vh;
+      height: 150vh;
       pointer-events: none;
     }
 
@@ -138,7 +138,7 @@
       height: 480px;
       transform-style: preserve-3d;
       will-change: transform;
-      transition: transform 0.04s linear;
+      transition: transform 0.05s linear;
     }
 
     .watch-layer {
@@ -161,7 +161,7 @@
       height: 100%;
       object-fit: contain;
       filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.4));
-      transition: filter 0.1s ease;
+      transition: filter 0.15s ease;
     }
 
     .layer-pin {
@@ -331,7 +331,7 @@
       height: 5px;
       background: #c5a059;
       border-radius: 2px;
-      animation: wheelMove 1s infinite ease-in-out;
+      animation: wheelMove 1.5s infinite ease-in-out;
     }
 
     @keyframes wheelMove {
@@ -356,7 +356,7 @@
       height: 100%;
       width: 0%;
       background: linear-gradient(90deg, #99732b, #e5c178);
-      transition: width 0.05s linear;
+      transition: width 0.08s linear;
     }
 
     .explode-degree-text {
@@ -385,7 +385,7 @@
       cursor: pointer;
       border-radius: 3px;
       backdrop-filter: blur(12px);
-      transition: all 0.15s ease;
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -479,7 +479,6 @@
           <rect x="95" y="10" width="130" height="42" rx="4" fill="url(#strapGrad)" stroke="#3a3e4a" stroke-width="1.5"/>
           <rect x="105" y="55" width="110" height="38" rx="4" fill="url(#linkHighlight)"/>
           <rect x="115" y="96" width="90" height="32" rx="4" fill="url(#strapGrad)"/>
-          
           <rect x="115" y="352" width="90" height="32" rx="4" fill="url(#strapGrad)"/>
           <rect x="105" y="387" width="110" height="38" rx="4" fill="url(#linkHighlight)"/>
           <rect x="95" y="428" width="130" height="42" rx="4" fill="url(#strapGrad)" stroke="#3a3e4a" stroke-width="1.5"/>
@@ -709,9 +708,9 @@
     let mouseX = 0, mouseY = 0;
     let targetMouseX = 0, targetMouseY = 0;
 
-    // 5 KAT HIZLI TEKERLEK (Tek tıkla tam açılma)
+    // DENGELENMİŞ TEKERLEK HASSASİYETİ (0.007)
     window.addEventListener('wheel', (e) => {
-      targetProg += e.deltaY * 0.014;
+      targetProg += e.deltaY * 0.007;
       targetProg = Math.max(0, Math.min(1, targetProg));
     }, { passive: true });
 
@@ -722,7 +721,7 @@
       }
     }, { passive: true });
 
-    // 5 KAT HIZLI MOBİL KAYDIRMA (Küçük bir parmak hareketi yeterli)
+    // DENGELENMİŞ MOBİL DOKUNMA HASSASİYETİ (0.016)
     let touchStartY = 0;
     window.addEventListener('touchstart', (e) => {
       touchStartY = e.touches[0].clientY;
@@ -732,7 +731,7 @@
       const touchY = e.touches[0].clientY;
       const deltaY = touchStartY - touchY;
       touchStartY = touchY;
-      targetProg += deltaY * 0.032;
+      targetProg += deltaY * 0.016;
       targetProg = Math.max(0, Math.min(1, targetProg));
     }, { passive: true });
 
@@ -747,7 +746,7 @@
       const startP = scrollProg;
       const endP = scrollProg > 0.5 ? 0.0 : 1.0;
       const startTime = performance.now();
-      const dur = 700;
+      const dur = 1400;
 
       function step(now) {
         const elapsed = (now - startTime) / dur;
@@ -805,8 +804,8 @@
     function render() {
       requestAnimationFrame(render);
 
-      // Anında yanıt veren çevik sönümleme (0.28)
-      scrollProg += (targetProg - scrollProg) * 0.28;
+      // Tok ve pürüzsüz sönümleme (0.18)
+      scrollProg += (targetProg - scrollProg) * 0.18;
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
 

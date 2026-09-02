@@ -1,407 +1,400 @@
-Build a premium, modern, highly polished product website for a luxury watch.
-
-IMPORTANT:
-I have provided two reference images:
-1. The first image is the main product/hero image of the assembled watch.
-2. The second image is the exploded technical illustration showing the watch components separated into layers.
-
-USE THESE PROVIDED IMAGES DIRECTLY AS THE VISUAL ASSETS.
-Do not create a replacement watch illustration from scratch.
-Do not use generic stock images.
-The website must visually match the provided watch and its exploded-view diagram.
-
-==================================================
-CORE CONCEPT
-==================================================
-
-The entire website should revolve around an interactive 3D-like exploded watch animation.
-
-When the user opens the page:
-- The watch appears completely assembled.
-- It should look like the first reference image.
-- The watch is centered prominently on the screen.
-- The design should feel like a premium Swiss/luxury watch brand website.
-- Minimal, elegant, cinematic and highly polished.
-
-As the user scrolls DOWN with their finger/mouse:
-- The watch should progressively separate into its individual layers/components.
-- The animation must be directly connected to scroll progress.
-- The further the user scrolls down, the further the components separate.
-- The components should separate vertically in the same order and composition as the second reference image.
-
-As the user scrolls UP:
-- The exploded components must progressively move back together.
-- Returning to the top must restore the fully assembled watch.
-- The transition must be completely reversible and smooth.
-
-DO NOT make the animation trigger only once.
-It must behave like a scroll-controlled animation:
-scroll down = explode
-scroll up = assemble
-
-==================================================
-EXPLODED WATCH LAYERS
-==================================================
-
-The exploded animation should contain these visual layers, from top to bottom:
-
-1. Sapphire crystal
-2. Watch dial
-3. Hour/minute/second hands
-4. Hour markers / indices
-5. Watch movement / mechanism
-6. Watch case
-7. Water-resistant gasket
-8. Stainless steel bracelet
-
-Use the second provided image as the exact visual reference for:
-- component order
-- approximate spacing
-- scale
-- alignment
-- perspective
-- overall composition
-
-The components should remain aligned on the same central axis.
-
-The final exploded state should visually resemble the second reference image.
-
-==================================================
-SCROLL EXPERIENCE
-==================================================
-
-Create a scroll-driven storytelling experience.
-
-At the beginning:
-100% assembled watch.
-
-While scrolling:
-0% → fully assembled
-20% → slight separation
-40% → clearly separated
-60% → mostly exploded
-80% → nearly identical to exploded reference
-100% → fully exploded
-
-Scrolling backward must interpolate the exact same values in reverse.
-
-Use smooth interpolation and easing so the animation feels premium.
-
-The animation should not feel like simple CSS position changes.
-It should feel like the watch is physically disassembling.
-
-Each component should have:
-- translateY / translateZ style movement
-- subtle opacity adjustments where appropriate
-- subtle rotation where necessary
-- realistic spacing
-- smooth easing
-
-The movement should be synchronized with scroll progress.
-
-==================================================
-PINNED HERO SECTION
-==================================================
-
-The main watch animation should remain pinned/sticky while the user scrolls through the animation.
-
-Use a structure similar to:
-
-Hero / animation container
-    ↓
-Sticky watch viewport
-    ↓
-Scroll progress controls explosion amount
-    ↓
-Additional content appears below
-
-The watch should remain visually centered while the page scrolls.
-
-On mobile:
-- Optimize the animation specifically for touch scrolling.
-- Keep the watch centered.
-- Ensure the exploded layers never overflow awkwardly outside the viewport.
-- Reduce spacing dynamically if the screen is small.
-- Maintain a high-end visual appearance.
-
-==================================================
-DESIGN
-==================================================
-
-Visual direction:
-
-Luxury
-Minimal
-Futuristic
-Editorial
-High-end product presentation
-Premium Swiss watch aesthetic
-
-Use:
-- lots of negative space
-- elegant typography
-- subtle gradients
-- cinematic lighting
-- glass/reflection effects
-- soft shadows
-- refined micro-interactions
-
-The provided image contains a blue sky/water environment.
-Use this visual language as inspiration for the background.
-
-The hero background can have:
-- soft blue gradient
-- subtle water/reflection effect
-- gentle light bloom
-- very subtle rainbow/refraction effect
-
-Do not make the page look like a generic ecommerce template.
-
-It should look like an award-winning product landing page.
-
-==================================================
-CONTENT SECTIONS
-==================================================
-
-After the main exploded animation, create additional sections:
-
-1. HERO
-   - Watch
-   - Premium headline
-   - Short tagline
-   - Scroll indicator
-
-2. PRECISION / CRAFTSMANSHIP
-   - Explain the watch mechanism
-   - Elegant typography
-   - Minimal layout
-
-3. MATERIALS
-   - Sapphire crystal
-   - Stainless steel
-   - Water resistance
-   - Precision mechanism
-
-4. COMPONENT STORY
-   - Visually explain each component
-   - Use the names from the exploded-view image
-   - Each component can appear with subtle scroll reveal animations
-
-5. FINAL PRODUCT
-   - Bring the watch back into a beautiful fully assembled presentation
-   - Use the main reference image
-   - Strong CTA
-
-==================================================
-TYPOGRAPHY
-==================================================
-
-Use a premium modern typography system.
-
-Headlines:
-- large
-- elegant
-- thin/light weight
-- generous letter spacing
-
-Body:
-- clean modern sans-serif
-- high readability
-
-Use typography similar to premium brands such as:
-Apple
-Rolex
-Aesop
-Nothing
-high-end automotive websites
-
-Do not copy any brand identity directly.
-
-==================================================
-TECHNICAL REQUIREMENTS
-==================================================
-
-Build this as a production-quality responsive website.
-
-Preferred stack:
-
-- React
-- TypeScript
-- Vite or Next.js
-- Tailwind CSS
-- Framer Motion and/or GSAP
-- GSAP ScrollTrigger is strongly preferred for the scroll-driven animation
-
-Use component-based architecture.
-
-Suggested structure:
-
-/src
-  /components
-    Hero.tsx
-    WatchAnimation.tsx
-    ExplodedWatch.tsx
-    Materials.tsx
-    Craftsmanship.tsx
-    ComponentsSection.tsx
-    FinalProduct.tsx
-  /assets
-    watch-hero.jpg
-    watch-exploded.png
-
-==================================================
-IMPORTANT IMAGE / ASSET HANDLING
-==================================================
-
-The two provided reference images must be included in the project as actual assets.
-
-Use the first image as:
-watch-hero.jpg
-
-Use the second image as:
-watch-exploded.png
-
-Do not simply place the exploded image as one flat image and call it an animation.
-
-The goal is to create the illusion that the individual watch parts physically separate.
-
-If the exploded reference image cannot be separated into independent layers automatically, structure the implementation so the visual components can be independently positioned and animated.
-
-The interaction must still convincingly simulate:
-
-assembled watch
-        ↓
-progressive disassembly
-        ↓
-fully exploded watch
-
-==================================================
-IMPORTANT IMPLEMENTATION DETAIL
-==================================================
-
-The scroll animation must be tied to actual scroll progress.
-
-Do NOT use:
-- autoplay animations
-- animation triggered by clicking
-- animation that runs only once
-- fake scrolling
-- looping animations
-
-The user must control the animation directly with their finger/mouse wheel.
-
-Example:
-
-scrollProgress = 0
-→ assembled
-
-scrollProgress = 0.25
-→ slightly separated
-
-scrollProgress = 0.5
-→ half exploded
-
-scrollProgress = 0.75
-→ mostly exploded
-
-scrollProgress = 1
-→ fully exploded
-
-Reverse scrolling must interpolate the same values backward.
-
-==================================================
-PERFORMANCE
-==================================================
-
-The website must be smooth on:
-- desktop
-- Android
-- iPhone
-- tablets
-
-Optimize:
-- image loading
-- GPU accelerated transforms
-- scroll handlers
-- animation rendering
-- layout reflows
-
-Avoid unnecessary React re-renders.
-
-Use transform-based animations where possible.
-
-Lazy-load sections that are below the fold.
-
-==================================================
-RESPONSIVE BEHAVIOR
-==================================================
-
-Desktop:
-- Large cinematic watch
-- Wide spacing
-- Large typography
-
-Tablet:
-- Medium watch scale
-- Reduced explosion distance
-
-Mobile:
-- Watch should remain clearly visible
-- Components should stay inside the viewport
-- Explosion distance should adapt to viewport height
-- Typography should scale down intelligently
-- Touch scrolling should feel natural
-
-Do not simply shrink the desktop design.
-
-Create a genuinely responsive layout.
-
-==================================================
-MICRO INTERACTIONS
-==================================================
-
-Add subtle premium interactions:
-
-- Scroll indicator animation
-- Gentle parallax
-- Hover effects on technical component labels
-- Smooth section reveals
-- Subtle lighting/reflection movement
-- Magnetic or soft hover interaction on CTA buttons
-- Extremely subtle motion, never excessive
-
-==================================================
-FINAL QUALITY BAR
-==================================================
-
-The final result should feel like a website designed by a professional creative development studio.
-
-Think:
-
-Apple product launch
-+
-luxury Swiss watch presentation
-+
-high-end interactive 3D product website
-
-The most important feature is the interactive scroll-controlled exploded watch.
-
-Prioritize:
-1. Visual quality
-2. Smooth scroll animation
-3. Correct component separation
-4. Responsive behavior
-5. Performance
-6. Clean code architecture
-
-Before finishing:
-- Make sure scrolling DOWN progressively explodes the watch.
-- Make sure scrolling UP progressively assembles it again.
-- Make sure the animation reaches a clearly exploded state.
-- Make sure the assembled state matches the first reference image as closely as possible.
-- Make sure the exploded state visually follows the second reference image.
-- Test desktop and mobile layouts.
-- Fix any overflow, jitter, jumping, or scroll locking issues.
-
-Do not provide a basic demo.
-Build the complete polished landing page.
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Rolex Oyster Perpetual | Katmanlı Görünüm</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- GSAP & ScrollTrigger CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;1,400&display=swap');
+
+    * {
+      box-sizing: border-box;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background-color: #0b1926;
+      color: #f8fafc;
+      overflow-x: hidden;
+      margin: 0;
+      touch-action: pan-y;
+    }
+
+    .font-serif {
+      font-family: 'Playfair Display', Georgia, serif;
+    }
+
+    /* Gerçekçi Işık ve Arka Plan Atmosferi */
+    .sky-bg {
+      background: radial-gradient(circle at 50% 28%, #72b9f3 0%, #3e81b6 38%, #163854 75%, #0b1926 100%);
+    }
+
+    .lens-flare {
+      position: absolute;
+      top: -15%;
+      left: -10%;
+      width: 80vw;
+      height: 80vw;
+      max-width: 900px;
+      max-height: 900px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.35) 0%, rgba(173,216,230,0.18) 35%, transparent 70%);
+      pointer-events: none;
+      filter: blur(50px);
+    }
+
+    .rainbow-arc {
+      position: absolute;
+      top: 5%;
+      left: -5%;
+      width: 65vw;
+      height: 65vw;
+      max-width: 750px;
+      max-height: 750px;
+      border-radius: 50%;
+      border: 3px solid transparent;
+      border-top-color: rgba(255, 100, 100, 0.25);
+      border-left-color: rgba(255, 230, 100, 0.25);
+      border-bottom-color: rgba(100, 220, 255, 0.25);
+      filter: blur(12px);
+      transform: rotate(-25deg);
+      pointer-events: none;
+    }
+
+    /* Su Yansıması */
+    .water-surface {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 32vh;
+      background: linear-gradient(to bottom, rgba(54, 115, 161, 0.2) 0%, rgba(11, 25, 38, 0.95) 90%);
+      border-top: 1px solid rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(1px);
+      pointer-events: none;
+    }
+
+    /* Lüks Cam Efekti Kartlar */
+    .glass-card {
+      background: rgba(15, 30, 48, 0.7);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+    }
+  </style>
+</head>
+<body class="relative">
+
+  <!-- Arka Plan Atmosferi -->
+  <div class="fixed inset-0 sky-bg pointer-events-none z-0"></div>
+  <div class="fixed lens-flare z-0"></div>
+  <div class="fixed rainbow-arc z-0"></div>
+  <div class="fixed water-surface z-10"></div>
+
+  <!-- Üst Menü / Navbar -->
+  <header class="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-5 py-3.5 glass-card border-b border-white/10">
+    <div class="flex items-center space-x-3">
+      <div class="w-8 h-8 rounded-full border border-white/30 flex items-center justify-center font-serif text-sm tracking-widest bg-white/5">
+        ♛
+      </div>
+      <div>
+        <h1 class="text-xs uppercase tracking-[0.25em] font-semibold text-white/90">Oyster Perpetual</h1>
+        <p class="text-[10px] text-white/50 tracking-wider">İnteraktif Katman Mimarisi</p>
+      </div>
+    </div>
+
+    <!-- Kontroller -->
+    <div class="flex items-center space-x-2">
+      <!-- Görsel Seçici Butonu -->
+      <label class="cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 hover:bg-white/20 border border-white/20 transition-all flex items-center space-x-1.5 active:scale-95 text-white/80">
+        <i data-lucide="image" class="w-3.5 h-3.5"></i>
+        <span class="hidden sm:inline">Görsel Değiştir</span>
+        <input type="file" id="image-uploader" multiple accept="image/*" class="hidden">
+      </label>
+
+      <!-- Otomatik Oynat Butonu -->
+      <button id="auto-btn" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-300 transition-all flex items-center space-x-1.5 active:scale-95">
+        <i data-lucide="play" class="w-3.5 h-3.5"></i>
+        <span id="auto-btn-text">Otomatik Oynat</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Sanal Kaydırma Alanı (350vh: aşağı kaydırdıkça katmanların ayrılmasını sağlar) -->
+  <div id="scroll-track" class="relative w-full h-[350vh]">
+    
+    <!-- Pinned (Ekrana Sabitlenmiş) Sahne -->
+    <div class="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center z-20">
+      
+      <!-- Ana Saat Sahnesi -->
+      <div class="relative w-full max-w-2xl h-[80vh] flex items-center justify-center px-4">
+        
+        <!-- 1. BİRLEŞİK / MONTAJLI SAAT GÖRSELİ -->
+        <div id="watch-assembled-wrap" class="absolute inset-0 flex items-center justify-center will-change-transform z-20 pointer-events-none">
+          <img 
+            id="watch-assembled-img" 
+            src="watch_assembled.jpg" 
+            alt="Rolex Oyster Perpetual Montajlı Saat"
+            class="max-h-[72vh] max-w-[85vw] object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.6)]"
+          />
+        </div>
+
+        <!-- 2. KATMANLARINA AYRILMIŞ (EXPLODED) SAAT GÖRSELİ -->
+        <div id="watch-exploded-wrap" class="absolute inset-0 flex items-center justify-center opacity-0 scale-95 will-change-transform z-20 pointer-events-none">
+          <img 
+            id="watch-exploded-img" 
+            src="watch_exploded.png" 
+            alt="Rolex Oyster Perpetual Katmanlarına Ayrılmış Görünüm"
+            class="max-h-[78vh] max-w-[90vw] object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
+          />
+        </div>
+
+        <!-- İnteraktif Parça Etiketleri -->
+        <div id="labels-container" class="absolute inset-0 pointer-events-none z-40 opacity-0 transition-opacity duration-300">
+          <div class="layer-tag absolute top-[14%] left-[4%] sm:left-[8%] glass-card px-3 py-1.5 rounded-lg border-l-2 border-cyan-400 shadow-xl">
+            <span class="text-[11px] font-bold tracking-wide text-cyan-300 block">Safir Cam</span>
+            <span class="text-[9px] text-white/60">Yansıma önleyici safir kristal</span>
+          </div>
+
+          <div class="layer-tag absolute top-[28%] left-[4%] sm:left-[8%] glass-card px-3 py-1.5 rounded-lg border-l-2 border-amber-400 shadow-xl">
+            <span class="text-[11px] font-bold tracking-wide text-amber-300 block">Kadran & Kollar</span>
+            <span class="text-[9px] text-white/60">Kutlama motifi & Chromalight ibreler</span>
+          </div>
+
+          <div class="layer-tag absolute top-[52%] left-[4%] sm:left-[8%] glass-card px-3 py-1.5 rounded-lg border-l-2 border-emerald-400 shadow-xl">
+            <span class="text-[11px] font-bold tracking-wide text-emerald-300 block">Mekanizma</span>
+            <span class="text-[9px] text-white/60">Kalibre 3230, 70 saat güç rezervi</span>
+          </div>
+
+          <div class="layer-tag absolute top-[66%] left-[4%] sm:left-[8%] glass-card px-3 py-1.5 rounded-lg border-l-2 border-blue-400 shadow-xl">
+            <span class="text-[11px] font-bold tracking-wide text-blue-300 block">Kasa & Conta</span>
+            <span class="text-[9px] text-white/60">Oystersteel çelik, 100 metre su geçirmezlik</span>
+          </div>
+
+          <div class="layer-tag absolute top-[84%] left-[4%] sm:left-[8%] glass-card px-3 py-1.5 rounded-lg border-l-2 border-indigo-400 shadow-xl">
+            <span class="text-[11px] font-bold tracking-wide text-indigo-300 block">Paslanmaz Çelik Kordon</span>
+            <span class="text-[9px] text-white/60">Oysterclasp güvenli katlanır toka</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Aşağı Kaydırma Rehberi -->
+      <div id="scroll-guide" class="absolute bottom-24 left-1/2 -translate-x-1/2 flex flex-col items-center pointer-events-none z-30 transition-opacity duration-300">
+        <span class="text-[10px] uppercase tracking-[0.25em] text-white/70 mb-1.5 font-medium">
+          Aşağı Kaydırın
+        </span>
+        <div class="w-5 h-8 rounded-full border-2 border-white/40 flex justify-center p-1">
+          <div class="w-1 h-2 bg-white rounded-full animate-bounce"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Mobil & Masaüstü Dokunmatik Kontrol Çubuğu (Floating Bar) -->
+  <div class="fixed bottom-4 left-4 right-4 sm:left-1/2 sm:-translate-x-1/2 sm:w-96 z-50 glass-card rounded-2xl p-3.5 flex flex-col space-y-2">
+    <div class="flex items-center justify-between text-[11px] text-white/70">
+      <span class="flex items-center gap-1.5">
+        <i data-lucide="layers" class="w-3.5 h-3.5 text-cyan-400"></i>
+        <span id="status-text" class="text-emerald-400 font-medium">Birleşik Saat</span>
+      </span>
+      <span id="slider-percentage" class="font-mono text-cyan-400 font-semibold">0%</span>
+    </div>
+
+    <!-- Parmağınızla Sürükleyebileceğiniz Slider -->
+    <input 
+      type="range" 
+      id="manual-slider" 
+      min="0" 
+      max="100" 
+      value="0" 
+      class="w-full h-2 bg-white/20 rounded-lg appearance-none cursor-pointer accent-cyan-400"
+    />
+
+    <div class="flex justify-between text-[9px] text-white/40 font-mono tracking-wider">
+      <span>BİRLEŞİK</span>
+      <span>KATMANLARA AYRILDI</span>
+    </div>
+  </div>
+
+  <script>
+    lucide.createIcons();
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    const assembledWrap = document.getElementById('watch-assembled-wrap');
+    const explodedWrap = document.getElementById('watch-exploded-wrap');
+    const labelsContainer = document.getElementById('labels-container');
+    const scrollGuide = document.getElementById('scroll-guide');
+    const statusText = document.getElementById('status-text');
+    const slider = document.getElementById('manual-slider');
+    const sliderPercentage = document.getElementById('slider-percentage');
+    const autoBtn = document.getElementById('auto-btn');
+    const autoBtnText = document.getElementById('auto-btn-text');
+
+    let isAutoPlaying = false;
+    let autoTween = null;
+
+    // Ana GSAP Çizelgesi: 0 = Birleşik, 1 = Katmanlarına Ayrılmış
+    const tl = gsap.timeline({
+      paused: true,
+      onUpdate: () => updateProgressUI(tl.progress())
+    });
+
+    // 1. Aşama: Montajlı saat yumuşakça küçülür ve solar
+    tl.to(assembledWrap, {
+      opacity: 0,
+      scale: 0.92,
+      y: -25,
+      ease: 'power2.inOut',
+      duration: 0.4
+    }, 0);
+
+    // 2. Aşama: Katmanlı saat merkezden dikey genişleyerek belirir
+    tl.fromTo(explodedWrap, {
+      opacity: 0,
+      scale: 0.88,
+      y: 35
+    }, {
+      opacity: 1,
+      scale: 1,
+      y: 0,
+      pointerEvents: 'auto',
+      ease: 'power2.out',
+      duration: 0.6
+    }, 0.2);
+
+    // 3. Aşama: Etiketler sırayla görünür
+    tl.to(labelsContainer, {
+      opacity: 1,
+      ease: 'power1.out',
+      duration: 0.4
+    }, 0.5);
+
+    gsap.utils.toArray('.layer-tag').forEach((tag, i) => {
+      tl.fromTo(tag, {
+        opacity: 0,
+        x: -25
+      }, {
+        opacity: 1,
+        x: 0,
+        duration: 0.2,
+        ease: 'back.out(1.2)'
+      }, 0.5 + (i * 0.08));
+    });
+
+    // Kaydırma (Scroll / Touch) ile GSAP Bağlantısı (Scrubbing)
+    ScrollTrigger.create({
+      trigger: '#scroll-track',
+      start: 'top top',
+      end: 'bottom bottom',
+      scrub: 0.7, // Akıcı yaylanma hissi
+      animation: tl,
+      onUpdate: (self) => {
+        if (!isAutoPlaying) {
+          slider.value = Math.round(self.progress * 100);
+          updateProgressUI(self.progress);
+        }
+      }
+    });
+
+    function updateProgressUI(progress) {
+      const pct = Math.round(progress * 100);
+      sliderPercentage.textContent = pct + '%';
+
+      if (progress > 0.05) {
+        scrollGuide.style.opacity = '0';
+      } else {
+        scrollGuide.style.opacity = '1';
+      }
+
+      if (progress < 0.2) {
+        statusText.textContent = 'Birleşik Saat (' + pct + '%)';
+        statusText.className = 'text-xs font-medium text-emerald-400';
+      } else if (progress > 0.8) {
+        statusText.textContent = 'Katmanlar Açık (' + pct + '%)';
+        statusText.className = 'text-xs font-medium text-cyan-400';
+      } else {
+        statusText.textContent = 'Ayrışıyor (' + pct + '%)';
+        statusText.className = 'text-xs font-medium text-amber-400';
+      }
+    }
+
+    // Parmağınızla alttaki çubuğu sürükleyerek anında kontrol etme
+    slider.addEventListener('input', (e) => {
+      const val = parseFloat(e.target.value) / 100;
+      const scrollDist = document.getElementById('scroll-track').offsetHeight - window.innerHeight;
+      window.scrollTo({
+        top: val * scrollDist,
+        behavior: 'instant'
+      });
+      tl.progress(val);
+      updateProgressUI(val);
+    });
+
+    // Otomatik Oynat / Birleştir Butonu
+    autoBtn.addEventListener('click', () => {
+      if (isAutoPlaying) {
+        if (autoTween) autoTween.kill();
+        isAutoPlaying = false;
+        autoBtnText.textContent = 'Otomatik Oynat';
+        autoBtn.querySelector('i').setAttribute('data-lucide', 'play');
+        lucide.createIcons();
+      } else {
+        isAutoPlaying = true;
+        autoBtnText.textContent = 'Durdur';
+        autoBtn.querySelector('i').setAttribute('data-lucide', 'pause');
+        lucide.createIcons();
+
+        const scrollDist = document.getElementById('scroll-track').offsetHeight - window.innerHeight;
+        const targetProgress = tl.progress() > 0.5 ? 0 : 1;
+        
+        autoTween = gsap.to(window, {
+          scrollTo: targetProgress * scrollDist,
+          duration: 2.8,
+          ease: 'power2.inOut',
+          onUpdate: () => {
+            const p = window.scrollY / scrollDist;
+            tl.progress(p);
+            slider.value = Math.round(p * 100);
+            updateProgressUI(p);
+          },
+          onComplete: () => {
+            isAutoPlaying = false;
+            autoBtnText.textContent = 'Otomatik Oynat';
+            autoBtn.querySelector('i').setAttribute('data-lucide', 'play');
+            lucide.createIcons();
+          }
+        });
+      }
+    });
+
+    // Tarayıcıdan doğrudan resim seçebilme desteği
+    document.getElementById('image-uploader').addEventListener('change', function(e) {
+      const files = Array.from(e.target.files);
+      files.forEach(file => {
+        const reader = new FileReader();
+        reader.onload = function(evt) {
+          if (file.name.includes('exploded') || file.name.includes('png') || files.indexOf(file) === 1) {
+            document.getElementById('watch-exploded-img').src = evt.target.result;
+          } else {
+            document.getElementById('watch-assembled-img').src = evt.target.result;
+          }
+        };
+        reader.readAsDataURL(file);
+      });
+    });
+  </script>
+</body>
+</html>

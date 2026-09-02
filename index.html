@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Da Mario | Geleneksel Taş Fırın Pizzacısı</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary: #c0392b;
+      --primary-dark: #962d22;
+      --secondary: #27ae60;
+      --dark: #1e1e1e;
+      --light: #faf7f2;
+      --cream: #f4ede2;
+      --gray: #666;
+      --border: #e0d7cb;
+      --font-title: 'Cinzel', serif;
+      --font-body: 'Plus Jakarta Sans', sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--light);
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    /* Header & Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(250, 247, 242, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.1rem 1.5rem;
+    }
+
+    .logo {
+      font-family: var(--font-title);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      letter-spacing: 1px;
+    }
+
+    .logo span {
+      color: var(--secondary);
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.8rem;
+      align-items: center;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      font-size: 0.95rem;
+      transition: color 0.2s ease;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-block;
+      background: var(--primary);
+      color: #fff;
+      padding: 0.65rem 1.3rem;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: 600;
+      transition: background-color 0.2s ease;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background: var(--primary-dark);
+      color: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
+      min-height: 75vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background: linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.65)),
+                  url('https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=1600&q=80') center/cover no-repeat;
+      color: #fff;
+      padding: 3rem 1.5rem;
+    }
+
+    .hero-content {
+      max-width: 750px;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-title);
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: #f1c40f;
+      margin-bottom: 0.8rem;
+    }
+
+    .hero h1 {
+      font-family: var(--font-title);
+      font-size: 3.2rem;
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero p {
+      font-size: 1.15rem;
+      margin-bottom: 2rem;
+      color: #e0e0e0;
+    }
+
+    /* Section Styles */
+    section {
+      padding: 5rem 1.5rem;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3.5rem;
+    }
+
+    .section-tag {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      color: var(--secondary);
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-family: var(--font-title);
+      font-size: 2.3rem;
+      color: var(--dark);
+    }
+
+    /* About Section */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    .about-img {
+      width: 100%;
+      height: 420px;
+      object-fit: cover;
+      border-radius: 12px;
+      box-shadow: 0 12px 28px rgba(0, 0, 0, 0.08);
+    }
+
+    .about-text h3 {
+      font-family: var(--font-title);
+      font-size: 1.7rem;
+      margin-bottom: 1rem;
+      color: var(--primary-dark);
+    }
+
+    .about-text p {
+      color: var(--gray);
+      margin-bottom: 1.2rem;
+    }
+
+    .features-list {
+      list-style: none;
+      margin-top: 1.5rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .features-list li {
+      font-weight: 600;
+      font-size: 0.95rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--dark);
+    }
+
+    .features-list li::before {
+      content: "✔";
+      color: var(--secondary);
+    }
+
+    /* Menu Section */
+    .menu-section {
+      background: var(--cream);
+      max-width: 100%;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .menu-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .menu-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+
+    .menu-card {
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .menu-card img {
+      width: 100%;
+      height: 190px;
+      object-fit: cover;
+    }
+
+    .menu-card-body {
+      padding: 1.3rem;
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+    }
+
+    .menu-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 0.6rem;
+    }
+
+    .menu-card-title {
+      font-family: var(--font-title);
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--dark);
+    }
+
+    .menu-card-price {
+      font-weight: 700;
+      color: var(--primary);
+      font-size: 1.1rem;
+    }
+
+    .menu-card-desc {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-bottom: 1.2rem;
+      flex-grow: 1;
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      padding: 0.2rem 0.5rem;
+      border-radius: 4px;
+      background: var(--light);
+      color: var(--secondary);
+      border: 1px solid #d4ebd9;
+      width: fit-content;
+    }
+
+    /* Location & Contact Section */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .contact-info {
+      background: #fff;
+      padding: 2rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    .info-item {
+      margin-bottom: 1.6rem;
+    }
+
+    .info-item:last-child {
+      margin-bottom: 0;
+    }
+
+    .info-item h4 {
+      font-family: var(--font-title);
+      font-size: 1.05rem;
+      color: var(--primary-dark);
+      margin-bottom: 0.3rem;
+    }
+
+    .info-item p {
+      color: var(--gray);
+      font-size: 0.95rem;
+    }
+
+    .map-container {
+      width: 100%;
+      height: 380px;
+      border-radius: 10px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+    }
+
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--dark);
+      color: #fff;
+      text-align: center;
+      padding: 2.5rem 1.5rem;
+      font-size: 0.9rem;
+      border-top: 4px solid var(--primary);
+    }
+
+    footer p {
+      color: #aaa;
+    }
+
+    /* Responsive */
+    @media (max-width: 860px) {
+      .hero h1 { font-size: 2.3rem; }
+      .about-grid, .contact-grid { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+      .nav-container { justify-content: space-between; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Navigation -->
+  <header>
+    <div class="nav-container">
+      <a href="#" class="logo">DA MARIO <span>PIZZA</span></a>
+      <nav>
+        <ul>
+          <li><a href="#hakkimizda">Hakkımızda</a></li>
+          <li><a href="#menu">Menü</a></li>
+          <li><a href="#konum">Konum & Saatler</a></li>
+          <li><a href="tel:+902125550123" class="btn">Masayı Ayırt</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Banner -->
+  <div class="hero">
+    <div class="hero-content">
+      <span class="hero-subtitle">Dal 1984 • Napoli Geleneği</span>
+      <h1>Odun Ateşinde Gerçek İtalyan Pizzası</h1>
+      <p>48 saat mayalanmış ekşi maya hamur, San Marzano domatesleri ve manda mozzarellası ile hazırlanan klasik lezzetler.</p>
+      <a href="#menu" class="btn" style="padding: 0.85rem 1.8rem; font-size: 1rem;">Menüyü İnceleyin</a>
+    </div>
+  </div>
+
+  <!-- About Section -->
+  <section id="hakkimizda">
+    <div class="section-header">
+      <span class="section-tag">Hikayemiz</span>
+      <h2 class="section-title">Geleneksel Taş Fırın Tutkusu</h2>
+    </div>
+    <div class="about-grid">
+      <img class="about-img" src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=80" alt="Pizza Hazırlanışı" />
+      <div class="about-text">
+        <h3>Her Dilimde Otantik Bir Deneyim</h3>
+        <p>Da Mario, geleneksel Napoli pizza kültürünü en saf haliyle sunmak amacıyla kuruldu. Hamurumuzu yalnızca un, su, tuz ve doğal maya ile hazırlıyor; en az 48 saat soğuk fermantasyona bırakıyoruz.</p>
+        <p>450 derecelik meşe odunlu taş fırınımızda 90 saniyede pişen pizzalarımız; hafif çıtır kenarları ve dumanı üstünde taze dokusuyla sofranıza gelir.</p>
+        <ul class="features-list">
+          <li>Taş Fırında Pişirme</li>
+          <li>Doğal Ekşi Maya</li>
+          <li>İtalya'dan Sertifikalı Un</li>
+          <li>Günlük Taze Mozzarella</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Menu Section -->
+  <div class="menu-section" id="menu">
+    <section class="menu-container">
+      <div class="section-header">
+        <span class="section-tag">Lezzetler</span>
+        <h2 class="section-title">Öne Çıkan Menümüz</h2>
+      </div>
+      <div class="menu-grid">
+        <!-- Item 1 -->
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=600&q=80" alt="Margherita" />
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">Margherita Classica</h3>
+              <span class="menu-card-price">₺280</span>
+            </div>
+            <p class="menu-card-desc">San Marzano domates sosu, taze Fior di Latte mozzarella, taze fesleğen ve sızma zeytinyağı.</p>
+            <span class="badge">Vejetaryen</span>
+          </div>
+        </div>
+        <!-- Item 2 -->
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1628840042765-356cda07504e?auto=format&fit=crop&w=600&q=80" alt="Diavola" />
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">Diavola Piccante</h3>
+              <span class="menu-card-price">₺340</span>
+            </div>
+            <p class="menu-card-desc">Domates sosu, mozzarella, baharatlı İtalyan sucuğu (Spianata Calabrese), acı biber yağı.</p>
+            <span class="badge">Hafif Acı</span>
+          </div>
+        </div>
+        <!-- Item 3 -->
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=600&q=80" alt="Quattro Formaggi" />
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">Quattro Formaggi</h3>
+              <span class="menu-card-price">₺360</span>
+            </div>
+            <p class="menu-card-desc">Gorgonzola, parmesan, provolone ve taze mozzarella peynirlerinin dengeli harmanı.</p>
+            <span class="badge">4 Peynirli</span>
+          </div>
+        </div>
+        <!-- Item 4 -->
+        <div class="menu-card">
+          <img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=600&q=80" alt="Funghi e Tartufo" />
+          <div class="menu-card-body">
+            <div class="menu-card-header">
+              <h3 class="menu-card-title">Funghi & Tartufo</h3>
+              <span class="menu-card-price">₺375</span>
+            </div>
+            <p class="menu-card-desc">Beyaz krema sos, kestane mantarı, mozzarella, taze kekik ve trüf yağı dokunuşu.</p>
+            <span class="badge">Şefin Önerisi</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- Location & Contact -->
+  <section id="konum">
+    <div class="section-header">
+      <span class="section-tag">Ziyaret Edin</span>
+      <h2 class="section-title">Konum ve Çalışma Saatleri</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-info">
+        <div class="info-item">
+          <h4>📍 Adres</h4>
+          <p>Bağdat Caddesi No: 142/A, Kadıköy, İstanbul</p>
+        </div>
+        <div class="info-item">
+          <h4>🕒 Çalışma Saatleri</h4>
+          <p>Pazartesi - Cuma: 11:30 - 22:30</p>
+          <p>Cumartesi - Pazar: 12:00 - 23:30</p>
+        </div>
+        <div class="info-item">
+          <h4>📞 Rezervasyon & Paket Servis</h4>
+          <p>Telefon: +90 (212) 555 01 23</p>
+          <p>E-posta: info@damariopizza.com</p>
+        </div>
+        <div style="margin-top: 1.5rem;">
+          <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" class="btn">Haritada Yol Tarifi Al</a>
+        </div>
+      </div>
+      
+      <!-- Interactive Google Map Embed -->
+      <div class="map-container">
+        <iframe 
+          title="Restoran Konumu"
+          src="https://maps.google.com/maps?q=Kadikoy,Istanbul&t=&z=14&ie=UTF8&iwloc=&output=embed" 
+          loading="lazy">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2026 Da Mario Pizza. Tüm hakları saklıdır. Odun ateşinde geleneksel lezzet.</p>
+  </footer>
+
+</body>
+</html>

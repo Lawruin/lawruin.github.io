@@ -14,7 +14,7 @@
       --primary-dark: #c0392b;
       --secondary: #27ae60;
       --gold: #f1c40f;
-      --dark-bg: #0b0a0e;
+      --dark-bg: #09080c;
       --dark-surface: #14131a;
       --border: rgba(255, 255, 255, 0.08);
       --font-title: 'Cinzel', serif;
@@ -36,7 +36,7 @@
       top: 0;
       width: 100%;
       z-index: 1000;
-      background: rgba(11, 10, 14, 0.94);
+      background: rgba(9, 8, 12, 0.92);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--border);
     }
@@ -89,39 +89,32 @@
       transform: translateY(-2px);
       box-shadow: 0 8px 20px rgba(231, 76, 60, 0.35);
     }
-    .btn-outline {
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.25);
-      color: #fff;
-    }
-    .btn-outline:hover {
-      background: rgba(255,255,255,0.1);
-      border-color: #fff;
-    }
 
     /* -------------------------------------------------------------
-       1. EN BAŞTAKİ 3D PİZZA VİTRİNİ
+       1. 3D VİTRİN VE SİNEMATİK SAHNE (REFERANS TASARIM)
     -------------------------------------------------------------- */
     .showcase-section {
       position: relative;
-      min-height: 85vh;
+      min-height: 90vh;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      background: radial-gradient(circle at 50% 30%, #22110e 0%, #0b0a0e 70%, #040305 100%);
-      padding: 4rem 1.5rem 2.5rem;
+      background: radial-gradient(circle at 50% 30%, #24110e 0%, #09080c 70%, #030304 100%);
+      padding: 3.5rem 1.5rem 2rem;
       perspective: 1200px;
       overflow: hidden;
+      transition: background 0.8s ease;
     }
 
+    /* Üstten vuran spot ve alt halka */
     .ufo-spotlight {
       position: absolute;
       top: 0; left: 50%;
       transform: translateX(-50%);
-      width: 550px; height: 320px;
+      width: 600px; height: 350px;
       background: radial-gradient(ellipse at top, rgba(231, 76, 60, 0.45) 0%, rgba(241, 196, 15, 0.15) 45%, transparent 70%);
-      filter: blur(35px);
+      filter: blur(40px);
       pointer-events: none;
       z-index: 1;
       transition: background 0.6s ease;
@@ -136,28 +129,30 @@
       box-shadow: 0 0 35px 10px rgba(241, 196, 15, 0.8), 0 0 80px 25px rgba(231, 76, 60, 0.6);
       z-index: 2;
     }
-
     .podium-ring {
       position: absolute;
-      bottom: 70px; left: 50%;
+      bottom: 80px; left: 50%;
       transform: translateX(-50%) rotateX(75deg);
-      width: 440px; height: 440px;
+      width: 460px; height: 460px;
       border-radius: 50%;
       border: 3px solid rgba(255, 255, 255, 0.15);
       box-shadow: 0 0 50px rgba(231, 76, 60, 0.35), inset 0 0 40px rgba(231, 76, 60, 0.2);
       pointer-events: none;
       z-index: 1;
+      transition: all 0.6s ease;
     }
 
+    /* Başlık */
     .showcase-header {
       text-align: center;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       z-index: 5;
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
     .showcase-tag {
       font-size: 0.85rem; letter-spacing: 4px;
       color: var(--gold); text-transform: uppercase;
-      font-weight: 700; display: block; margin-bottom: 0.4rem;
+      font-weight: 700; display: block; margin-bottom: 0.3rem;
     }
     .showcase-title {
       font-family: var(--font-title);
@@ -165,64 +160,140 @@
       font-weight: 700;
       letter-spacing: 1px;
     }
-    .showcase-hint {
-      font-size: 0.9rem;
-      color: #aaa;
-      margin-top: 0.3rem;
-    }
 
-    /* 3D Karusel Sahnesi */
-    .carousel-wrapper {
-      position: relative;
+    /* Ana Sahne Izgarası (Detay Modunda 2 Kolona Dönüşür) */
+    .showcase-stage-grid {
+      display: grid;
+      grid-template-columns: 0px 1fr;
       width: 100%;
       max-width: 1200px;
-      height: 380px;
+      align-items: center;
+      z-index: 10;
+      transition: grid-template-columns 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .showcase-stage-grid.detail-active {
+      grid-template-columns: 420px 1fr;
+    }
+
+    /* Sol Bilgi Paneli (Başlangıçta Gizli, Seçilince Kayarak Gelir) */
+    .detail-panel {
+      overflow: hidden;
+      opacity: 0;
+      transform: translateX(-40px);
+      pointer-events: none;
+      transition: opacity 0.5s ease 0.15s, transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.15s;
+      padding-right: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .showcase-stage-grid.detail-active .detail-panel {
+      opacity: 1;
+      transform: translateX(0);
+      pointer-events: auto;
+    }
+
+    .btn-back-catalog {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      color: #eee;
+      padding: 0.45rem 1rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      width: fit-content;
+      transition: all 0.2s;
       display: flex;
       align-items: center;
-      justify-content: center;
-      transform-style: preserve-3d;
-      z-index: 10;
-      user-select: none;
-      cursor: grab;
-      touch-action: pan-y;
+      gap: 0.4rem;
     }
-    .carousel-wrapper:active { cursor: grabbing; }
+    .btn-back-catalog:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+    }
 
+    .detail-tag {
+      font-size: 0.8rem; letter-spacing: 3px;
+      color: var(--gold); text-transform: uppercase; font-weight: 700;
+    }
+    .detail-title {
+      font-family: var(--font-title);
+      font-size: 2.5rem;
+      line-height: 1.1;
+    }
+    .detail-price {
+      font-size: 1.8rem; font-weight: 700; color: var(--primary);
+    }
+    .detail-desc {
+      color: #aaa; font-size: 0.95rem; line-height: 1.6;
+    }
+    .ingredients-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 12px;
+      padding: 1rem;
+    }
+    .ingredients-box h4 { font-size: 0.9rem; color: #ddd; margin-bottom: 0.6rem; }
+    .chips-wrapper { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .chip {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.3rem 0.7rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      color: #eee;
+    }
+
+    /* Sağ Taraf: 3D Sahne ve Pizza Parçaları */
+    .stage-canvas-area {
+      position: relative;
+      width: 100%;
+      height: 440px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      perspective: 1200px;
+      transform-style: preserve-3d;
+    }
+
+    /* Karusel Pizzaları */
     .carousel-item {
       position: absolute;
-      width: 270px; height: 320px;
+      width: 280px; height: 320px;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       cursor: pointer;
       transform-style: preserve-3d;
-      transition: opacity 0.25s ease, filter 0.25s ease;
-      touch-action: pan-y;
+      will-change: transform, opacity;
+      transition: opacity 0.5s ease;
     }
 
     .pizza-disc-wrap {
       width: 250px; height: 250px;
       border-radius: 50%;
       position: relative;
+      transform-style: preserve-3d;
       pointer-events: auto;
     }
 
     .pizza-disc {
-      width: 100%;
-      height: 100%;
+      width: 100%; height: 100%;
       border-radius: 50%;
       object-fit: cover;
-      box-shadow: 0 25px 45px rgba(0, 0, 0, 0.85), 0 0 25px rgba(231, 76, 60, 0.25);
+      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(231, 76, 60, 0.3);
       border: 3px solid rgba(255, 255, 255, 0.15);
       pointer-events: none;
     }
 
-    .item-badge {
-      margin-top: 0.8rem;
+    .item-badge-pill {
+      margin-top: 1rem;
       background: rgba(18, 17, 23, 0.95);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      padding: 0.4rem 1.1rem;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 0.45rem 1.2rem;
       border-radius: 20px;
       font-size: 0.85rem;
       font-weight: 600;
@@ -230,17 +301,60 @@
       box-shadow: 0 8px 24px rgba(0,0,0,0.6);
       display: flex;
       align-items: center;
-      gap: 0.4rem;
-      pointer-events: none;
+      gap: 0.5rem;
+      transition: all 0.2s;
+    }
+    .item-badge-pill:hover {
+      background: var(--primary);
+      border-color: var(--primary);
+      transform: scale(1.05);
     }
 
-    /* Karusel Alt Kontrolleri */
+    /* Detay Modundaki Açı Kontrol Çubuğu */
+    .angle-bar {
+      position: absolute;
+      bottom: 0px;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: rgba(18, 17, 23, 0.85);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,0.12);
+      padding: 0.4rem 0.8rem;
+      border-radius: 30px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.4s ease 0.2s;
+      z-index: 20;
+    }
+    .showcase-stage-grid.detail-active .angle-bar {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .angle-btn {
+      background: transparent;
+      border: none;
+      color: #bbb;
+      padding: 0.35rem 0.85rem;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+    .angle-btn.active, .angle-btn:hover {
+      background: rgba(255,255,255,0.15);
+      color: #fff;
+    }
+
+    /* Karusel Navigasyon Butonları & Çubuk */
     .carousel-controls {
       display: flex;
       align-items: center;
       gap: 1.5rem;
       margin-top: 1.2rem;
       z-index: 10;
+      transition: opacity 0.3s ease;
     }
     .arrow-btn {
       width: 44px; height: 44px;
@@ -273,7 +387,7 @@
     }
 
     .scroll-down-hint {
-      margin-top: 1.8rem;
+      margin-top: 1.5rem;
       z-index: 10;
       display: flex;
       align-items: center;
@@ -289,131 +403,6 @@
     }
     .scroll-down-hint:hover {
       background: rgba(255,255,255,0.12);
-      color: #fff;
-    }
-
-    /* -------------------------------------------------------------
-       SİNEMATİK İNCELEME MODALI (PİZZAYA TIKLANDIĞINDA)
-    -------------------------------------------------------------- */
-    .inspection-modal {
-      position: fixed;
-      inset: 0;
-      z-index: 2000;
-      background: rgba(8, 7, 10, 0.95);
-      backdrop-filter: blur(18px);
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 2rem;
-    }
-    .inspection-modal.active { display: flex; }
-
-    .inspection-container {
-      max-width: 1150px;
-      width: 100%;
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 3.5rem;
-      align-items: center;
-      position: relative;
-    }
-    .btn-close-inspect {
-      position: absolute;
-      top: -40px; right: 0;
-      width: 42px; height: 42px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.1);
-      border: 1px solid rgba(255,255,255,0.2);
-      color: #fff;
-      font-size: 1.3rem;
-      display: flex; align-items: center; justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .btn-close-inspect:hover {
-      background: var(--primary);
-      border-color: var(--primary);
-    }
-
-    .inspection-details { display: flex; flex-direction: column; gap: 1.1rem; }
-    .details-tag {
-      font-size: 0.85rem; letter-spacing: 3px;
-      color: var(--gold); text-transform: uppercase; font-weight: 700;
-    }
-    .details-title { font-family: var(--font-title); font-size: 2.8rem; line-height: 1.1; }
-    .details-price { font-size: 1.9rem; font-weight: 700; color: var(--primary); }
-    .details-desc { color: #aaa; font-size: 1rem; line-height: 1.6; }
-    
-    .ingredients-box {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.09);
-      border-radius: 12px;
-      padding: 1.2rem;
-    }
-    .ingredients-box h4 { font-size: 0.95rem; color: #ddd; margin-bottom: 0.7rem; }
-    .chips-wrapper { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-    .chip {
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 0.35rem 0.75rem;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      color: #eee;
-    }
-
-    /* 3D Döndürülebilir Pizza Alanı */
-    .interactive-3d-stage {
-      position: relative;
-      width: 100%;
-      height: 460px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      perspective: 1000px;
-    }
-    .interactive-pizza-wrapper {
-      width: 380px; height: 380px;
-      position: relative;
-      transform-style: preserve-3d;
-      cursor: grab;
-      will-change: transform;
-      touch-action: none;
-    }
-    .interactive-pizza-wrapper:active { cursor: grabbing; }
-
-    .interactive-pizza-wrapper img {
-      width: 100%; height: 100%;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 35px 70px rgba(0, 0, 0, 0.95), 0 0 50px rgba(231, 76, 60, 0.4);
-      border: 4px solid rgba(255,255,255,0.15);
-      pointer-events: none;
-    }
-
-    .angle-controls {
-      display: flex;
-      gap: 0.5rem;
-      background: rgba(18, 17, 23, 0.85);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,0.12);
-      padding: 0.4rem;
-      border-radius: 30px;
-      margin-top: 1.5rem;
-    }
-    .angle-btn {
-      background: transparent;
-      border: none;
-      color: #bbb;
-      padding: 0.4rem 0.9rem;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .angle-btn.active, .angle-btn:hover {
-      background: rgba(255,255,255,0.15);
       color: #fff;
     }
 
@@ -517,10 +506,9 @@
 
     @media (max-width: 900px) {
       .showcase-title { font-size: 2.1rem; }
-      .inspection-container { grid-template-columns: 1fr; text-align: center; gap: 2rem; }
-      .interactive-3d-stage { height: 350px; }
-      .interactive-pizza-wrapper { width: 280px; height: 280px; }
-      .chips-wrapper, .angle-controls { justify-content: center; }
+      .showcase-stage-grid.detail-active { grid-template-columns: 1fr; }
+      .detail-panel { padding-right: 0; text-align: center; margin-bottom: 1.5rem; }
+      .chips-wrapper { justify-content: center; }
       .builder-layout, .about-grid, .contact-grid { grid-template-columns: 1fr; }
       nav ul { display: none; }
       .board-container { width: 340px; height: 340px; }
@@ -547,24 +535,57 @@
   </header>
 
   <!-- =======================================================
-       1. EN BAŞTAKİ 3D PİZZA VİTRİNİ
+       1. 3D PİZZA VİTRİNİ & SİNEMATİK SAHNE
   ======================================================== -->
   <section class="showcase-section" id="vitrin">
     <div class="ufo-spotlight" id="ufoLight"></div>
     <div class="spot-emitter"></div>
     <div class="podium-ring" id="podiumRing"></div>
 
-    <div class="showcase-header">
-      <span class="showcase-tag">2026 Koleksiyonu</span>
+    <div class="showcase-header" id="showcaseHeader">
+      <span class="showcase-tag">2026 Özel Koleksiyonu</span>
       <h1 class="showcase-title">İtalyan Taş Fırın Seçkisi</h1>
-      <p class="showcase-hint">👉 Sağa sola kaydırın, 3D incelemek için pizzaya dokunun</p>
+      <p style="font-size:0.9rem; color:#aaa; margin-top:0.3rem;">👉 Sağa sola kaydırın, 3D incelemek için pizzaya veya 'İncele' butonuna dokunun</p>
     </div>
 
-    <!-- 3D Dönen Karusel -->
-    <div class="carousel-wrapper" id="carouselWrapper"></div>
+    <!-- Ana Sahne Izgarası -->
+    <div class="showcase-stage-grid" id="stageGrid">
+      
+      <!-- SOL PANEL: Seçilen Pizzanın Detayları (Geçişte kayarak gelir) -->
+      <div class="detail-panel" id="detailPanel">
+        <button class="btn-back-catalog" id="btnBack">❮ Koleksiyona Dön</button>
+        <span class="detail-tag" id="detailTag">Napoli Geleneksel</span>
+        <h2 class="detail-title" id="detailTitle">Margherita Classica</h2>
+        <div class="detail-price" id="detailPrice">₺280</div>
+        <p class="detail-desc" id="detailDesc">
+          San Marzano domates sosu, Fior di Latte taze mozzarella, taze fesleğen ve sızma zeytinyağı.
+        </p>
+        <div class="ingredients-box">
+          <h4>🌱 İçindekiler & Reçete</h4>
+          <div class="chips-wrapper" id="detailChips"></div>
+        </div>
+        <div style="margin-top: 0.5rem;">
+          <a href="tel:+902125550123" class="btn" style="padding: 0.85rem 1.8rem;">Hemen Sipariş Ver</a>
+        </div>
+      </div>
 
-    <!-- Navigasyon Butonları & Çubuk -->
-    <div class="carousel-controls">
+      <!-- SAĞ / MERKEZ PANEL: 3D Karusel ve Animasyon Alanı -->
+      <div class="stage-canvas-area" id="stageArea">
+        <!-- Pizzalar JavaScript ile buraya eklenir -->
+
+        <!-- 3D Açı Kontrolleri -->
+        <div class="angle-bar" id="angleBar">
+          <span style="font-size:0.8rem; color:#aaa; margin-right:0.3rem;">3D Açı:</span>
+          <button class="angle-btn active" data-pitch="32" data-roll="-18">Açılı 35°</button>
+          <button class="angle-btn" data-pitch="82" data-roll="0">Üstten 90°</button>
+          <button class="angle-btn" data-pitch="15" data-roll="-28">Kenar 15°</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Karusel Navigasyonu -->
+    <div class="carousel-controls" id="carouselControls">
       <button class="arrow-btn" id="prevBtn" title="Önceki">❮</button>
       <div class="progress-bar-track">
         <div class="progress-bar-fill" id="progressFill"></div>
@@ -572,54 +593,11 @@
       <button class="arrow-btn" id="nextBtn" title="Sonraki">❯</button>
     </div>
 
-    <!-- Doğrudan Atölyeye İnme Butonu -->
-    <a href="#kendin-yap" class="scroll-down-hint">
+    <a href="#kendin-yap" class="scroll-down-hint" id="scrollHint">
       <span>👨‍🍳 Kendi Pizzanı Yap Atölyesine Geç</span>
       <span>↓</span>
     </a>
   </section>
-
-  <!-- =======================================================
-       SİNEMATİK 3D İNCELEME PENCERESİ (MODAL)
-  ======================================================== -->
-  <div class="inspection-modal" id="inspectionModal">
-    <div class="inspection-container">
-      <button class="btn-close-inspect" id="closeInspectBtn" title="Koleksiyona Dön">✕</button>
-
-      <!-- Sol Bilgi & Detaylar -->
-      <div class="inspection-details">
-        <span class="details-tag" id="inspectTag">Napoli Geleneksel</span>
-        <h2 class="details-title" id="inspectTitle">Margherita Classica</h2>
-        <div class="details-price" id="inspectPrice">₺280</div>
-        <p class="details-desc" id="inspectDesc">
-          San Marzano domates sosu, Fior di Latte taze manda mozzarellası, elle koparılmış taze fesleğen ve sızma zeytinyağı.
-        </p>
-        <div class="ingredients-box">
-          <h4>🌱 İçindekiler & Reçete</h4>
-          <div class="chips-wrapper" id="inspectIngredients"></div>
-        </div>
-        <div style="display: flex; gap: 1rem; margin-top: 0.5rem;">
-          <a href="tel:+902125550123" class="btn" style="padding: 0.85rem 1.8rem;">Sipariş Ver</a>
-          <button class="btn btn-outline" id="backBtn">Koleksiyona Dön</button>
-        </div>
-      </div>
-
-      <!-- Sağ: 3D Serbestçe Döndürülebilen Pizza -->
-      <div class="interactive-3d-stage">
-        <div class="interactive-pizza-wrapper" id="interactivePizza">
-          <img src="" alt="Pizza Detay" id="inspectImage" />
-        </div>
-
-        <!-- Hazır Açı Butonları -->
-        <div class="angle-controls">
-          <button class="angle-btn active" data-pitch="35" data-roll="-15">Açılı (35°)</button>
-          <button class="angle-btn" data-pitch="80" data-roll="0">Üstten (90°)</button>
-          <button class="angle-btn" data-pitch="15" data-roll="-25">Kenar (15°)</button>
-        </div>
-      </div>
-
-    </div>
-  </div>
 
   <!-- =======================================================
        2. KENDİ PİZZANI YAP ATÖLYESİ (CANVAS)
@@ -632,7 +610,7 @@
       </div>
 
       <div class="builder-layout">
-        <!-- Malzeme Paneli -->
+        <!-- Sol Malzeme Seçimi -->
         <div class="builder-sidebar">
           <div class="builder-group">
             <div class="builder-group-title">1. Hamur Tipi</div>
@@ -685,9 +663,7 @@
     </div>
   </div>
 
-  <!-- =======================================================
-       3. HAKKIMIZDA
-  ======================================================== -->
+  <!-- Hakkımızda -->
   <section class="about-section" id="hakkimizda">
     <div class="about-grid">
       <img class="about-img" src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=80" alt="Pizza Hazırlanışı" />
@@ -705,9 +681,7 @@
     </div>
   </section>
 
-  <!-- =======================================================
-       4. KONUM
-  ======================================================== -->
+  <!-- Konum -->
   <section class="contact-section" id="konum">
     <div class="contact-grid">
       <div class="contact-info">
@@ -736,7 +710,7 @@
   </footer>
 
   <!-- =======================================================
-       SCRIPTS: YÜKSEK HASSASİYETLİ DOKUNMA, INERTIA & ATÖLYE
+       JAVASCRIPT: SİNEMATİK SAHNE GEÇİŞİ, 3D ATALET & ATÖLYE
   ======================================================== -->
   <script>
     /* ----------------------------------------------------
@@ -750,7 +724,7 @@
         price: "₺280",
         color: "#e74c3c",
         img: "https://images.unsplash.com/photo-1604382354936-07c5d9983bd3?auto=format&fit=crop&w=800&q=80",
-        desc: "San Marzano domates sosu, Fior di Latte taze mozzarella, taze fesleğen ve sızma zeytinyağı.",
+        desc: "San Marzano domates sosu, Fior di Latte taze mozzarella, elle koparılmış taze fesleğen ve sızma zeytinyağı.",
         ingredients: ["San Marzano Domates", "Fior di Latte Mozzarella", "Taze Fesleğen", "Sızma Zeytinyağı", "Deniz Tuzu"]
       },
       {
@@ -796,63 +770,70 @@
     ];
 
     /* ----------------------------------------------------
-       2. 3D KARUSEL VE AKILLI DOKUNMA YÖNETİMİ
+       2. 3D KARUSEL VE SİNEMATİK MERKEZ GEÇİŞİ
     ----------------------------------------------------- */
-    const carouselWrapper = document.getElementById('carouselWrapper');
+    const stageArea = document.getElementById('stageArea');
+    const stageGrid = document.getElementById('stageGrid');
+    const showcaseHeader = document.getElementById('showcaseHeader');
+    const carouselControls = document.getElementById('carouselControls');
+    const scrollHint = document.getElementById('scrollHint');
     const progressFill = document.getElementById('progressFill');
     const ufoLight = document.getElementById('ufoLight');
     const podiumRing = document.getElementById('podiumRing');
 
+    const detailTag = document.getElementById('detailTag');
+    const detailTitle = document.getElementById('detailTitle');
+    const detailPrice = document.getElementById('detailPrice');
+    const detailDesc = document.getElementById('detailDesc');
+    const detailChips = document.getElementById('detailChips');
+    const btnBack = document.getElementById('btnBack');
+
     let currentPos = 0;
     let targetPos = 0;
-    let isTouchActive = false;
-    let isMouseActive = false;
-    let touchStartX = 0;
-    let touchStartY = 0;
-    let touchStartTime = 0;
-    let dragStartPos = 0;
-    let isDirectionLocked = false;
-    let isHorizontalSwipe = false;
-    let isInspectOpen = false;
-    let items = [];
+    let isDetailActive = false;
+    let selectedIndex = 0;
+    let domItems = [];
 
-    // DOM Öğelerini Ekle
+    // İnceleme Modunda 3D Açı Değerleri
+    let orbitPitch = 32;
+    let orbitRoll = -18;
+
+    // DOM'a Karusel Pizzalarını Ekle
     pizzas.forEach((p, idx) => {
-      const el = document.createElement('div');
-      el.className = 'carousel-item';
-      el.dataset.index = idx;
-      el.innerHTML = `
+      const item = document.createElement('div');
+      item.className = 'carousel-item';
+      item.dataset.index = idx;
+      item.innerHTML = `
         <div class="pizza-disc-wrap">
           <img src="${p.img}" class="pizza-disc" alt="${p.name}" />
         </div>
-        <div class="item-badge">
+        <div class="item-badge-pill">
           <span>${p.name} • ${p.price}</span>
-          <span style="color:var(--gold); font-size:0.8rem;">🔍 İncele</span>
+          <span style="color:var(--gold);">🔍 İncele</span>
         </div>
       `;
 
-      // Masaüstü Doğrudan Tıklama
-      el.addEventListener('click', (e) => {
-        openInspection(idx);
+      // Pizzaya veya altındaki hap butona tıklandığında/dokunulduğunda
+      item.addEventListener('click', (e) => {
+        if (!isDetailActive) {
+          selectPizza(idx);
+        }
       });
 
-      carouselWrapper.appendChild(el);
-      items.push(el);
+      stageArea.appendChild(item);
+      domItems.push(item);
     });
 
-    // 60 FPS Animasyon & Pozisyonlama
-    function animateCarousel(time) {
-      if (!isInspectOpen) {
-        // Yumuşak yaylanma
-        if (!isTouchActive && !isMouseActive) {
-          currentPos += (targetPos - currentPos) * 0.12;
-        }
+    // 60 FPS Karusel & Pozisyonlama Döngüsü
+    function renderShowcase(time) {
+      if (!isDetailActive) {
+        currentPos += (targetPos - currentPos) * 0.12;
 
         const count = pizzas.length;
         const radiusX = window.innerWidth < 768 ? 160 : 300;
         const depthZ = window.innerWidth < 768 ? 140 : 250;
 
-        items.forEach((item, idx) => {
+        domItems.forEach((item, idx) => {
           let offset = idx - currentPos;
           while (offset > count / 2) offset -= count;
           while (offset < -count / 2) offset += count;
@@ -877,6 +858,10 @@
             item.style.transform = `translateX(${tx}px) translateY(${floatY}px) translateZ(${tz}px) rotateY(${ry}deg) scale(${scale})`;
             item.style.filter = absOffset < 0.4 ? 'drop-shadow(0 20px 30px rgba(0,0,0,0.85))' : 'brightness(0.55)';
           }
+
+          // Butonları tekrar görünür yap
+          const badge = item.querySelector('.item-badge-pill');
+          if (badge) badge.style.display = 'flex';
         });
 
         const activeIdx = ((Math.round(currentPos) % count) + count) % count;
@@ -886,202 +871,191 @@
         ufoLight.style.background = `radial-gradient(ellipse at top, ${activeColor}55 0%, rgba(241,196,15,0.12) 45%, transparent 70%)`;
         podiumRing.style.boxShadow = `0 0 50px ${activeColor}44, inset 0 0 35px ${activeColor}33`;
       }
-      requestAnimationFrame(animateCarousel);
+      requestAnimationFrame(renderShowcase);
     }
-    requestAnimationFrame(animateCarousel);
+    requestAnimationFrame(renderShowcase);
 
     /* ----------------------------------------------------
-       GELİŞMİŞ DOKUNMA & HASSAS KAYDIRMA (TOUCH YÖNETİMİ)
+       3. SİNEMATİK SEÇİM & MERKEZE GEÇİŞ (IN-PLACE ZOOM)
     ----------------------------------------------------- */
-    carouselWrapper.addEventListener('touchstart', (e) => {
-      isTouchActive = true;
-      isDirectionLocked = false;
-      isHorizontalSwipe = false;
-      touchStartX = e.touches[0].clientX;
-      touchStartY = e.touches[0].clientY;
-      touchStartTime = Date.now();
-      dragStartPos = currentPos;
-    }, { passive: true });
-
-    carouselWrapper.addEventListener('touchmove', (e) => {
-      if (!isTouchActive || isInspectOpen) return;
-      const dx = e.touches[0].clientX - touchStartX;
-      const dy = e.touches[0].clientY - touchStartY;
-
-      // İlk 8 pikselde hareketin yatay mı dikey mi olduğunu kilitle
-      if (!isDirectionLocked && (Math.abs(dx) > 8 || Math.abs(dy) > 8)) {
-        isDirectionLocked = true;
-        isHorizontalSwipe = Math.abs(dx) > Math.abs(dy);
-      }
-
-      if (isHorizontalSwipe) {
-        // Yatay karusel kaydırması yapılıyorsa sayfanın dikey sallanmasını engelle
-        if (e.cancelable) e.preventDefault();
-        // Birebir parmak takibi (Gecikmesiz akıcı tepki)
-        currentPos = dragStartPos - (dx / 180);
-        targetPos = currentPos;
-      }
-    }, { passive: false });
-
-    carouselWrapper.addEventListener('touchend', (e) => {
-      if (!isTouchActive) return;
-      isTouchActive = false;
-
-      const dt = Date.now() - touchStartTime;
-      const dx = e.changedTouches[0].clientX - touchStartX;
-      const dy = e.changedTouches[0].clientY - touchStartY;
-      const distance = Math.hypot(dx, dy);
-
-      // KUSURSUZ TAP / DOKUNMA TESPİTİ
-      // Eğer parmak 12 pikselden az oynadıysa ve 350ms'den kısa sürdüyse bu bir DOKUNMADIR!
-      if (distance < 12 && dt < 350) {
-        const targetEl = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY);
-        const itemEl = targetEl ? targetEl.closest('.carousel-item') : null;
-        if (itemEl && itemEl.dataset.index !== undefined) {
-          openInspection(parseInt(itemEl.dataset.index));
-          return;
-        }
-      }
-
-      // Hızlı Kaydırma (Flick) Fiziği
-      if (isHorizontalSwipe) {
-        if (dx < -35) {
-          targetPos = Math.round(currentPos + 0.35);
-        } else if (dx > 35) {
-          targetPos = Math.round(currentPos - 0.35);
-        } else {
-          targetPos = Math.round(currentPos);
-        }
-      } else {
-        targetPos = Math.round(currentPos);
-      }
-    });
-
-    // Masaüstü Fareyle Sürükleme
-    carouselWrapper.addEventListener('mousedown', (e) => {
-      isMouseActive = true;
-      touchStartX = e.clientX;
-      touchStartTime = Date.now();
-      dragStartPos = currentPos;
-    });
-    window.addEventListener('mousemove', (e) => {
-      if (!isMouseActive || isInspectOpen) return;
-      const dx = e.clientX - touchStartX;
-      currentPos = dragStartPos - (dx / 240);
-      targetPos = currentPos;
-    });
-    window.addEventListener('mouseup', (e) => {
-      if (isMouseActive) {
-        isMouseActive = false;
-        const dx = e.clientX - touchStartX;
-        if (Math.abs(dx) > 15) {
-          targetPos = dx < 0 ? Math.round(currentPos + 0.3) : Math.round(currentPos - 0.3);
-        } else {
-          targetPos = Math.round(currentPos);
-        }
-      }
-    });
-
-    document.getElementById('nextBtn').addEventListener('click', () => { targetPos = Math.round(targetPos) + 1; });
-    document.getElementById('prevBtn').addEventListener('click', () => { targetPos = Math.round(targetPos) - 1; });
-
-    /* ----------------------------------------------------
-       3. SİNEMATİK İNCELEME MODALI & 3D DÖNDÜRME
-    ----------------------------------------------------- */
-    const inspectionModal = document.getElementById('inspectionModal');
-    const inspectTag = document.getElementById('inspectTag');
-    const inspectTitle = document.getElementById('inspectTitle');
-    const inspectPrice = document.getElementById('inspectPrice');
-    const inspectDesc = document.getElementById('inspectDesc');
-    const inspectIngredients = document.getElementById('inspectIngredients');
-    const inspectImage = document.getElementById('inspectImage');
-    const interactivePizza = document.getElementById('interactivePizza');
-
-    let curPitch = 35;
-    let curRoll = -15;
-
-    function openInspection(idx) {
-      isInspectOpen = true;
+    function selectPizza(idx) {
+      isDetailActive = true;
+      selectedIndex = idx;
       const p = pizzas[idx];
 
-      inspectTag.textContent = p.tag;
-      inspectTitle.textContent = p.name;
-      inspectPrice.textContent = p.price;
-      inspectDesc.textContent = p.desc;
-      inspectImage.src = p.img;
-      inspectIngredients.innerHTML = p.ingredients.map(ing => `<span class="chip">${ing}</span>`).join('');
+      // Sol panel bilgilerini doldur
+      detailTag.textContent = p.tag;
+      detailTitle.textContent = p.name;
+      detailPrice.textContent = p.price;
+      detailDesc.textContent = p.desc;
+      detailChips.innerHTML = p.ingredients.map(ing => `<span class="chip">${ing}</span>`).join('');
 
-      inspectionModal.classList.add('active');
-      setAngle(35, -15);
+      // Başlık ve karusel oklarını gizle
+      showcaseHeader.style.opacity = '0';
+      carouselControls.style.opacity = '0';
+      carouselControls.style.pointerEvents = 'none';
+      scrollHint.style.opacity = '0';
+
+      // Sahneyi iki kolonlu detay görünümüne geçir
+      stageGrid.classList.add('detail-active');
+
+      // Seçilmeyen diğer tüm pizzaları kaybet
+      domItems.forEach((item, i) => {
+        if (i !== idx) {
+          item.style.transition = 'all 0.5s cubic-bezier(0.16, 1, 0.3, 1)';
+          item.style.opacity = '0';
+          item.style.pointerEvents = 'none';
+          item.style.transform = `translateX(${i < idx ? -400 : 400}px) scale(0.3) translateZ(-400px)`;
+        }
+      });
+
+      // SEÇİLEN PİZZAYI MERKEZE GETİR VE 3D AÇIYLA EĞ
+      const selectedItem = domItems[idx];
+      selectedItem.style.transition = 'all 0.7s cubic-bezier(0.16, 1, 0.3, 1)';
+      selectedItem.style.zIndex = '200';
+      selectedItem.style.opacity = '1';
+
+      // Altındaki küçük etiketi gizle (temiz 3D görünüm için)
+      const badge = selectedItem.querySelector('.item-badge-pill');
+      if (badge) badge.style.display = 'none';
+
+      // Varsayılan sinematik açıya ayarla
+      setOrbitAngle(32, -18);
+
+      // Ortam ışığını seçilen pizzanın rengine dönüştür
+      ufoLight.style.background = `radial-gradient(ellipse at top, ${p.color}88 0%, rgba(241,196,15,0.2) 45%, transparent 70%)`;
+      podiumRing.style.boxShadow = `0 0 70px ${p.color}77, inset 0 0 45px ${p.color}55`;
     }
 
-    function closeInspection() {
-      isInspectOpen = false;
-      inspectionModal.classList.remove('active');
+    function setOrbitAngle(pitch, roll) {
+      orbitPitch = pitch;
+      orbitRoll = roll;
+      const selectedItem = domItems[selectedIndex];
+      if (selectedItem) {
+        selectedItem.style.transform = `translateX(0px) translateY(0px) translateZ(80px) rotateX(${pitch}deg) rotateY(${roll}deg) rotateZ(4deg) scale(1.35)`;
+      }
     }
 
-    document.getElementById('closeInspectBtn').addEventListener('click', closeInspection);
-    document.getElementById('backBtn').addEventListener('click', closeInspection);
-    inspectionModal.addEventListener('click', (e) => {
-      if (e.target === inspectionModal) closeInspection();
-    });
+    // Koleksiyona Geri Dön
+    function backToCatalog() {
+      isDetailActive = false;
+      stageGrid.classList.remove('detail-active');
 
-    function setAngle(pitch, roll) {
-      curPitch = pitch;
-      curRoll = roll;
-      interactivePizza.style.transform = `rotateX(${pitch}deg) rotateY(${roll}deg) scale(1.05)`;
+      showcaseHeader.style.opacity = '1';
+      carouselControls.style.opacity = '1';
+      carouselControls.style.pointerEvents = 'auto';
+      scrollHint.style.opacity = '1';
+
+      // Geçiş animasyonunu yumuşat
+      domItems.forEach(item => {
+        item.style.transition = 'transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.5s ease';
+      });
+
+      targetPos = selectedIndex;
+      currentPos = selectedIndex;
+
+      setTimeout(() => {
+        domItems.forEach(item => { item.style.transition = ''; });
+      }, 600);
     }
 
+    btnBack.addEventListener('click', backToCatalog);
+
+    // Hazır Açı Butonları
     document.querySelectorAll('.angle-btn').forEach(btn => {
       btn.addEventListener('click', () => {
         document.querySelectorAll('.angle-btn').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
         const p = parseFloat(btn.dataset.pitch);
         const r = parseFloat(btn.dataset.roll);
-        interactivePizza.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
-        setAngle(p, r);
-        setTimeout(() => { interactivePizza.style.transition = 'none'; }, 400);
+        const selectedItem = domItems[selectedIndex];
+        selectedItem.style.transition = 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1)';
+        setOrbitAngle(p, r);
       });
     });
 
-    // 3D Pizzayı Tutup Serbest Döndürme
-    let isOrbit = false;
-    let orbitX = 0, orbitY = 0;
+    /* ----------------------------------------------------
+       4. DOKUNMATİK VE FARE İLE SERBEST 3D DÖNDÜRME
+    ----------------------------------------------------- */
+    let isDragging = false;
+    let startX = 0, startY = 0;
+    let isOrbiting = false;
 
-    interactivePizza.parentElement.addEventListener('mousedown', (e) => {
-      isOrbit = true;
-      orbitX = e.clientX; orbitY = e.clientY;
-      interactivePizza.style.transition = 'none';
+    stageArea.addEventListener('mousedown', (e) => {
+      if (isDetailActive) {
+        isOrbiting = true;
+        startX = e.clientX; startY = e.clientY;
+        const selectedItem = domItems[selectedIndex];
+        if (selectedItem) selectedItem.style.transition = 'none';
+      } else {
+        isDragging = true;
+        startX = e.clientX;
+      }
     });
+
     window.addEventListener('mousemove', (e) => {
-      if (!isOrbit) return;
-      curRoll += (e.clientX - orbitX) * 0.5;
-      curPitch = Math.min(85, Math.max(10, curPitch - (e.clientY - orbitY) * 0.4));
-      interactivePizza.style.transform = `rotateX(${curPitch}deg) rotateY(${curRoll}deg) scale(1.05)`;
-      orbitX = e.clientX; orbitY = e.clientY;
+      if (isDetailActive && isOrbiting) {
+        const dx = e.clientX - startX;
+        const dy = e.clientY - startY;
+        orbitRoll += dx * 0.5;
+        orbitPitch = Math.min(85, Math.max(10, orbitPitch - dy * 0.4));
+        setOrbitAngle(orbitPitch, orbitRoll);
+        startX = e.clientX; startY = e.clientY;
+      } else if (!isDetailActive && isDragging) {
+        const dx = e.clientX - startX;
+        targetPos = currentPos - (dx / 250);
+      }
     });
-    window.addEventListener('mouseup', () => { isOrbit = false; });
 
-    // Dokunmatik 3D Orbit
-    interactivePizza.parentElement.addEventListener('touchstart', (e) => {
-      isOrbit = true;
-      orbitX = e.touches[0].clientX; orbitY = e.touches[0].clientY;
-      interactivePizza.style.transition = 'none';
+    window.addEventListener('mouseup', () => {
+      isDragging = false;
+      isOrbiting = false;
+      if (!isDetailActive) targetPos = Math.round(targetPos);
+    });
+
+    // Dokunmatik (Mobil) Etkileşimler
+    stageArea.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+      if (isDetailActive) {
+        isOrbiting = true;
+        const selectedItem = domItems[selectedIndex];
+        if (selectedItem) selectedItem.style.transition = 'none';
+      } else {
+        isDragging = true;
+      }
     }, { passive: true });
 
-    interactivePizza.parentElement.addEventListener('touchmove', (e) => {
-      if (!isOrbit) return;
-      if (e.cancelable) e.preventDefault();
-      curRoll += (e.touches[0].clientX - orbitX) * 0.55;
-      curPitch = Math.min(85, Math.max(10, curPitch - (e.touches[0].clientY - orbitY) * 0.45));
-      interactivePizza.style.transform = `rotateX(${curPitch}deg) rotateY(${curRoll}deg) scale(1.05)`;
-      orbitX = e.touches[0].clientX; orbitY = e.touches[0].clientY;
+    stageArea.addEventListener('touchmove', (e) => {
+      if (isDetailActive && isOrbiting) {
+        if (e.cancelable) e.preventDefault();
+        const dx = e.touches[0].clientX - startX;
+        const dy = e.touches[0].clientY - startY;
+        orbitRoll += dx * 0.55;
+        orbitPitch = Math.min(85, Math.max(10, orbitPitch - dy * 0.45));
+        setOrbitAngle(orbitPitch, orbitRoll);
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+      } else if (!isDetailActive && isDragging) {
+        const dx = e.touches[0].clientX - startX;
+        // Yatay kaydırmada sayfayı titretme
+        if (Math.abs(dx) > 10 && e.cancelable) e.preventDefault();
+        currentPos -= (dx / 300);
+        targetPos = currentPos;
+      }
     }, { passive: false });
 
-    interactivePizza.parentElement.addEventListener('touchend', () => { isOrbit = false; });
+    stageArea.addEventListener('touchend', () => {
+      isDragging = false;
+      isOrbiting = false;
+      if (!isDetailActive) targetPos = Math.round(targetPos);
+    });
+
+    document.getElementById('nextBtn').addEventListener('click', () => { if (!isDetailActive) targetPos = Math.round(targetPos) + 1; });
+    document.getElementById('prevBtn').addEventListener('click', () => { if (!isDetailActive) targetPos = Math.round(targetPos) - 1; });
 
     /* ----------------------------------------------------
-       4. KENDİ PİZZANI YAP ATÖLYESİ (CANVAS KODLARI)
+       5. KENDİ PİZZANI YAP ATÖLYESİ (CANVAS KODLARI)
     ----------------------------------------------------- */
     const canvas = document.getElementById('pizzaCanvas');
     const ctx = canvas.getContext('2d');
@@ -1232,7 +1206,6 @@
     window.addEventListener('mousemove', handleMove);
     window.addEventListener('mouseup', () => { isDrawing = false; });
 
-    // Sadece tuval içindeyken çizimi yakala
     canvas.addEventListener('touchstart', (e) => {
       e.preventDefault();
       handleStart(e);
@@ -1254,7 +1227,7 @@
         currentTool = btn.dataset.tool;
 
         if (['sauce-red', 'sauce-white'].includes(currentTool)) {
-          statusHint.textContent = "Sos seçildi: Hamurun üzerinde parmağınızı gezdirerek sosu sürün.";
+          statusHint.textContent = "Sos seçildi: Hamurun üzerinde gezdirerek sosu sürün.";
         } else if (currentTool === 'cheese') {
           statusHint.textContent = "Mozzarella seçildi: Peyniri yaymak için sürükleyin.";
         } else {
@@ -1281,7 +1254,7 @@
       statusHint.textContent = "Hamur temizlendi. Yeni pizzanıza başlayabilirsiniz!";
     });
 
-    // İlk Çizim
+    // Sayfa açıldığında ilk hamuru çiz
     renderPizzaCanvas();
   </script>
 

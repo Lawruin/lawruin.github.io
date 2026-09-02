@@ -33,7 +33,7 @@
       font-family: 'Playfair Display', Georgia, serif;
     }
 
-    /* Gerçekçi Işık ve Arka Plan Atmosferi */
+    /* Gerçekçi Işık ve Arka Plan */
     .sky-bg {
       background: radial-gradient(circle at 50% 28%, #72b9f3 0%, #3e81b6 38%, #163854 75%, #0b1926 100%);
     }
@@ -83,12 +83,12 @@
       pointer-events: none;
     }
 
-    /* Lüks Cam Efekti Kartlar */
+    /* Cam Efekti Kartlar */
     .glass-card {
-      background: rgba(15, 30, 48, 0.7);
+      background: rgba(15, 30, 48, 0.75);
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      border: 1px solid rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.14);
       box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
     }
   </style>
@@ -113,39 +113,100 @@
       </div>
     </div>
 
-    <!-- Kontroller -->
+    <!-- Hızlı Aksiyonlar -->
     <div class="flex items-center space-x-2">
-      <!-- Görsel Seçici Butonu -->
-      <label class="cursor-pointer px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 hover:bg-white/20 border border-white/20 transition-all flex items-center space-x-1.5 active:scale-95 text-white/80">
+      <button onclick="openImageModal()" class="px-3 py-1.5 rounded-full text-xs font-medium bg-white/10 hover:bg-white/20 border border-white/20 transition-all flex items-center space-x-1.5 active:scale-95 text-white/90">
         <i data-lucide="image" class="w-3.5 h-3.5"></i>
-        <span class="hidden sm:inline">Görsel Değiştir</span>
-        <input type="file" id="image-uploader" multiple accept="image/*" class="hidden">
-      </label>
+        <span>Görseller</span>
+      </button>
 
-      <!-- Otomatik Oynat Butonu -->
-      <button id="auto-btn" class="px-3.5 py-1.5 rounded-full text-xs font-medium bg-cyan-500/20 hover:bg-cyan-500/30 border border-cyan-400/40 text-cyan-300 transition-all flex items-center space-x-1.5 active:scale-95">
+      <button id="auto-btn" class="px-3 py-1.5 rounded-full text-xs font-medium bg-cyan-500/25 hover:bg-cyan-500/35 border border-cyan-400/40 text-cyan-300 transition-all flex items-center space-x-1.5 active:scale-95">
         <i data-lucide="play" class="w-3.5 h-3.5"></i>
-        <span id="auto-btn-text">Otomatik Oynat</span>
+        <span id="auto-btn-text">Oynat</span>
       </button>
     </div>
   </header>
 
-  <!-- Sanal Kaydırma Alanı (350vh: aşağı kaydırdıkça katmanların ayrılmasını sağlar) -->
+  <!-- MOBİL GÖRSEL YÜKLEME MODALI -->
+  <div id="image-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm hidden">
+    <div class="glass-card w-full max-w-sm rounded-3xl p-6 flex flex-col space-y-4 border border-cyan-500/30">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center space-x-2 text-cyan-400">
+          <i data-lucide="sparkles" class="w-5 h-5"></i>
+          <h3 class="text-sm font-semibold text-white">Saat Fotoğraflarını Seçin</h3>
+        </div>
+        <button onclick="closeImageModal()" class="text-white/50 hover:text-white text-lg font-bold p-1">✕</button>
+      </div>
+      
+      <p class="text-[11px] text-white/70 leading-relaxed">
+        Telefonda güvenlik engeline takılmadan çalışması için galerinizdeki iki görseli bir kez seçmeniz yeterlidir:
+      </p>
+
+      <div class="space-y-3 pt-1">
+        <!-- 1. Montajlı Saat Seçici -->
+        <label class="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 cursor-pointer active:scale-98 transition-all">
+          <div class="flex items-center space-x-2.5">
+            <span class="w-6 h-6 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center text-xs font-bold">1</span>
+            <div class="text-left">
+              <span class="text-xs font-medium text-white block">Montajlı Tam Saat</span>
+              <span id="name-assembled" class="text-[10px] text-white/40">Galeriden Seçin</span>
+            </div>
+          </div>
+          <i data-lucide="upload" class="w-4 h-4 text-white/60"></i>
+          <input type="file" id="file-assembled" accept="image/*" class="hidden">
+        </label>
+
+        <!-- 2. Katmanlı Saat Seçici -->
+        <label class="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 cursor-pointer active:scale-98 transition-all">
+          <div class="flex items-center space-x-2.5">
+            <span class="w-6 h-6 rounded-full bg-amber-500/20 text-amber-400 flex items-center justify-center text-xs font-bold">2</span>
+            <div class="text-left">
+              <span class="text-xs font-medium text-white block">Katmanlarına Ayrılmış Saat</span>
+              <span id="name-exploded" class="text-[10px] text-white/40">Galeriden Seçin</span>
+            </div>
+          </div>
+          <i data-lucide="upload" class="w-4 h-4 text-white/60"></i>
+          <input type="file" id="file-exploded" accept="image/*" class="hidden">
+        </label>
+      </div>
+
+      <button onclick="closeImageModal()" class="w-full py-2.5 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 font-semibold text-xs transition-all active:scale-95 shadow-lg shadow-cyan-500/25">
+        Tamamla ve Başla
+      </button>
+    </div>
+  </div>
+
+  <!-- Sanal Kaydırma Alanı (Aşağı kaydırdıkça katmanları açar) -->
   <div id="scroll-track" class="relative w-full h-[350vh]">
     
-    <!-- Pinned (Ekrana Sabitlenmiş) Sahne -->
+    <!-- Pinned Sahne -->
     <div class="sticky top-0 left-0 w-full h-screen overflow-hidden flex items-center justify-center z-20">
       
-      <!-- Ana Saat Sahnesi -->
+      <!-- Ana Saat Görsel Sahnesi -->
       <div class="relative w-full max-w-2xl h-[80vh] flex items-center justify-center px-4">
         
+        <!-- Boş Görsel Uyarısı (Resimler henüz seçilmediğinde ekranda görünür) -->
+        <div id="empty-state" class="absolute z-30 flex flex-col items-center justify-center text-center p-6 glass-card rounded-3xl border border-cyan-500/40 max-w-xs shadow-2xl">
+          <div class="w-12 h-12 rounded-full bg-cyan-500/20 text-cyan-400 flex items-center justify-center mb-3">
+            <i data-lucide="image-plus" class="w-6 h-6"></i>
+          </div>
+          <h2 class="text-sm font-bold text-white mb-1">Görselleri Seçin</h2>
+          <p class="text-[11px] text-white/70 mb-4 leading-relaxed">
+            Telefonun yerel dosya güvenlik engeline takılmamak için galerinizdeki 2 fotoğrafı bir kez seçin.
+          </p>
+          <button onclick="openImageModal()" class="w-full py-2.5 px-4 rounded-xl bg-cyan-500 hover:bg-cyan-400 text-slate-950 text-xs font-bold transition-all active:scale-95 shadow-lg shadow-cyan-500/30 flex items-center justify-center space-x-2">
+            <i data-lucide="folder-open" class="w-4 h-4"></i>
+            <span>Galeriden 2 Fotoğrafı Seç</span>
+          </button>
+        </div>
+
         <!-- 1. BİRLEŞİK / MONTAJLI SAAT GÖRSELİ -->
         <div id="watch-assembled-wrap" class="absolute inset-0 flex items-center justify-center will-change-transform z-20 pointer-events-none">
           <img 
             id="watch-assembled-img" 
             src="watch_assembled.jpg" 
             alt="Rolex Oyster Perpetual Montajlı Saat"
-            class="max-h-[72vh] max-w-[85vw] object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.6)]"
+            class="max-h-[72vh] max-w-[85vw] object-contain drop-shadow-[0_25px_35px_rgba(0,0,0,0.6)] hidden"
           />
         </div>
 
@@ -155,7 +216,7 @@
             id="watch-exploded-img" 
             src="watch_exploded.png" 
             alt="Rolex Oyster Perpetual Katmanlarına Ayrılmış Görünüm"
-            class="max-h-[78vh] max-w-[90vw] object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)]"
+            class="max-h-[78vh] max-w-[90vw] object-contain drop-shadow-[0_30px_50px_rgba(0,0,0,0.7)] hidden"
           />
         </div>
 
@@ -202,7 +263,7 @@
     </div>
   </div>
 
-  <!-- Mobil & Masaüstü Dokunmatik Kontrol Çubuğu (Floating Bar) -->
+  <!-- Dokunmatik Kontrol Çubuğu -->
   <div class="fixed bottom-4 left-4 right-4 sm:left-1/2 sm:-translate-x-1/2 sm:w-96 z-50 glass-card rounded-2xl p-3.5 flex flex-col space-y-2">
     <div class="flex items-center justify-between text-[11px] text-white/70">
       <span class="flex items-center gap-1.5">
@@ -212,7 +273,7 @@
       <span id="slider-percentage" class="font-mono text-cyan-400 font-semibold">0%</span>
     </div>
 
-    <!-- Parmağınızla Sürükleyebileceğiniz Slider -->
+    <!-- Sürükleme Çubuğu -->
     <input 
       type="range" 
       id="manual-slider" 
@@ -230,9 +291,10 @@
 
   <script>
     lucide.createIcons();
-
     gsap.registerPlugin(ScrollTrigger);
 
+    const assembledImg = document.getElementById('watch-assembled-img');
+    const explodedImg = document.getElementById('watch-exploded-img');
     const assembledWrap = document.getElementById('watch-assembled-wrap');
     const explodedWrap = document.getElementById('watch-exploded-wrap');
     const labelsContainer = document.getElementById('labels-container');
@@ -242,17 +304,85 @@
     const sliderPercentage = document.getElementById('slider-percentage');
     const autoBtn = document.getElementById('auto-btn');
     const autoBtnText = document.getElementById('auto-btn-text');
+    const emptyState = document.getElementById('empty-state');
+    const modal = document.getElementById('image-modal');
 
-    let isAutoPlaying = false;
-    let autoTween = null;
+    function openImageModal() {
+      modal.classList.remove('hidden');
+    }
+    function closeImageModal() {
+      modal.classList.add('hidden');
+    }
 
-    // Ana GSAP Çizelgesi: 0 = Birleşik, 1 = Katmanlarına Ayrılmış
+    // Telefonun hafızasından kayıtlı görselleri kontrol et
+    const savedAssembled = localStorage.getItem('watch_assembled_data');
+    const savedExploded = localStorage.getItem('watch_exploded_data');
+
+    if (savedAssembled) {
+      assembledImg.src = savedAssembled;
+      assembledImg.classList.remove('hidden');
+    }
+    if (savedExploded) {
+      explodedImg.src = savedExploded;
+      explodedImg.classList.remove('hidden');
+    }
+
+    function checkReadyState() {
+      if (!assembledImg.classList.contains('hidden') || !explodedImg.classList.contains('hidden')) {
+        emptyState.classList.add('hidden');
+      }
+    }
+
+    assembledImg.onload = () => {
+      assembledImg.classList.remove('hidden');
+      checkReadyState();
+    };
+    explodedImg.onload = () => {
+      explodedImg.classList.remove('hidden');
+      checkReadyState();
+    };
+
+    // 1. Montajlı Fotoğrafı Yükleme
+    document.getElementById('file-assembled').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          assembledImg.src = evt.target.result;
+          assembledImg.classList.remove('hidden');
+          localStorage.setItem('watch_assembled_data', evt.target.result);
+          document.getElementById('name-assembled').textContent = '✓ Seçildi';
+          document.getElementById('name-assembled').className = 'text-[10px] text-emerald-400 font-semibold';
+          checkReadyState();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // 2. Katmanlı Fotoğrafı Yükleme
+    document.getElementById('file-exploded').addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (evt) => {
+          explodedImg.src = evt.target.result;
+          explodedImg.classList.remove('hidden');
+          localStorage.setItem('watch_exploded_data', evt.target.result);
+          document.getElementById('name-exploded').textContent = '✓ Seçildi';
+          document.getElementById('name-exploded').className = 'text-[10px] text-emerald-400 font-semibold';
+          checkReadyState();
+        };
+        reader.readAsDataURL(file);
+      }
+    });
+
+    // Animasyon Zaman Çizelgesi
     const tl = gsap.timeline({
       paused: true,
       onUpdate: () => updateProgressUI(tl.progress())
     });
 
-    // 1. Aşama: Montajlı saat yumuşakça küçülür ve solar
+    // 1. Montajlı saat küçülüp solar
     tl.to(assembledWrap, {
       opacity: 0,
       scale: 0.92,
@@ -261,7 +391,7 @@
       duration: 0.4
     }, 0);
 
-    // 2. Aşama: Katmanlı saat merkezden dikey genişleyerek belirir
+    // 2. Katmanlı saat dikey açılır
     tl.fromTo(explodedWrap, {
       opacity: 0,
       scale: 0.88,
@@ -275,7 +405,7 @@
       duration: 0.6
     }, 0.2);
 
-    // 3. Aşama: Etiketler sırayla görünür
+    // 3. Etiketler açılır
     tl.to(labelsContainer, {
       opacity: 1,
       ease: 'power1.out',
@@ -294,12 +424,12 @@
       }, 0.5 + (i * 0.08));
     });
 
-    // Kaydırma (Scroll / Touch) ile GSAP Bağlantısı (Scrubbing)
+    // Kaydırmayı Animasyona Bağla
     ScrollTrigger.create({
       trigger: '#scroll-track',
       start: 'top top',
       end: 'bottom bottom',
-      scrub: 0.7, // Akıcı yaylanma hissi
+      scrub: 0.7,
       animation: tl,
       onUpdate: (self) => {
         if (!isAutoPlaying) {
@@ -331,7 +461,7 @@
       }
     }
 
-    // Parmağınızla alttaki çubuğu sürükleyerek anında kontrol etme
+    // Parmağınızla alttaki çubuğu sürükleme
     slider.addEventListener('input', (e) => {
       const val = parseFloat(e.target.value) / 100;
       const scrollDist = document.getElementById('scroll-track').offsetHeight - window.innerHeight;
@@ -343,12 +473,15 @@
       updateProgressUI(val);
     });
 
-    // Otomatik Oynat / Birleştir Butonu
+    // Otomatik Oynat Butonu
+    let isAutoPlaying = false;
+    let autoTween = null;
+
     autoBtn.addEventListener('click', () => {
       if (isAutoPlaying) {
         if (autoTween) autoTween.kill();
         isAutoPlaying = false;
-        autoBtnText.textContent = 'Otomatik Oynat';
+        autoBtnText.textContent = 'Oynat';
         autoBtn.querySelector('i').setAttribute('data-lucide', 'play');
         lucide.createIcons();
       } else {
@@ -372,28 +505,12 @@
           },
           onComplete: () => {
             isAutoPlaying = false;
-            autoBtnText.textContent = 'Otomatik Oynat';
+            autoBtnText.textContent = 'Oynat';
             autoBtn.querySelector('i').setAttribute('data-lucide', 'play');
             lucide.createIcons();
           }
         });
       }
-    });
-
-    // Tarayıcıdan doğrudan resim seçebilme desteği
-    document.getElementById('image-uploader').addEventListener('change', function(e) {
-      const files = Array.from(e.target.files);
-      files.forEach(file => {
-        const reader = new FileReader();
-        reader.onload = function(evt) {
-          if (file.name.includes('exploded') || file.name.includes('png') || files.indexOf(file) === 1) {
-            document.getElementById('watch-exploded-img').src = evt.target.result;
-          } else {
-            document.getElementById('watch-assembled-img').src = evt.target.result;
-          }
-        };
-        reader.readAsDataURL(file);
-      });
     });
   </script>
 </body>

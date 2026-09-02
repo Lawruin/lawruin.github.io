@@ -3,308 +3,159 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>Rolex Oyster Perpetual | Celebration Motif - Exploded View</title>
+  <title>Rolex Oyster Perpetual | Celebration</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,600;0,700;1,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
-
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  
   <style>
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
+      -webkit-tap-highlight-color: transparent;
       user-select: none;
       -webkit-user-select: none;
-      -webkit-tap-highlight-color: transparent;
     }
 
     body, html {
       width: 100%;
       height: 100%;
-      background-color: #0d1e2e;
-      color: #f8fafc;
+      background-color: #0b1825;
+      color: #ffffff;
       font-family: 'Plus Jakarta Sans', sans-serif;
       overflow-x: hidden;
       touch-action: pan-y;
     }
 
-    .font-serif {
-      font-family: 'Playfair Display', Georgia, serif;
-    }
-
-    .font-mono {
-      font-family: 'Space Mono', monospace;
-    }
-
-    /* 400vh Sanal Kaydırma Yolu */
-    #scroll-track {
+    /* 350vh Sanal Kaydırma Alanı (Scroll scrubbing) */
+    #scrollTrack {
       position: relative;
       width: 100%;
-      height: 400vh;
-      pointer-events: none;
+      height: 350vh;
     }
 
-    /* Arka Plan Atmosferi: Güneşli Mavi Gökyüzü ve Su Yansıması */
-    .sky-bg {
+    /* Sabit Ekran Sahnesi */
+    .viewport-scene {
       position: fixed;
       top: 0;
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: radial-gradient(circle at 50% 28%, #72bbf6 0%, #3e81b6 38%, #163854 75%, #0d1e2e 100%);
-      z-index: 0;
-      pointer-events: none;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 10;
     }
 
-    .lens-flare {
-      position: fixed;
-      top: -12%;
-      left: -10%;
-      width: 75vw;
-      height: 75vw;
-      max-width: 800px;
-      max-height: 800px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(255,255,255,0.45) 0%, rgba(200,235,255,0.2) 35%, transparent 70%);
-      filter: blur(50px);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .rainbow-ring {
-      position: fixed;
-      top: 4%;
-      left: -6%;
-      width: 65vw;
-      height: 65vw;
-      max-width: 700px;
-      max-height: 700px;
-      border-radius: 50%;
-      border: 3px solid transparent;
-      border-top-color: rgba(255, 110, 110, 0.35);
-      border-left-color: rgba(255, 230, 90, 0.35);
-      border-bottom-color: rgba(90, 220, 255, 0.35);
-      filter: blur(14px);
-      transform: rotate(-25deg);
-      z-index: 1;
-      pointer-events: none;
-    }
-
-    .water-surface {
-      position: fixed;
-      bottom: 0;
+    /* Görselle Birebir Uyumlu Lüks Arka Plan */
+    .sky-background {
+      position: absolute;
+      top: 0;
       left: 0;
-      right: 0;
-      height: 32vh;
-      background: linear-gradient(to bottom, rgba(54, 115, 161, 0.25) 0%, rgba(13, 30, 46, 0.95) 90%);
-      border-top: 1px solid rgba(255, 255, 255, 0.25);
-      backdrop-filter: blur(1px);
-      z-index: 5;
+      width: 100%;
+      height: 100%;
+      background: radial-gradient(circle at 50% 30%, #76baf2 0%, #3e81b6 40%, #153754 75%, #0b1825 100%);
+      z-index: 1;
       pointer-events: none;
     }
 
-    /* Üst Menü */
-    .navbar {
+    /* Üst Menü / Header */
+    .luxury-header {
       position: fixed;
       top: 0;
       left: 0;
       right: 0;
-      height: 64px;
-      padding: 0 24px;
+      height: 60px;
+      padding: 0 20px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(13, 30, 46, 0.7);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+      background: rgba(11, 24, 37, 0.65);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
       z-index: 100;
     }
 
     .brand-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.95);
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
     }
 
-    .rolex-crown-icon {
-      width: 32px;
-      height: 32px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.08);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
+    .rolex-crown {
       color: #ffd700;
+      font-size: 15px;
     }
 
-    /* 3D SAAT SAHNESİ */
+    /* Saat Sahnesi (Ekranın Tam Merkezinde, Önünde Engel Yok) */
     .watch-stage {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+      height: 76vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      perspective: 1300px;
-      z-index: 10;
-      pointer-events: none;
+      z-index: 20;
     }
 
-    .watch-container {
-      position: relative;
-      width: 330px;
-      height: 520px;
-      transform-style: preserve-3d;
-      will-change: transform;
-      transition: transform 0.06s linear;
-      pointer-events: none;
-    }
-
-    .watch-layer {
+    /* SAF GPU DESTEKLİ GÖRSEL KATMANLARI (60 FPS) */
+    .watch-asset {
       position: absolute;
       top: 0;
       left: 0;
-      width: 100%;
-      height: 100%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transform-style: preserve-3d;
-      will-change: transform, filter;
-      pointer-events: none;
-    }
-
-    .watch-layer svg {
       width: 100%;
       height: 100%;
       object-fit: contain;
-      filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.5));
-    }
-
-    /* Katman Pinleri */
-    .layer-pin {
-      position: absolute;
-      left: -20px;
-      top: 50%;
-      transform: translateY(-50%) translateZ(15px);
-      display: flex;
-      align-items: center;
-      flex-direction: row-reverse;
-      gap: 12px;
-      opacity: 0;
       pointer-events: none;
-      transition: opacity 0.35s ease, transform 0.35s ease;
-      white-space: nowrap;
+      will-change: transform, opacity;
+      transform: translate3d(0, 0, 0);
     }
 
-    .layer-pin.pin-right {
-      left: auto;
-      right: -20px;
-      flex-direction: row;
-    }
-
-    .layer-pin.visible {
+    /* 1. Montajlı Orijinal Saat Görseli */
+    #watchAssembled {
       opacity: 1;
-      transform: translateY(-50%) translateX(0px) translateZ(15px);
+      transform: translate3d(0, 0, 0) scale(1);
     }
 
-    .pin-line {
-      width: 40px;
-      height: 1px;
-      background: linear-gradient(90deg, rgba(255, 255, 255, 0.6), rgba(100, 210, 255, 0.1));
-    }
-
-    .pin-right .pin-line {
-      background: linear-gradient(90deg, rgba(100, 210, 255, 0.1), rgba(255, 255, 255, 0.6));
-    }
-
-    .pin-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #38bdf8;
-      box-shadow: 0 0 10px #38bdf8, 0 0 20px #0284c7;
-    }
-
-    .pin-badge {
-      background: rgba(13, 30, 46, 0.85);
-      border: 1px solid rgba(56, 189, 248, 0.4);
-      padding: 6px 12px;
-      border-radius: 8px;
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
-    }
-
-    .pin-title {
-      font-size: 11px;
-      font-weight: 700;
-      color: #38bdf8;
-      letter-spacing: 0.05em;
-      display: block;
-    }
-
-    .pin-subtitle {
-      font-size: 9px;
-      color: rgba(255, 255, 255, 0.65);
-      letter-spacing: 0.02em;
-    }
-
-    /* Sol Bilgi Kartı */
-    .info-card {
-      position: fixed;
-      top: 50%;
-      transform: translateY(-50%);
-      left: 6%;
-      max-width: 360px;
-      z-index: 50;
-      pointer-events: none;
+    /* 2. Katmanlarına Ayrılmış Orijinal Saat Görseli */
+    #watchExploded {
       opacity: 0;
-      transition: opacity 0.5s ease, transform 0.5s ease;
-      background: rgba(13, 30, 46, 0.75);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      border-radius: 20px;
-      padding: 24px;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      transform: translate3d(0, 30px, 0) scale(0.96);
     }
 
-    .info-card.active {
-      opacity: 1;
-      transform: translateY(-50%) translateX(0);
-    }
-
-    /* Alt Yüzen Kontrol Çubuğu */
-    .floating-bar {
+    /* Alt Durum ve Dokunmatik Kontrol Paneli */
+    .bottom-bar {
       position: fixed;
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
       width: calc(100% - 32px);
-      max-width: 440px;
-      background: rgba(13, 30, 46, 0.85);
-      border: 1px solid rgba(255, 255, 255, 0.18);
-      border-radius: 24px;
-      padding: 14px 20px;
+      max-width: 400px;
+      background: rgba(11, 24, 37, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
+      padding: 12px 18px;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
       z-index: 100;
       display: flex;
       flex-direction: column;
       gap: 8px;
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
     }
 
-    .bar-header {
+    .status-row {
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -328,501 +179,95 @@
       pointer-events: none;
     }
 
-    .scroll-guide {
+    /* Kaydırma Rehberi */
+    .scroll-hint {
       position: fixed;
-      bottom: 95px;
+      bottom: 90px;
       left: 50%;
       transform: translateX(-50%);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 6px;
-      z-index: 80;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255, 255, 255, 0.75);
+      background: rgba(11, 24, 37, 0.6);
+      padding: 6px 14px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      z-index: 90;
       pointer-events: none;
       transition: opacity 0.3s ease;
-    }
-
-    .mouse-icon {
-      width: 20px;
-      height: 32px;
-      border: 2px solid rgba(255, 255, 255, 0.45);
-      border-radius: 12px;
-      display: flex;
-      justify-content: center;
-      padding-top: 4px;
-    }
-
-    .mouse-wheel {
-      width: 3px;
-      height: 6px;
-      background: #38bdf8;
-      border-radius: 2px;
-      animation: bounceWheel 1.5s infinite;
-    }
-
-    @keyframes bounceWheel {
-      0%, 100% { transform: translateY(0); opacity: 1; }
-      50% { transform: translateY(8px); opacity: 0.3; }
-    }
-
-    .action-btn {
-      padding: 7px 16px;
-      border-radius: 9999px;
-      font-size: 11px;
-      font-weight: 600;
       display: flex;
       align-items: center;
       gap: 6px;
+    }
+
+    .btn-action {
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
       cursor: pointer;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-      background: rgba(255, 255, 255, 0.1);
-      color: #ffffff;
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      background: rgba(56, 189, 248, 0.15);
+      color: #38bdf8;
       transition: all 0.2s;
     }
 
-    .action-btn:active {
+    .btn-action:active {
       transform: scale(0.96);
-    }
-
-    .action-btn.primary {
-      background: rgba(56, 189, 248, 0.2);
-      border-color: rgba(56, 189, 248, 0.4);
-      color: #38bdf8;
     }
   </style>
 </head>
 <body>
 
-  <!-- ARKA PLAN GÖRSEL KATMANLARI -->
-  <div class="sky-bg"></div>
-  <div class="lens-flare"></div>
-  <div class="rainbow-ring"></div>
-  <div class="water-surface"></div>
+  <!-- ARKA PLAN -->
+  <div class="sky-background"></div>
 
-  <!-- ÜST MENÜ (NAVBAR) -->
-  <header class="navbar">
+  <!-- ÜST MENÜ -->
+  <header class="luxury-header">
     <div class="brand-title">
-      <div class="rolex-crown-icon">♛</div>
-      <div>
-        <div style="font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;">Rolex</div>
-        <div style="font-size: 9px; color: rgba(255,255,255,0.6); letter-spacing: 0.15em; text-transform: uppercase;">Oyster Perpetual 41</div>
-      </div>
+      <span class="rolex-crown">♛</span>
+      <span>Oyster Perpetual</span>
     </div>
-
-    <div style="display: flex; gap: 8px;">
-      <button id="autoTourBtn" class="action-btn primary">
-        <i data-lucide="play" style="width: 14px; height: 14px;"></i>
-        <span id="autoBtnText">Otomatik Oynat</span>
-      </button>
-      <button id="resetBtn" class="action-btn">
-        <i data-lucide="rotate-ccw" style="width: 14px; height: 14px;"></i>
-        <span>Birleştir</span>
-      </button>
-    </div>
+    <button id="autoPlayBtn" class="btn-action">Otomatik Oynat</button>
   </header>
 
-  <!-- SOL HİKAYE & BİLGİ KARTLARI -->
-  <div class="info-card active" id="info-0">
-    <span style="font-size: 9px; color: #38bdf8; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 6px;">İKONİK TASARIM</span>
-    <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #ffffff;">Oyster Perpetual Celebration</h2>
-    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">
-      Lüks saatçiliğin efsanevi klasiği. Canlı kutlama balonları motifi ve Oystersteel çeliğin kusursuz uyumuyla tek bir gövdede birleşik halde duruyor.
-    </p>
-    <div style="margin-top: 14px; font-size: 10px; color: #38bdf8; display: flex; align-items: center; gap: 6px;">
-      <i data-lucide="arrow-down" style="width: 12px; height: 12px;"></i>
-      <span>Aşağı kaydırarak saati katmanlarına ayırın</span>
+  <!-- SABİT SAHNE -->
+  <div class="viewport-scene">
+    
+    <!-- ORİJİNAL GERÇEK SAAT GÖRSELLERİ -->
+    <div class="watch-stage">
+      <!-- 1. Montajlı Gerçek Saat -->
+      <img 
+        id="watchAssembled" 
+        src="watch_assembled.jpg" 
+        alt="Rolex Oyster Perpetual Montajlı Görünüm"
+        class="watch-asset"
+      />
+
+      <!-- 2. Katmanlarına Ayrılmış Gerçek Saat -->
+      <img 
+        id="watchExploded" 
+        src="watch_exploded.png" 
+        alt="Rolex Oyster Perpetual Katmanlarına Ayrılmış Görünüm"
+        class="watch-asset"
+      />
     </div>
-  </div>
 
-  <div class="info-card" id="info-1">
-    <span style="font-size: 9px; color: #38bdf8; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 6px;">KATMAN 01 / SAFİR KRİSTAL</span>
-    <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #ffffff;">Safir Cam & Yansıma Kalkanı</h2>
-    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">
-      Elmastan sonra doğadaki en sert mineral olan sentetik safirden üretilmiştir. İçten ve dıştan çift yansıma önleyici kaplama ile kaplıdır.
-    </p>
-  </div>
-
-  <div class="info-card" id="info-2">
-    <span style="font-size: 9px; color: #f59e0b; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 6px;">KATMAN 02 / SANATSAL KADRAN</span>
-    <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #ffffff;">Celebration Motif Kadran</h2>
-    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">
-      Canlı renkleri (şeker pembesi, sarı, mercan kırmızısı, yeşil ve turkuaz mavisi) kutlayan lakeli ve parlak balon motifleri.
-    </p>
-  </div>
-
-  <div class="info-card" id="info-3">
-    <span style="font-size: 9px; color: #10b981; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 6px;">KATMAN 03 / KALİBRE 3230</span>
-    <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #ffffff;">Otomatik Mekanik Kalibre</h2>
-    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">
-      Rolex tarafından tamamen şirket içinde geliştirilen ve üretilen mekanizma. Chronergy eşapmanı sayesinde 70 saatlik kesintisiz güç rezervi.
-    </p>
-  </div>
-
-  <div class="info-card" id="info-4">
-    <span style="font-size: 9px; color: #818cf8; letter-spacing: 0.25em; text-transform: uppercase; font-weight: 700; display: block; margin-bottom: 6px;">KATMAN 04 / GÖVDE & BİLEZİK</span>
-    <h2 style="font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #ffffff;">Oystersteel Kasa ve Kordon</h2>
-    <p style="font-size: 12px; color: rgba(255,255,255,0.7); line-height: 1.6;">
-      904L süper alaşım çelik. Su geçirmez conta ve vidalı Twinlock kurma kolu ile 100 metre basınca dayanıklılık.
-    </p>
-  </div>
-
-  <!-- 3D SAHNE & KATMANLAR -->
-  <div class="watch-stage">
-    <div class="watch-container" id="watchContainer">
-
-      <!-- 1. EN ALT KATMAN: PASLANMAZ ÇELİK KORDON -->
-      <div class="watch-layer" id="layer-bracelet" data-dist="-230" data-rot="0">
-        <svg viewBox="0 0 330 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="steelGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#93a5b4"/>
-              <stop offset="25%" stop-color="#e2ebf2"/>
-              <stop offset="50%" stop-color="#adbcc8"/>
-              <stop offset="75%" stop-color="#f8fafc"/>
-              <stop offset="100%" stop-color="#8092a0"/>
-            </linearGradient>
-            <linearGradient id="steelCenterGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#adbcc8"/>
-              <stop offset="50%" stop-color="#ffffff"/>
-              <stop offset="100%" stop-color="#94a6b5"/>
-            </linearGradient>
-            <linearGradient id="claspGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#d0dce5"/>
-              <stop offset="50%" stop-color="#9eafbe"/>
-              <stop offset="100%" stop-color="#6f8190"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Üst Kordon Baklaları -->
-          <g opacity="0.95">
-            <path d="M98 25 L120 25 L120 140 L94 140 Z" fill="url(#steelGrad)" stroke="#586774" stroke-width="0.8"/>
-            <path d="M210 25 L232 25 L236 140 L210 140 Z" fill="url(#steelGrad)" stroke="#586774" stroke-width="0.8"/>
-            <path d="M120 25 L210 25 L210 140 L120 140 Z" fill="url(#steelCenterGrad)" stroke="#586774" stroke-width="0.8"/>
-            <line x1="96" y1="60" x2="234" y2="60" stroke="#485561" stroke-width="1.2"/>
-            <line x1="95" y1="100" x2="235" y2="100" stroke="#485561" stroke-width="1.2"/>
-          </g>
-
-          <!-- Alt Kordon Baklaları & Oysterclasp Toka -->
-          <g opacity="0.95">
-            <path d="M94 380 L120 380 L120 495 L98 495 Z" fill="url(#steelGrad)" stroke="#586774" stroke-width="0.8"/>
-            <path d="M210 380 L236 380 L232 495 L210 495 Z" fill="url(#steelGrad)" stroke="#586774" stroke-width="0.8"/>
-            <path d="M120 380 L210 380 L210 495 L120 495 Z" fill="url(#steelCenterGrad)" stroke="#586774" stroke-width="0.8"/>
-            
-            <line x1="95" y1="420" x2="235" y2="420" stroke="#485561" stroke-width="1.2"/>
-            <line x1="96" y1="460" x2="234" y2="460" stroke="#485561" stroke-width="1.2"/>
-
-            <rect x="110" y="440" width="110" height="55" rx="5" fill="url(#claspGrad)" stroke="#3f4b56" stroke-width="1.5"/>
-            <text x="165" y="473" font-size="16" fill="#ffffff" text-anchor="middle" opacity="0.8">♛</text>
-          </g>
-        </svg>
-
-        <div class="layer-pin pin-right" id="pin-bracelet">
-          <div class="pin-badge">
-            <span class="pin-title">Paslanmaz Çelik Kordon</span>
-            <span class="pin-subtitle">Oystersteel & Oysterclasp Toka</span>
-          </div>
-          <div class="pin-line"></div>
-          <div class="pin-dot"></div>
-        </div>
-      </div>
-
-      <!-- 2. KATMAN: SU GEÇİRMEZ CONTA -->
-      <div class="watch-layer" id="layer-gasket" data-dist="-160" data-rot="4">
-        <svg viewBox="0 0 330 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="gasketGrad" cx="50%" cy="50%" r="50%">
-              <stop offset="85%" stop-color="#18181b"/>
-              <stop offset="93%" stop-color="#3f3f46"/>
-              <stop offset="100%" stop-color="#09090b"/>
-            </radialGradient>
-          </defs>
-          <circle cx="165" cy="260" r="102" stroke="url(#gasketGrad)" stroke-width="6" fill="none"/>
-          <circle cx="165" cy="260" r="105" stroke="rgba(255,255,255,0.15)" stroke-width="1" fill="none"/>
-        </svg>
-
-        <div class="layer-pin" id="pin-gasket">
-          <div class="pin-badge">
-            <span class="pin-title">Su Geçirmez Conta</span>
-            <span class="pin-subtitle">100 Metre Basınç Yalıtımı</span>
-          </div>
-          <div class="pin-line"></div>
-          <div class="pin-dot"></div>
-        </div>
-      </div>
-
-      <!-- 3. KATMAN: ÇELİK KASA VE KURMA KOLU -->
-      <div class="watch-layer" id="layer-case" data-dist="-95" data-rot="0">
-        <svg viewBox="0 0 330 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="caseSteelGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#e2ebf2"/>
-              <stop offset="25%" stop-color="#93a5b4"/>
-              <stop offset="50%" stop-color="#f8fafc"/>
-              <stop offset="75%" stop-color="#8092a0"/>
-              <stop offset="100%" stop-color="#b6c6d3"/>
-            </linearGradient>
-            <linearGradient id="bezelGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="30%" stop-color="#94a6b5"/>
-              <stop offset="70%" stop-color="#ffffff"/>
-              <stop offset="100%" stop-color="#6c7c8a"/>
-            </linearGradient>
-          </defs>
-
-          <path d="M96 145 C85 190 85 330 96 375 L112 375 C102 335 102 185 112 145 Z" fill="url(#caseSteelGrad)" stroke="#4e5b66" stroke-width="1"/>
-          <path d="M234 145 C245 190 245 330 234 375 L218 375 C228 335 228 185 218 145 Z" fill="url(#caseSteelGrad)" stroke="#4e5b66" stroke-width="1"/>
-
-          <circle cx="165" cy="260" r="114" fill="url(#caseSteelGrad)" stroke="#3e4852" stroke-width="1.5"/>
-          <circle cx="165" cy="260" r="102" fill="none" stroke="url(#bezelGrad)" stroke-width="7"/>
-
-          <!-- Kurma Kolu (Winding Crown) -->
-          <g transform="translate(276, 250)">
-            <rect x="0" y="3" width="16" height="14" rx="2" fill="url(#caseSteelGrad)" stroke="#3e4852" stroke-width="1"/>
-            <line x1="4" y1="3" x2="4" y2="17" stroke="#333" stroke-width="1"/>
-            <line x1="8" y1="3" x2="8" y2="17" stroke="#333" stroke-width="1"/>
-            <line x1="12" y1="3" x2="12" y2="17" stroke="#333" stroke-width="1"/>
-            <circle cx="15" cy="10" r="2.5" fill="#38bdf8" opacity="0.8"/>
-          </g>
-        </svg>
-
-        <div class="layer-pin" id="pin-case">
-          <div class="pin-badge">
-            <span class="pin-title">Oyster Kasa</span>
-            <span class="pin-subtitle">904L Korozyon Dirençli Çelik</span>
-          </div>
-          <div class="pin-line"></div>
-          <div class="pin-dot"></div>
-        </div>
-      </div>
-
-      <!-- 4. KATMAN: MEKANİK KALİBRE 3230 -->
-      <div class="watch-layer" id="layer-movement" data-dist="-25" data-rot="10">
-        <svg viewBox="0 0 330 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <radialGradient id="perlageGrad" cx="50%" cy="50%" r="50%">
-              <stop offset="0%" stop-color="#e2ebf2"/>
-              <stop offset="60%" stop-color="#b0c0ce"/>
-              <stop offset="100%" stop-color="#7a8d9d"/>
-            </radialGradient>
-            <linearGradient id="goldGearGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#fef08a"/>
-              <stop offset="50%" stop-color="#eab308"/>
-              <stop offset="100%" stop-color="#a16207"/>
-            </linearGradient>
-          </defs>
-
-          <circle cx="165" cy="260" r="95" fill="url(#perlageGrad)" stroke="#4b5762" stroke-width="1.5"/>
-
-          <!-- Çarklar ve Balans Yayı -->
-          <circle cx="135" cy="235" r="26" fill="url(#goldGearGrad)" stroke="#78350f" stroke-width="1" stroke-dasharray="3 2"/>
-          <circle cx="135" cy="235" r="16" fill="#d1d5db" stroke="#6b7280" stroke-width="1"/>
-          <circle cx="185" cy="235" r="22" fill="url(#goldGearGrad)" stroke="#78350f" stroke-width="1" stroke-dasharray="3 2"/>
-          
-          <circle cx="165" cy="295" r="22" fill="none" stroke="url(#goldGearGrad)" stroke-width="3"/>
-          <circle cx="165" cy="295" r="6" fill="#e11d48" stroke="#881337" stroke-width="1"/>
-
-          <!-- Yakut Taşlar -->
-          <circle cx="135" cy="235" r="4" fill="#e11d48" stroke="#881337" stroke-width="1"/>
-          <circle cx="185" cy="235" r="3.5" fill="#e11d48" stroke="#881337" stroke-width="1"/>
-          <circle cx="150" cy="260" r="3.5" fill="#e11d48" stroke="#881337" stroke-width="1"/>
-          <circle cx="180" cy="275" r="3" fill="#e11d48" stroke="#881337" stroke-width="1"/>
-
-          <!-- Kurma Şaftı -->
-          <rect x="258" y="258.5" width="22" height="3" fill="#cbd5e1" stroke="#475569" stroke-width="0.6"/>
-        </svg>
-
-        <div class="layer-pin pin-right" id="pin-movement">
-          <div class="pin-badge">
-            <span class="pin-title">Kalibre 3230</span>
-            <span class="pin-subtitle">70 Saat Güç Rezervi & Otomatik Kurma</span>
-          </div>
-          <div class="pin-line"></div>
-          <div class="pin-dot"></div>
-        </div>
-      </div>
-
-      <!-- 5. KATMAN: İNDEKSLER HALKASI -->
-      <div class="watch-layer" id="layer-indices" data-dist="45" data-rot="0">
-        <svg viewBox="0 0 330 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="goldMarkerGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="50%" stop-color="#cbd5e1"/>
-              <stop offset="100%" stop-color="#94a6b5"/>
-            </linearGradient>
-          </defs>
-
-          <circle cx="165" cy="260" r="88" stroke="rgba(255,255,255,0.25)" stroke-width="0.8" fill="none"/>
-
-          <!-- 18kt Beyaz Altın İndeksler -->
-          <rect x="162" y="174" width="6" height="15" rx="1.5" fill="url(#goldMarkerGrad)" stroke="#334155" stroke-width="0.8"/>
-          <rect x="243" y="257" width="13" height="6" rx="1.5" fill="url(#goldMarkerGrad)" stroke="#334155" stroke-width="0.8"/>
-          <rect x="162" y="331" width="6" height="15" rx="1.5" fill="url(#goldMarkerGrad)" stroke="#334155" stroke-width="0.8"/>
-          <rect x="174" y="257" width="13" height="6" rx="1.5" fill="url(#goldMarkerGrad)" stroke="#334155" stroke-width="0.8"/>
-
-          <rect x="207" y="185" width="5.5" height="14" rx="1.2" transform="rotate(30 209 192)" fill="url(#goldMarkerGrad)"/>
-          <rect x="238" y="216" width="5.5" height="14" rx="1.2" transform="rotate(60 240 223)" fill="url(#goldMarkerGrad)"/>
-          <rect x="238" y="290" width="5.5" height="14" rx="1.2" transform="rotate(120 240 297)" fill="url(#goldMarkerGrad)"/>
-          <rect x="207" y="321" width="5.5" height="14" rx="1.2" transform="rotate(150 209 328)" fill="url(#goldMarkerGrad)"/>
-          <rect x="117" y="321" width="5.5" height="14" rx="1.2" transform="rotate(-150 119 328)" fill="url(#goldMarkerGrad)"/>
-          <rect x="86" y="290" width="5.5" height="14" rx="1.2" transform="rotate(-120 88 297)" fill="url(#goldMarkerGrad)"/>
-          <rect x="86" y="216" width="5.5" height="14" rx="1.2" transform="rotate(-60 88 223)" fill="url(#goldMarkerGrad)"/>
-          <rect x="117" y="185" width="5.5" height="14" rx="1.2" transform="rotate(-30 119 192)" fill="url(#goldMarkerGrad)"/>
-        </svg>
-
-        <div class="layer-pin" id="pin-indices">
-          <div class="pin-badge">
-            <span class="pin-title">İndeksler</span>
-            <span class="pin-subtitle">18kt Beyaz Altın & Chromalight Işıma</span>
-          </div>
-          <div class="pin-line"></div>
-          <div class="pin-dot"></div>
-        </div>
-      </div>
-
-      <!-- 6. KATMAN: RENKLİ KUTLAMA KADRANI -->
-      <div class="watch-layer" id="layer-dial" data-dist="115" data-rot="-5">
-        <svg viewBox="0 0 330 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <circle cx="165" cy="260" r="91" fill="#38bdf8" stroke="#1e293b" stroke-width="1.5"/>
-
-          <!-- Kutlama Balonları (Celebration Bubbles) -->
-          <circle cx="140" cy="230" r="16" fill="#f43f5e" stroke="#0f172a" stroke-width="2"/>
-          <circle cx="180" cy="285" r="14" fill="#f43f5e" stroke="#0f172a" stroke-width="1.8"/>
-          <circle cx="195" cy="225" r="11" fill="#f43f5e" stroke="#0f172a" stroke-width="1.5"/>
-          <circle cx="125" cy="290" r="10" fill="#f43f5e" stroke="#0f172a" stroke-width="1.5"/>
-
-          <circle cx="170" cy="220" r="15" fill="#facc15" stroke="#0f172a" stroke-width="2"/>
-          <circle cx="130" cy="265" r="13" fill="#facc15" stroke="#0f172a" stroke-width="1.8"/>
-          <circle cx="160" cy="295" r="12" fill="#facc15" stroke="#0f172a" stroke-width="1.5"/>
-          <circle cx="205" cy="255" r="9" fill="#facc15" stroke="#0f172a" stroke-width="1.5"/>
-
-          <circle cx="185" cy="250" r="17" fill="#ea580c" stroke="#0f172a" stroke-width="2"/>
-          <circle cx="145" cy="285" r="14" fill="#ea580c" stroke="#0f172a" stroke-width="1.8"/>
-          <circle cx="120" cy="235" r="11" fill="#ea580c" stroke="#0f172a" stroke-width="1.5"/>
-          <circle cx="160" cy="240" r="8" fill="#ea580c" stroke="#0f172a" stroke-width="1.2"/>
-
-          <circle cx="150" cy="265" r="15" fill="#16a34a" stroke="#0f172a" stroke-width="2"/>
-          <circle cx="190" cy="280" r="12" fill="#16a34a" stroke="#0f172a" stroke-width="1.8"/>
-          <circle cx="175" cy="240" r="9" fill="#16a34a" stroke="#0f172a" stroke-width="1.5"/>
-
-          <circle cx="135" cy="248" r="8" fill="#0284c7" stroke="#0f172a" stroke-width="1.5"/>
-          <circle cx="172" cy="268" r="7" fill="#0284c7" stroke="#0f172a" stroke-width="1.5"/>
-
-          <!-- Rolex Logoları -->
-          <text x="165" y="200" font-size="14" fill="#ffffff" text-anchor="middle">♛</text>
-          <text x="165" y="209" font-family="'Plus Jakarta Sans', sans-serif" font-size="7" font-weight="700" fill="#ffffff" text-anchor="middle" letter-spacing="1.5">ROLEX</text>
-          <text x="165" y="216" font-family="'Plus Jakarta Sans', sans-serif" font-size="4.5" font-weight="600" fill="rgba(255,255,255,0.85)" text-anchor="middle" letter-spacing="1">OYSTER PERPETUAL</text>
-
-          <text x="165" y="318" font-family="'Plus Jakarta Sans', sans-serif" font-size="4" font-weight="600" fill="rgba(255,255,255,0.85)" text-anchor="middle" letter-spacing="0.8">SUPERLATIVE CHRONOMETER</text>
-          <text x="165" y="324" font-family="'Plus Jakarta Sans', sans-serif" font-size="3.5" font-weight="500" fill="rgba(255,255,255,0.7)" text-anchor="middle" letter-spacing="0.5">OFFICIALLY CERTIFIED</text>
-        </svg>
-
-        <div class="layer-pin" id="pin-dial">
-          <div class="pin-badge">
-            <span class="pin-title">Kadran</span>
-            <span class="pin-subtitle">Celebration Çok Renkli Lakeli Motif</span>
-          </div>
-          <div class="pin-line"></div>
-          <div class="pin-dot"></div>
-        </div>
-      </div>
-
-      <!-- 7. KATMAN: AKREP, YELKOVAN VE SANİYE KOLU -->
-      <div class="watch-layer" id="layer-hands" data-dist="185" data-rot="0">
-        <svg viewBox="0 0 330 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="handGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="#ffffff"/>
-              <stop offset="50%" stop-color="#e2e8f0"/>
-              <stop offset="100%" stop-color="#94a6b5"/>
-            </linearGradient>
-          </defs>
-
-          <!-- Akrep -->
-          <g transform="rotate(-65 165 260)">
-            <rect x="162.5" y="215" width="5" height="45" rx="1.5" fill="url(#handGrad)" stroke="#334155" stroke-width="0.8"/>
-            <rect x="163.5" y="222" width="3" height="30" rx="1" fill="#e0f2fe"/>
-          </g>
-
-          <!-- Yelkovan -->
-          <g transform="rotate(60 165 260)">
-            <rect x="163" y="190" width="4" height="70" rx="1.5" fill="url(#handGrad)" stroke="#334155" stroke-width="0.8"/>
-            <rect x="164" y="196" width="2" height="54" rx="0.8" fill="#e0f2fe"/>
-          </g>
-
-          <!-- Saniye Kolu -->
-          <g transform="rotate(160 165 260)">
-            <line x1="165" y1="180" x2="165" y2="285" stroke="#f8fafc" stroke-width="1.2"/>
-            <circle cx="165" cy="200" r="2.5" fill="#f8fafc"/>
-          </g>
-
-          <circle cx="165" cy="260" r="5" fill="url(#handGrad)" stroke="#334155" stroke-width="1"/>
-          <circle cx="165" cy="260" r="1.8" fill="#0f172a"/>
-        </svg>
-
-        <div class="layer-pin pin-right" id="pin-hands">
-          <div class="pin-badge">
-            <span class="pin-title">Akrep, Yelkovan, Saniye Kolu</span>
-            <span class="pin-subtitle">Chromalight Fosforlu İbreler</span>
-          </div>
-          <div class="pin-line"></div>
-          <div class="pin-dot"></div>
-        </div>
-      </div>
-
-      <!-- 8. EN ÜST KATMAN: SAFİR CAM -->
-      <div class="watch-layer" id="layer-crystal" data-dist="255" data-rot="6">
-        <svg viewBox="0 0 330 520" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="crystalGleam" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.45)"/>
-              <stop offset="35%" stop-color="rgba(56, 189, 248, 0.15)"/>
-              <stop offset="60%" stop-color="rgba(255, 255, 255, 0.05)"/>
-              <stop offset="100%" stop-color="rgba(56, 189, 248, 0.25)"/>
-            </linearGradient>
-            <linearGradient id="bevelEdge" x1="0%" y1="0%" x2="100%" y2="0%">
-              <stop offset="0%" stop-color="rgba(255, 255, 255, 0.8)"/>
-              <stop offset="50%" stop-color="rgba(56, 189, 248, 0.4)"/>
-              <stop offset="100%" stop-color="rgba(255, 255, 255, 0.6)"/>
-            </linearGradient>
-          </defs>
-
-          <circle cx="165" cy="260" r="98" fill="url(#crystalGleam)" stroke="url(#bevelEdge)" stroke-width="2.5"/>
-          <path d="M120 185 Q165 240 210 185" stroke="rgba(255, 255, 255, 0.4)" stroke-width="3" fill="none" stroke-linecap="round"/>
-          <circle cx="215" cy="220" r="12" fill="rgba(255,255,255,0.2)" filter="blur(4px)"/>
-        </svg>
-
-        <div class="layer-pin" id="pin-crystal">
-          <div class="pin-badge">
-            <span class="pin-title">Safir Cam</span>
-            <span class="pin-subtitle">Çizilmeye Karşı Dayanıklı Kristal</span>
-          </div>
-          <div class="pin-line"></div>
-          <div class="pin-dot"></div>
-        </div>
-      </div>
-
+    <!-- Aşağı Kaydırın İpucu -->
+    <div class="scroll-hint" id="scrollHint">
+      <span>Aşağı Kaydırın</span>
+      <span>↓</span>
     </div>
+
   </div>
 
-  <!-- AŞAĞI KAYDIRIN REHBERİ -->
-  <div class="scroll-guide" id="scrollGuide">
-    <div class="mouse-icon">
-      <div class="mouse-wheel"></div>
-    </div>
-    <span style="font-size: 10px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255,255,255,0.7); font-weight: 600;">
-      Aşağı Kaydırın
-    </span>
-  </div>
-
-  <!-- ALT KONTROL ÇUBUĞU -->
-  <div class="floating-bar">
-    <div class="bar-header">
-      <span style="color: rgba(255,255,255,0.7); display: flex; align-items: center; gap: 6px;">
-        <i data-lucide="layers" style="width: 14px; height: 14px; color: #38bdf8;"></i>
-        <span id="statusIndicator" style="color: #10b981; font-weight: 600;">Birleşik Durum (%0)</span>
-      </span>
-      <span id="progressText" class="font-mono" style="color: #38bdf8; font-weight: 700;">0%</span>
+  <!-- ALT KONTROL PANELİ (DOKUNMATİK & SLIDER) -->
+  <div class="bottom-bar">
+    <div class="status-row">
+      <span id="statusLabel" style="color: #10b981; font-weight: 600;">Montajlı Durum (%0)</span>
+      <span id="percentLabel" style="font-family: 'Space Mono', monospace; color: #38bdf8; font-weight: 700;">0%</span>
     </div>
 
     <div class="slider-track" id="sliderTrack">
@@ -835,44 +280,40 @@
     </div>
   </div>
 
-  <div id="scroll-track"></div>
+  <!-- 350vh Kaydırma Yolu -->
+  <div id="scrollTrack"></div>
 
   <script>
-    lucide.createIcons();
+    // -------------------------------------------------------------
+    // 60/120 FPS SAF GPU DESTEKLİ ANİMASYON MOTORU
+    // -------------------------------------------------------------
+    const watchAssembled = document.getElementById('watchAssembled');
+    const watchExploded = document.getElementById('watchExploded');
+    const sliderFill = document.getElementById('sliderFill');
+    const statusLabel = document.getElementById('statusLabel');
+    const percentLabel = document.getElementById('percentLabel');
+    const scrollHint = document.getElementById('scrollHint');
+    const sliderTrack = document.getElementById('sliderTrack');
+    const autoPlayBtn = document.getElementById('autoPlayBtn');
 
-    // 3D ETKİLEŞİM & ANİMASYON MOTORU
-    const watchContainer = document.getElementById('watchContainer');
-    const layers = [
-      { el: document.getElementById('layer-crystal'), pin: document.getElementById('pin-crystal'), dist: 255, rot: 8 },
-      { el: document.getElementById('layer-hands'), pin: document.getElementById('pin-hands'), dist: 185, rot: 0 },
-      { el: document.getElementById('layer-dial'), pin: document.getElementById('pin-dial'), dist: 115, rot: -6 },
-      { el: document.getElementById('layer-indices'), pin: document.getElementById('pin-indices'), dist: 45, rot: 0 },
-      { el: document.getElementById('layer-movement'), pin: document.getElementById('pin-movement'), dist: -25, rot: 10 },
-      { el: document.getElementById('layer-case'), pin: document.getElementById('pin-case'), dist: -95, rot: 0 },
-      { el: document.getElementById('layer-gasket'), pin: document.getElementById('pin-gasket'), dist: -160, rot: 4 },
-      { el: document.getElementById('layer-bracelet'), pin: document.getElementById('pin-bracelet'), dist: -230, rot: 0 }
-    ];
-
-    let currentProg = 0;
-    let targetProg = 0;
-    let mouseX = 0, mouseY = 0;
-    let targetMouseX = 0, targetMouseY = 0;
+    let currentProgress = 0;
+    let targetProgress = 0;
 
     // 1. Mouse Tekerleği
     window.addEventListener('wheel', (e) => {
-      targetProg += e.deltaY * 0.0008;
-      targetProg = Math.max(0, Math.min(1, targetProg));
+      targetProgress += e.deltaY * 0.0009;
+      targetProgress = Math.max(0, Math.min(1, targetProgress));
     }, { passive: true });
 
     // 2. Sayfa Kaydırması
     window.addEventListener('scroll', () => {
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       if (maxScroll > 0) {
-        targetProg = Math.max(0, Math.min(1, window.scrollY / maxScroll));
+        targetProgress = Math.max(0, Math.min(1, window.scrollY / maxScroll));
       }
     }, { passive: true });
 
-    // 3. Mobil Dokunmatik Kaydırma (Swipe)
+    // 3. Mobil Dokunmatik Kaydırma (Touch Swipe)
     let touchStartY = 0;
     window.addEventListener('touchstart', (e) => {
       touchStartY = e.touches[0].clientY;
@@ -882,190 +323,106 @@
       const touchY = e.touches[0].clientY;
       const deltaY = touchStartY - touchY;
       touchStartY = touchY;
-      targetProg += deltaY * 0.0025;
-      targetProg = Math.max(0, Math.min(1, targetProg));
+      targetProgress += deltaY * 0.003;
+      targetProgress = Math.max(0, Math.min(1, targetProgress));
     }, { passive: true });
 
-    // 4. Mouse Hareketiyle Parallaks
-    window.addEventListener('mousemove', (e) => {
-      targetMouseX = (e.clientX / window.innerWidth - 0.5) * 2;
-      targetMouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-    });
-
-    // 5. Slider Kontrolü
-    const sliderTrack = document.getElementById('sliderTrack');
-    let isDraggingSlider = false;
-
-    function handleSliderEvent(e) {
+    // 4. Alt Slider Barı İle Sürükleme
+    let isDragging = false;
+    function handleSlider(e) {
       const rect = sliderTrack.getBoundingClientRect();
       const clientX = e.touches ? e.touches[0].clientX : e.clientX;
       const x = Math.max(0, Math.min(rect.width, clientX - rect.left));
-      targetProg = x / rect.width;
+      targetProgress = x / rect.width;
       
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
       window.scrollTo({
-        top: targetProg * maxScroll,
+        top: targetProgress * maxScroll,
         behavior: 'instant'
       });
     }
 
-    sliderTrack.addEventListener('mousedown', (e) => {
-      isDraggingSlider = true;
-      handleSliderEvent(e);
-    });
-    window.addEventListener('mousemove', (e) => {
-      if (isDraggingSlider) handleSliderEvent(e);
-    });
-    window.addEventListener('mouseup', () => isDraggingSlider = false);
+    sliderTrack.addEventListener('mousedown', (e) => { isDragging = true; handleSlider(e); });
+    window.addEventListener('mousemove', (e) => { if (isDragging) handleSlider(e); });
+    window.addEventListener('mouseup', () => isDragging = false);
 
-    sliderTrack.addEventListener('touchstart', (e) => {
-      isDraggingSlider = true;
-      handleSliderEvent(e);
-    }, { passive: true });
-    window.addEventListener('touchmove', (e) => {
-      if (isDraggingSlider) handleSliderEvent(e);
-    }, { passive: true });
-    window.addEventListener('touchend', () => isDraggingSlider = false);
+    sliderTrack.addEventListener('touchstart', (e) => { isDragging = true; handleSlider(e); }, { passive: true });
+    window.addEventListener('touchmove', (e) => { if (isDragging) handleSlider(e); }, { passive: true });
+    window.addEventListener('touchend', () => isDragging = false);
 
-    // Otomatik Oynat & Sıfırla
-    const autoTourBtn = document.getElementById('autoTourBtn');
-    const autoBtnText = document.getElementById('autoBtnText');
-    const resetBtn = document.getElementById('resetBtn');
+    // 5. Otomatik Oynat Butonu
     let isAutoPlaying = false;
     let autoStartTime = 0;
     let autoStartProg = 0;
     let autoTargetProg = 1;
 
-    autoTourBtn.addEventListener('click', () => {
+    autoPlayBtn.addEventListener('click', () => {
       if (isAutoPlaying) {
         isAutoPlaying = false;
-        autoBtnText.textContent = 'Otomatik Oynat';
-        autoTourBtn.querySelector('i').setAttribute('data-lucide', 'play');
-        lucide.createIcons();
+        autoPlayBtn.textContent = 'Otomatik Oynat';
       } else {
         isAutoPlaying = true;
-        autoBtnText.textContent = 'Durdur';
-        autoTourBtn.querySelector('i').setAttribute('data-lucide', 'pause');
-        lucide.createIcons();
-
-        autoStartProg = currentProg;
-        autoTargetProg = currentProg > 0.5 ? 0 : 1;
+        autoPlayBtn.textContent = 'Durdur';
+        autoStartProg = currentProgress;
+        autoTargetProg = currentProgress > 0.5 ? 0 : 1;
         autoStartTime = performance.now();
       }
     });
 
-    resetBtn.addEventListener('click', () => {
-      isAutoPlaying = false;
-      targetProg = 0;
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-      autoBtnText.textContent = 'Otomatik Oynat';
-      autoTourBtn.querySelector('i').setAttribute('data-lucide', 'play');
-      lucide.createIcons();
-    });
-
-    const infoCards = [
-      document.getElementById('info-0'),
-      document.getElementById('info-1'),
-      document.getElementById('info-2'),
-      document.getElementById('info-3'),
-      document.getElementById('info-4')
-    ];
-    const sliderFill = document.getElementById('sliderFill');
-    const progressText = document.getElementById('progressText');
-    const statusIndicator = document.getElementById('statusIndicator');
-    const scrollGuide = document.getElementById('scrollGuide');
-
-    function updateUI(p) {
-      const pct = Math.round(p * 100);
-      sliderFill.style.width = pct + '%';
-      progressText.textContent = pct + '%';
-
-      if (p > 0.05) {
-        scrollGuide.style.opacity = '0';
-      } else {
-        scrollGuide.style.opacity = '1';
-      }
-
-      if (p < 0.15) {
-        statusIndicator.textContent = 'Birleşik Durum (%' + pct + ')';
-        statusIndicator.style.color = '#10b981';
-      } else if (p > 0.8) {
-        statusIndicator.textContent = 'Katmanlar Açık (%' + pct + ')';
-        statusIndicator.style.color = '#38bdf8';
-      } else {
-        statusIndicator.textContent = 'Ayrışıyor (%' + pct + ')';
-        statusIndicator.style.color = '#f59e0b';
-      }
-
-      let activeIdx = 0;
-      if (p < 0.20) activeIdx = 0;
-      else if (p < 0.45) activeIdx = 1;
-      else if (p < 0.65) activeIdx = 2;
-      else if (p < 0.85) activeIdx = 3;
-      else activeIdx = 4;
-
-      infoCards.forEach((card, i) => {
-        if (i === activeIdx) card.classList.add('active');
-        else card.classList.remove('active');
-      });
-    }
-
-    // 60/120 FPS Donanım Hızlandırmalı Render Döngüsü
+    // 60 / 120 FPS Donanım Hızlandırmalı Render Döngüsü
     function render(now) {
       requestAnimationFrame(render);
 
       if (isAutoPlaying) {
-        const elapsed = (now - autoStartTime) / 3000;
+        const elapsed = (now - autoStartTime) / 2600;
         if (elapsed < 1) {
-          targetProg = autoStartProg + (autoTargetProg - autoStartProg) * (0.5 - 0.5 * Math.cos(elapsed * Math.PI));
+          targetProgress = autoStartProg + (autoTargetProg - autoStartProg) * (0.5 - 0.5 * Math.cos(elapsed * Math.PI));
         } else {
-          targetProg = autoTargetProg;
+          targetProgress = autoTargetProg;
           isAutoPlaying = false;
-          autoBtnText.textContent = 'Otomatik Oynat';
-          autoTourBtn.querySelector('i').setAttribute('data-lucide', 'play');
-          lucide.createIcons();
+          autoPlayBtn.textContent = 'Otomatik Oynat';
         }
       }
 
-      currentProg += (targetProg - currentProg) * 0.12;
-      mouseX += (targetMouseX - mouseX) * 0.05;
-      mouseY += (targetMouseY - mouseY) * 0.05;
+      // Linear Interpolation (Pürüzsüz Akış)
+      currentProgress += (targetProgress - currentProgress) * 0.12;
+      const p = currentProgress;
 
-      const ease = currentProg * currentProg * (3 - 2 * currentProg);
+      // 1. Montajlı Saat: Aşağı kaydırdıkça solar ve hafif yukarı süzülür
+      const assembledOpacity = Math.max(0, 1 - (p * 1.6));
+      const assembledY = -25 * p;
+      const assembledScale = 1 - (0.05 * p);
+      watchAssembled.style.opacity = assembledOpacity;
+      watchAssembled.style.transform = `translate3d(0, ${assembledY}px, 0) scale(${assembledScale})`;
 
-      // 3D Dönüş Açısı
-      const rotX = 26 * ease + (mouseY * 6);
-      const rotY = -34 * ease + (mouseX * 10);
-      const rotZ = 8 * ease;
+      // 2. Parçalanmış Saat: Aşağı kaydırdıkça belirir ve yerine oturur
+      const explodedOpacity = Math.min(1, Math.max(0, (p - 0.1) * 1.4));
+      const explodedY = 25 * (1 - p);
+      const explodedScale = 0.94 + (0.06 * p);
+      watchExploded.style.opacity = explodedOpacity;
+      watchExploded.style.transform = `translate3d(0, ${explodedY}px, 0) scale(${explodedScale})`;
 
-      watchContainer.style.transform = `rotateX(${rotX}deg) rotateY(${rotY}deg) rotateZ(${rotZ}deg)`;
+      // UI Güncellemeleri
+      const pct = Math.round(p * 100);
+      sliderFill.style.width = pct + '%';
+      percentLabel.textContent = pct + '%';
 
-      // Katmanların Z Ekseninde Ayrılması
-      layers.forEach((layer) => {
-        const currentZ = layer.dist * ease;
-        const currentRotZ = layer.rot * ease;
-        
-        const shadowDist = Math.abs(currentZ) * 0.22;
-        const shadowBlur = Math.abs(currentZ) * 0.3 + 12;
-        const shadowOpacity = Math.min(0.65, 0.25 + ease * 0.35);
+      if (p > 0.05) {
+        scrollHint.style.opacity = '0';
+      } else {
+        scrollHint.style.opacity = '1';
+      }
 
-        layer.el.style.transform = `translateZ(${currentZ}px) rotateZ(${currentRotZ}deg)`;
-        
-        const svgChild = layer.el.querySelector('svg');
-        if (svgChild) {
-          svgChild.style.filter = `drop-shadow(0 ${shadowDist}px ${shadowBlur}px rgba(0, 0, 0, ${shadowOpacity}))`;
-        }
-
-        if (layer.pin) {
-          if (ease > 0.40) {
-            layer.pin.classList.add('visible');
-          } else {
-            layer.pin.classList.remove('visible');
-          }
-        }
-      });
-
-      updateUI(currentProg);
+      if (p < 0.2) {
+        statusLabel.textContent = 'Montajlı Durum (%' + pct + ')';
+        statusLabel.style.color = '#10b981';
+      } else if (p > 0.8) {
+        statusLabel.textContent = 'Katmanlar Ayrıldı (%' + pct + ')';
+        statusLabel.style.color = '#38bdf8';
+      } else {
+        statusLabel.textContent = 'Ayrışıyor (%' + pct + ')';
+        statusLabel.style.color = '#f59e0b';
+      }
     }
 
     render(performance.now());

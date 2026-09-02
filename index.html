@@ -30,7 +30,7 @@
     #scroll-track {
       position: relative;
       width: 100%;
-      height: 450vh;
+      height: 200vh;
       pointer-events: none;
     }
 
@@ -118,7 +118,6 @@
       box-shadow: 0 0 25px rgba(197, 160, 89, 0.4);
     }
 
-    /* 3D SAAT SAHNESİ */
     .watch-stage {
       position: fixed;
       top: 0;
@@ -139,7 +138,7 @@
       height: 480px;
       transform-style: preserve-3d;
       will-change: transform;
-      transition: transform 0.08s linear;
+      transition: transform 0.05s linear;
     }
 
     .watch-layer {
@@ -162,10 +161,9 @@
       height: 100%;
       object-fit: contain;
       filter: drop-shadow(0 10px 25px rgba(0, 0, 0, 0.4));
-      transition: filter 0.2s ease;
+      transition: filter 0.15s ease;
     }
 
-    /* Lazer Çizgili Parça Pinleri */
     .layer-pin {
       position: absolute;
       right: -30px;
@@ -176,7 +174,7 @@
       gap: 10px;
       opacity: 0;
       pointer-events: none;
-      transition: opacity 0.4s ease, transform 0.4s ease;
+      transition: opacity 0.3s ease, transform 0.3s ease;
       white-space: nowrap;
     }
 
@@ -211,7 +209,6 @@
       backdrop-filter: blur(8px);
     }
 
-    /* Bilgi Kartları (Masaüstü) */
     .story-section {
       position: fixed;
       top: 50%;
@@ -221,7 +218,7 @@
       z-index: 50;
       pointer-events: none;
       opacity: 0;
-      transition: opacity 0.5s ease, transform 0.5s ease;
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
 
     .story-section.active {
@@ -334,7 +331,7 @@
       height: 5px;
       background: #c5a059;
       border-radius: 2px;
-      animation: wheelMove 2s infinite ease-in-out;
+      animation: wheelMove 1.5s infinite ease-in-out;
     }
 
     @keyframes wheelMove {
@@ -359,7 +356,7 @@
       height: 100%;
       width: 0%;
       background: linear-gradient(90deg, #99732b, #e5c178);
-      transition: width 0.1s linear;
+      transition: width 0.08s linear;
     }
 
     .explode-degree-text {
@@ -388,7 +385,7 @@
       cursor: pointer;
       border-radius: 3px;
       backdrop-filter: blur(12px);
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
       display: flex;
       align-items: center;
       gap: 6px;
@@ -400,7 +397,6 @@
       background: rgba(197, 160, 89, 0.12);
     }
 
-    /* MOBİL GÖRÜNÜM: SAAT EKRANA TAM OTURUR, ASLA TAŞMAZ */
     @media (max-width: 900px) {
       header {
         padding: 16px 20px;
@@ -492,7 +488,6 @@
     <button class="cta-btn" onclick="triggerAutoTour()">Otomatik Tur</button>
   </header>
 
-  <!-- 3D GERÇEK SAAT KATMANLARI -->
   <div class="watch-stage">
     <div class="watch-container" id="watchContainer">
 
@@ -658,7 +653,6 @@
     </div>
   </div>
 
-  <!-- BİLGİ KARTLARI -->
   <div class="story-section active" id="story-0">
     <div class="section-tag">Aeterna Grand Complication</div>
     <h1 class="story-title">SAF MÜHENDİSLİK.<br>ZAMANSIZ SANAT.</h1>
@@ -704,7 +698,6 @@
     </p>
   </div>
 
-  <!-- ALT PANEL -->
   <div class="bottom-hud">
     <div class="scroll-hint">
       <div class="mouse-icon"><div class="mouse-wheel"></div></div>
@@ -745,8 +738,9 @@
     let mouseX = 0, mouseY = 0;
     let targetMouseX = 0, targetMouseY = 0;
 
+    // Hızlandırılmış Tekerlek Algılama
     window.addEventListener('wheel', (e) => {
-      targetProg += e.deltaY * 0.0009;
+      targetProg += e.deltaY * 0.0028;
       targetProg = Math.max(0, Math.min(1, targetProg));
     }, { passive: true });
 
@@ -757,6 +751,7 @@
       }
     }, { passive: true });
 
+    // Hızlandırılmış Mobil Swipe Algılama
     let touchStartY = 0;
     window.addEventListener('touchstart', (e) => {
       touchStartY = e.touches[0].clientY;
@@ -766,7 +761,7 @@
       const touchY = e.touches[0].clientY;
       const deltaY = touchStartY - touchY;
       touchStartY = touchY;
-      targetProg += deltaY * 0.0022;
+      targetProg += deltaY * 0.0065;
       targetProg = Math.max(0, Math.min(1, targetProg));
     }, { passive: true });
 
@@ -781,7 +776,7 @@
       const startP = scrollProg;
       const endP = scrollProg > 0.5 ? 0.0 : 1.0;
       const startTime = performance.now();
-      const dur = 2800;
+      const dur = 2000;
 
       function step(now) {
         const elapsed = (now - startTime) / dur;
@@ -839,7 +834,8 @@
     function render() {
       requestAnimationFrame(render);
 
-      scrollProg += (targetProg - scrollProg) * 0.08;
+      // Daha atak ve çevik geçiş (0.14)
+      scrollProg += (targetProg - scrollProg) * 0.14;
       mouseX += (targetMouseX - mouseX) * 0.05;
       mouseY += (targetMouseY - mouseY) * 0.05;
 
@@ -867,7 +863,7 @@
         }
 
         if (layer.pin) {
-          if (ease > 0.45) {
+          if (ease > 0.4) {
             layer.pin.classList.add('visible');
           } else {
             layer.pin.classList.remove('visible');
